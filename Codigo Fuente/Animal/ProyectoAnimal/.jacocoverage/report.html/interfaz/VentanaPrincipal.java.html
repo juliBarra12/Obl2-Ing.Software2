@@ -1,0 +1,2097 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VentanaPrincipal.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProyectoAnimal&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">interfaz</a> &gt; <span class="el_source">VentanaPrincipal.java</span></div><h1>VentanaPrincipal.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaz;
+
+import dominio.*;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
+/**
+ *
+ * @author marce
+ */
+public class VentanaPrincipal extends javax.swing.JFrame {
+
+    private Sistema sistema;
+    private boolean agregarPerroSeleccionado;
+    private boolean agregarUsuarioSeleccionado;
+    private String rutaImagenAgregar;
+    private Fecha fechaSeleccionada;
+    private final int[] arrayDiasEnMes;
+    private String rutaImagenRuta;
+
+<span class="nc" id="L49">    public VentanaPrincipal(Sistema sis) {</span>
+<span class="nc" id="L50">        sistema = sis;</span>
+<span class="nc" id="L51">        fechaSeleccionada = new Fecha();</span>
+<span class="nc" id="L52">        initComponents();</span>
+<span class="nc" id="L53">        this.setLocationRelativeTo(null);</span>
+        try {
+<span class="nc" id="L55">            PerroLblFoto.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/perroPorDefecto.png&quot;)).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L56">        } catch (IOException ex) {</span>
+<span class="nc" id="L57">            System.out.println(ex);</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">        PerroBtnEditar.setVisible(false);</span>
+<span class="nc" id="L60">        PerroBtnGuardar.setVisible(false);</span>
+<span class="nc" id="L61">        CalPanHoraPersonalizada.setVisible(false);</span>
+<span class="nc" id="L62">        CalPanVeterinaria.setVisible(false);</span>
+<span class="nc" id="L63">        CalComboVeterinaria.setVisible(false);</span>
+<span class="nc" id="L64">        CalBtnVerRuta.setVisible(false);</span>
+<span class="nc" id="L65">        CalBtnGroupVeterinaria.clearSelection();</span>
+<span class="nc" id="L66">        CalBtnVeterinariaNo.setSelected(true);</span>
+<span class="nc" id="L67">        CalBtnGroupRepetir.clearSelection();</span>
+<span class="nc" id="L68">        CalBtnGroupRealizada.clearSelection();</span>
+<span class="nc" id="L69">        CalBtnRealizadaNo.setSelected(true);</span>
+<span class="nc" id="L70">        CalTxtTipoAlimento.setVisible(false);</span>
+<span class="nc" id="L71">        CalLblTipoAlimento.setVisible(false);</span>
+<span class="nc" id="L72">        CalPanVeterinaria.setVisible(false);</span>
+<span class="nc" id="L73">        CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L74">        CalLblHorarios.setVisible(false);</span>
+<span class="nc" id="L75">        rutaImagenAgregar = &quot;&quot;;</span>
+<span class="nc" id="L76">        rutaImagenRuta = &quot;&quot;;</span>
+<span class="nc" id="L77">        agregarPerroSeleccionado = true;</span>
+<span class="nc" id="L78">        agregarUsuarioSeleccionado = true;</span>
+<span class="nc" id="L79">        arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</span>
+<span class="nc" id="L80">        CalPanRuta.setVisible(false);</span>
+<span class="nc" id="L81">        this.setSize(950, 625);</span>
+<span class="nc" id="L82">    }</span>
+
+    public void resetearPestanaPerros() {
+<span class="nc" id="L85">        setearListaPerros();</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (PerroComboPerros.getItemCount() != 0) {</span>
+<span class="nc" id="L87">            Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());</span>
+<span class="nc" id="L88">            PerroLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());</span>
+<span class="nc" id="L89">            PerroLblPeso.setText(&quot;Pesa:       &quot; + perroSeleccionado.getPeso());</span>
+<span class="nc" id="L90">            PerroLblAltura.setText(&quot;Mide:       &quot; + perroSeleccionado.getAltura());</span>
+<span class="nc" id="L91">            PerroLblComentarios.setText(&quot;&quot; + perroSeleccionado.getComentarios());</span>
+<span class="nc" id="L92">            PerroLblFoto.setIcon(perroSeleccionado.getFoto());</span>
+<span class="nc" id="L93">            PerroBtnEditar.setVisible(true);</span>
+<span class="nc" id="L94">        } else {</span>
+<span class="nc" id="L95">            PerroLblNombre.setText(&quot;Nombre:&quot;);</span>
+<span class="nc" id="L96">            PerroLblPeso.setText(&quot;Peso:&quot;);</span>
+<span class="nc" id="L97">            PerroLblAltura.setText(&quot;Altura:&quot;);</span>
+<span class="nc" id="L98">            PerroLblComentarios.setText(&quot;Comentarios:&quot;);</span>
+<span class="nc" id="L99">            PerroLblFoto.setIcon(crearIcono(&quot;/images/perroPorDefecto.png&quot;, 100));</span>
+<span class="nc" id="L100">            PerroBtnEditar.setVisible(false);</span>
+        }
+<span class="nc" id="L102">        ocultarAgregarPerro();</span>
+<span class="nc" id="L103">        rutaImagenAgregar = &quot;&quot;;</span>
+<span class="nc" id="L104">    }</span>
+
+    public void inicializarPestanaUsuarios() {
+
+<span class="nc" id="L108">        resetearListaUsuarios();</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (UsuarioComboUsuarios.getItemCount() != 0) {</span>
+<span class="nc" id="L110">            Usuario usuarioSeleccionado = sistema.buscarUsuarioPorNombre(UsuarioComboUsuarios.getSelectedItem().toString());</span>
+<span class="nc" id="L111">            UsuarioLblNombre.setText(&quot;Nombre: &quot; + usuarioSeleccionado.getNombre());</span>
+<span class="nc" id="L112">            UsuarioLblMail.setText(&quot;Mail: &quot; + usuarioSeleccionado.getMail());</span>
+<span class="nc" id="L113">        } else {</span>
+<span class="nc" id="L114">            UsuarioLblNombre.setText(&quot;Nombre: &quot;);</span>
+<span class="nc" id="L115">            UsuarioLblMail.setText(&quot;Mail: &quot;);</span>
+        }
+<span class="nc" id="L117">        ocultarAgregarUsuario();</span>
+<span class="nc" id="L118">        agregarUsuarioSeleccionado = false;</span>
+<span class="nc" id="L119">    }</span>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+<span class="nc" id="L129">        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();</span>
+
+<span class="nc" id="L131">        CalBtnGroupRepetir = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L132">        CalBtnGroupVeterinaria = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L133">        CalBtnGroupRealizada = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L134">        Panel = new javax.swing.JTabbedPane();</span>
+<span class="nc" id="L135">        panCalendario = new javax.swing.JPanel();</span>
+<span class="nc" id="L136">        CalDayChooser = new com.toedter.calendar.JDayChooser();</span>
+<span class="nc" id="L137">        CalMonthChooser = new com.toedter.calendar.JMonthChooser();</span>
+<span class="nc" id="L138">        CalYearChooser = new com.toedter.calendar.JYearChooser();</span>
+<span class="nc" id="L139">        CalScrollActividades = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L140">        CalLstActividades = new javax.swing.JList&lt;String&gt;();</span>
+<span class="nc" id="L141">        CalBtnAgregar = new javax.swing.JButton();</span>
+<span class="nc" id="L142">        CalLblTipo = new javax.swing.JLabel();</span>
+<span class="nc" id="L143">        CalLblUsuario = new javax.swing.JLabel();</span>
+<span class="nc" id="L144">        CalLblPerro = new javax.swing.JLabel();</span>
+<span class="nc" id="L145">        CalLblFecha = new javax.swing.JLabel();</span>
+<span class="nc" id="L146">        CalComboTipo = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L147">        CalComboUsuario = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L148">        CalComboPerro = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L149">        CalComboHora = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L150">        CalLblHora = new javax.swing.JLabel();</span>
+<span class="nc" id="L151">        CalPanHoraPersonalizada = new javax.swing.JPanel();</span>
+<span class="nc" id="L152">        CalPanLblMinutos = new javax.swing.JLabel();</span>
+<span class="nc" id="L153">        CalPanSpinMinutos = new javax.swing.JSpinner();</span>
+<span class="nc" id="L154">        CalPanSpinHora = new javax.swing.JSpinner();</span>
+<span class="nc" id="L155">        CalPanLblHora = new javax.swing.JLabel();</span>
+<span class="nc" id="L156">        CalLblFechaResp = new javax.swing.JLabel();</span>
+<span class="nc" id="L157">        CalLblTituloFecha = new javax.swing.JLabel();</span>
+<span class="nc" id="L158">        CalLblTituloActividad = new javax.swing.JLabel();</span>
+<span class="nc" id="L159">        CalLblNombre = new javax.swing.JLabel();</span>
+<span class="nc" id="L160">        CalTxtNombreResp = new javax.swing.JTextField();</span>
+<span class="nc" id="L161">        CalPanVeterinaria = new javax.swing.JPanel();</span>
+<span class="nc" id="L162">        CalLblVeterinaria = new javax.swing.JLabel();</span>
+<span class="nc" id="L163">        CalBtnVeterinariaSi = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L164">        CalBtnVeterinariaNo = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L165">        CalComboVeterinaria = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L166">        CalLblMotivo = new javax.swing.JLabel();</span>
+<span class="nc" id="L167">        CalComboMotivo = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L168">        CalLblHorarios = new javax.swing.JLabel();</span>
+<span class="nc" id="L169">        CalTxtTipoAlimento = new javax.swing.JTextField();</span>
+<span class="nc" id="L170">        CalLblTipoAlimento = new javax.swing.JLabel();</span>
+<span class="nc" id="L171">        CalLblActividadesDelDia = new javax.swing.JLabel();</span>
+<span class="nc" id="L172">        CalScrollInfoAct = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L173">        CalTxtAreaInfoAct = new javax.swing.JTextArea();</span>
+<span class="nc" id="L174">        CalLblInfoActividad = new javax.swing.JLabel();</span>
+<span class="nc" id="L175">        CalBtnEditar = new javax.swing.JButton();</span>
+<span class="nc" id="L176">        CalLblRealizada = new javax.swing.JLabel();</span>
+<span class="nc" id="L177">        CalBtnRealizadaSi = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L178">        CalBtnRealizadaNo = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L179">        CalPanRuta = new javax.swing.JPanel();</span>
+<span class="nc" id="L180">        CalSpinDistancia = new javax.swing.JSpinner();</span>
+<span class="nc" id="L181">        CalLblKilometros = new javax.swing.JLabel();</span>
+<span class="nc" id="L182">        CalBtnRuta = new javax.swing.JButton();</span>
+<span class="nc" id="L183">        CalLblRuta = new javax.swing.JLabel();</span>
+<span class="nc" id="L184">        CalLblDistancia = new javax.swing.JLabel();</span>
+<span class="nc" id="L185">        CalBtnAgregarDatos = new javax.swing.JButton();</span>
+<span class="nc" id="L186">        CalLblAdvertencia = new javax.swing.JLabel();</span>
+<span class="nc" id="L187">        CalBtnVerRuta = new javax.swing.JButton();</span>
+<span class="nc" id="L188">        panUsuarios = new javax.swing.JPanel();</span>
+<span class="nc" id="L189">        UsuarioLblUsuarios = new javax.swing.JLabel();</span>
+<span class="nc" id="L190">        UsuarioComboUsuarios = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L191">        UsuarioLblNombre = new javax.swing.JLabel();</span>
+<span class="nc" id="L192">        UsuarioLblMail = new javax.swing.JLabel();</span>
+<span class="nc" id="L193">        UsuarioTxtNombre = new javax.swing.JTextField();</span>
+<span class="nc" id="L194">        UsuarioTxtMail = new javax.swing.JTextField();</span>
+<span class="nc" id="L195">        UsuarioBtnAgregar = new javax.swing.JButton();</span>
+<span class="nc" id="L196">        UsuarioLblActividades = new javax.swing.JLabel();</span>
+<span class="nc" id="L197">        UsuarioScrollActividades = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L198">        UsuarioLstActividades = new javax.swing.JList&lt;String&gt;();</span>
+<span class="nc" id="L199">        UsuarioLblActividad = new javax.swing.JLabel();</span>
+<span class="nc" id="L200">        UsuarioLblFecha = new javax.swing.JLabel();</span>
+<span class="nc" id="L201">        UsuarioScrollFechas = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L202">        UsuarioLstFechas = new javax.swing.JList&lt;String&gt;();</span>
+<span class="nc" id="L203">        UsuarioLblAdvertencia = new javax.swing.JLabel();</span>
+<span class="nc" id="L204">        panPerros = new javax.swing.JPanel();</span>
+<span class="nc" id="L205">        PerroBtnAgregar = new javax.swing.JButton();</span>
+<span class="nc" id="L206">        PerroLblPerros = new javax.swing.JLabel();</span>
+<span class="nc" id="L207">        PerroPanInformacion = new javax.swing.JPanel();</span>
+<span class="nc" id="L208">        PerroPanFoto = new javax.swing.JPanel();</span>
+<span class="nc" id="L209">        PerroLblFoto = new javax.swing.JLabel();</span>
+<span class="nc" id="L210">        PerroLblAltura = new javax.swing.JLabel();</span>
+<span class="nc" id="L211">        PerroLblComentarios = new javax.swing.JLabel();</span>
+<span class="nc" id="L212">        PerroLblNombre = new javax.swing.JLabel();</span>
+<span class="nc" id="L213">        PerroLblPeso = new javax.swing.JLabel();</span>
+<span class="nc" id="L214">        PerroTxtNombre = new javax.swing.JTextField();</span>
+<span class="nc" id="L215">        PerroTxtComentarios = new javax.swing.JTextField();</span>
+<span class="nc" id="L216">        PerroBtnExaminar = new javax.swing.JButton();</span>
+<span class="nc" id="L217">        PerroLblFotoBoton = new javax.swing.JLabel();</span>
+<span class="nc" id="L218">        PerroSpinAltura = new javax.swing.JSpinner();</span>
+<span class="nc" id="L219">        PerroSpinPeso = new javax.swing.JSpinner();</span>
+<span class="nc" id="L220">        CalLblCentimetros = new javax.swing.JLabel();</span>
+<span class="nc" id="L221">        CalLblKilogramos = new javax.swing.JLabel();</span>
+<span class="nc" id="L222">        PerroComboPerros = new javax.swing.JComboBox&lt;String&gt;();</span>
+<span class="nc" id="L223">        PerroBtnEditar = new javax.swing.JButton();</span>
+<span class="nc" id="L224">        PerroBtnGuardar = new javax.swing.JButton();</span>
+<span class="nc" id="L225">        PerroLblAdvertencia = new javax.swing.JLabel();</span>
+
+<span class="nc" id="L227">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L228">        setTitle(&quot;My Pets&quot;);</span>
+<span class="nc" id="L229">        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+
+<span class="nc" id="L231">        Panel.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L233">                PanelMouseClicked(evt);</span>
+<span class="nc" id="L234">            }</span>
+        });
+
+<span class="nc" id="L237">        CalDayChooser.setBorder(new javax.swing.border.MatteBorder(null));</span>
+
+<span class="nc" id="L239">        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, CalMonthChooser, org.jdesktop.beansbinding.ELProperty.create(&quot;${month}&quot;), CalDayChooser, org.jdesktop.beansbinding.BeanProperty.create(&quot;month&quot;));</span>
+<span class="nc" id="L240">        bindingGroup.addBinding(binding);</span>
+<span class="nc" id="L241">        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, CalYearChooser, org.jdesktop.beansbinding.ELProperty.create(&quot;${year}&quot;), CalDayChooser, org.jdesktop.beansbinding.BeanProperty.create(&quot;year&quot;));</span>
+<span class="nc" id="L242">        bindingGroup.addBinding(binding);</span>
+
+<span class="nc" id="L244">        CalDayChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {</span>
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+<span class="nc" id="L246">                CalDayChooserPropertyChange(evt);</span>
+<span class="nc" id="L247">            }</span>
+        });
+
+<span class="nc" id="L250">        CalMonthChooser.setBorder(new javax.swing.border.MatteBorder(null));</span>
+<span class="nc" id="L251">        CalMonthChooser.setToolTipText(&quot;&quot;);</span>
+
+<span class="nc" id="L253">        CalYearChooser.setBorder(new javax.swing.border.MatteBorder(null));</span>
+
+<span class="nc" id="L255">        CalLstActividades.addListSelectionListener(new javax.swing.event.ListSelectionListener() {</span>
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+<span class="nc" id="L257">                CalLstActividadesValueChanged(evt);</span>
+<span class="nc" id="L258">            }</span>
+        });
+<span class="nc" id="L260">        CalScrollActividades.setViewportView(CalLstActividades);</span>
+
+<span class="nc" id="L262">        CalBtnAgregar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L264">                CalBtnAgregarActionPerformed(evt);</span>
+<span class="nc" id="L265">            }</span>
+        });
+
+<span class="nc" id="L268">        CalLblTipo.setText(&quot;Tipo de actividad:&quot;);</span>
+
+<span class="nc" id="L270">        CalLblUsuario.setText(&quot;Usuario:&quot;);</span>
+
+<span class="nc" id="L272">        CalLblPerro.setText(&quot;Perro:&quot;);</span>
+
+<span class="nc" id="L274">        CalLblFecha.setText(&quot;Fecha:&quot;);</span>
+
+<span class="nc" id="L276">        CalComboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;Paseo&quot;, &quot;Alimentación&quot;, &quot;Otra&quot; }));</span>
+<span class="nc" id="L277">        CalComboTipo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L279">                CalComboTipoActionPerformed(evt);</span>
+<span class="nc" id="L280">            }</span>
+        });
+
+<span class="nc" id="L283">        CalComboHora.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;Ahora&quot;, &quot;Personalizado&quot; }));</span>
+<span class="nc" id="L284">        CalComboHora.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L286">                CalComboHoraActionPerformed(evt);</span>
+<span class="nc" id="L287">            }</span>
+        });
+
+<span class="nc" id="L290">        CalLblHora.setText(&quot;Hora&quot;);</span>
+
+<span class="nc" id="L292">        CalPanLblMinutos.setText(&quot;Minutos&quot;);</span>
+
+<span class="nc" id="L294">        CalPanSpinMinutos.setModel(new javax.swing.SpinnerNumberModel(0, 0, 55, 5));</span>
+
+<span class="nc" id="L296">        CalPanSpinHora.setModel(new javax.swing.SpinnerListModel(new String[] {&quot;00&quot;, &quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;, &quot;19&quot;, &quot;20&quot;, &quot;21&quot;, &quot;22&quot;, &quot;23&quot;}));</span>
+
+<span class="nc" id="L298">        CalPanLblHora.setText(&quot;Hora&quot;);</span>
+
+<span class="nc" id="L300">        javax.swing.GroupLayout CalPanHoraPersonalizadaLayout = new javax.swing.GroupLayout(CalPanHoraPersonalizada);</span>
+<span class="nc" id="L301">        CalPanHoraPersonalizada.setLayout(CalPanHoraPersonalizadaLayout);</span>
+<span class="nc" id="L302">        CalPanHoraPersonalizadaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L303">            CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L304">            .addGroup(CalPanHoraPersonalizadaLayout.createSequentialGroup()</span>
+<span class="nc" id="L305">                .addContainerGap()</span>
+<span class="nc" id="L306">                .addGroup(CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L307">                    .addComponent(CalPanLblHora)</span>
+<span class="nc" id="L308">                    .addComponent(CalPanLblMinutos))</span>
+<span class="nc" id="L309">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L310">                .addGroup(CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L311">                    .addComponent(CalPanSpinMinutos)</span>
+<span class="nc" id="L312">                    .addComponent(CalPanSpinHora))</span>
+<span class="nc" id="L313">                .addContainerGap())</span>
+        );
+<span class="nc" id="L315">        CalPanHoraPersonalizadaLayout.setVerticalGroup(</span>
+<span class="nc" id="L316">            CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L317">            .addGroup(CalPanHoraPersonalizadaLayout.createSequentialGroup()</span>
+<span class="nc" id="L318">                .addContainerGap()</span>
+<span class="nc" id="L319">                .addGroup(CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L320">                    .addComponent(CalPanLblHora)</span>
+<span class="nc" id="L321">                    .addComponent(CalPanSpinHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L322">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L323">                .addGroup(CalPanHoraPersonalizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L324">                    .addComponent(CalPanLblMinutos)</span>
+<span class="nc" id="L325">                    .addComponent(CalPanSpinMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L326">                .addContainerGap())</span>
+        );
+
+<span class="nc" id="L329">        CalLblTituloFecha.setText(&quot;Fecha&quot;);</span>
+
+<span class="nc" id="L331">        CalLblTituloActividad.setText(&quot;Actividad&quot;);</span>
+
+<span class="nc" id="L333">        CalLblNombre.setText(&quot;Nombre:&quot;);</span>
+
+<span class="nc" id="L335">        CalTxtNombreResp.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L337">                CalTxtNombreRespActionPerformed(evt);</span>
+<span class="nc" id="L338">            }</span>
+        });
+
+<span class="nc" id="L341">        CalLblVeterinaria.setText(&quot;Veterinaria:&quot;);</span>
+
+<span class="nc" id="L343">        CalBtnGroupVeterinaria.add(CalBtnVeterinariaSi);</span>
+<span class="nc" id="L344">        CalBtnVeterinariaSi.setText(&quot;Si&quot;);</span>
+<span class="nc" id="L345">        CalBtnVeterinariaSi.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L347">                CalBtnVeterinariaSiActionPerformed(evt);</span>
+<span class="nc" id="L348">            }</span>
+        });
+
+<span class="nc" id="L351">        CalBtnGroupVeterinaria.add(CalBtnVeterinariaNo);</span>
+<span class="nc" id="L352">        CalBtnVeterinariaNo.setText(&quot;No&quot;);</span>
+<span class="nc" id="L353">        CalBtnVeterinariaNo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L355">                CalBtnVeterinariaNoActionPerformed(evt);</span>
+<span class="nc" id="L356">            }</span>
+        });
+
+<span class="nc" id="L359">        CalComboVeterinaria.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L361">                CalComboVeterinariaActionPerformed(evt);</span>
+<span class="nc" id="L362">            }</span>
+        });
+
+<span class="nc" id="L365">        CalLblMotivo.setText(&quot;Motivo:&quot;);</span>
+
+<span class="nc" id="L367">        CalComboMotivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;Corte de Pelo&quot;, &quot;Corte de Uñas&quot;, &quot;Visita Médica&quot;, &quot;Otro&quot; }));</span>
+
+<span class="nc" id="L369">        javax.swing.GroupLayout CalPanVeterinariaLayout = new javax.swing.GroupLayout(CalPanVeterinaria);</span>
+<span class="nc" id="L370">        CalPanVeterinaria.setLayout(CalPanVeterinariaLayout);</span>
+<span class="nc" id="L371">        CalPanVeterinariaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L372">            CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L373">            .addGroup(CalPanVeterinariaLayout.createSequentialGroup()</span>
+<span class="nc" id="L374">                .addContainerGap()</span>
+<span class="nc" id="L375">                .addGroup(CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L376">                    .addComponent(CalLblHorarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L377">                    .addGroup(CalPanVeterinariaLayout.createSequentialGroup()</span>
+<span class="nc" id="L378">                        .addGroup(CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L379">                            .addComponent(CalLblVeterinaria)</span>
+<span class="nc" id="L380">                            .addComponent(CalLblMotivo))</span>
+<span class="nc" id="L381">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L382">                        .addGroup(CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L383">                            .addComponent(CalComboVeterinaria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L384">                            .addComponent(CalComboMotivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L385">                            .addGroup(CalPanVeterinariaLayout.createSequentialGroup()</span>
+<span class="nc" id="L386">                                .addComponent(CalBtnVeterinariaSi)</span>
+<span class="nc" id="L387">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L388">                                .addComponent(CalBtnVeterinariaNo)))))</span>
+<span class="nc" id="L389">                .addContainerGap(22, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L391">        CalPanVeterinariaLayout.setVerticalGroup(</span>
+<span class="nc" id="L392">            CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L393">            .addGroup(CalPanVeterinariaLayout.createSequentialGroup()</span>
+<span class="nc" id="L394">                .addContainerGap()</span>
+<span class="nc" id="L395">                .addGroup(CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L396">                    .addComponent(CalLblVeterinaria)</span>
+<span class="nc" id="L397">                    .addComponent(CalBtnVeterinariaSi)</span>
+<span class="nc" id="L398">                    .addComponent(CalBtnVeterinariaNo))</span>
+<span class="nc" id="L399">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L400">                .addComponent(CalComboVeterinaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L401">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L402">                .addGroup(CalPanVeterinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L403">                    .addComponent(CalComboMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L404">                    .addComponent(CalLblMotivo))</span>
+<span class="nc" id="L405">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L406">                .addComponent(CalLblHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L407">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L410">        CalTxtTipoAlimento.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L412">                CalTxtTipoAlimentoActionPerformed(evt);</span>
+<span class="nc" id="L413">            }</span>
+        });
+
+<span class="nc" id="L416">        CalLblTipoAlimento.setText(&quot;Tipo Alimento:&quot;);</span>
+
+<span class="nc" id="L418">        CalLblActividadesDelDia.setText(&quot;Actividades del Día:&quot;);</span>
+
+<span class="nc" id="L420">        CalTxtAreaInfoAct.setColumns(20);</span>
+<span class="nc" id="L421">        CalTxtAreaInfoAct.setRows(5);</span>
+<span class="nc" id="L422">        CalScrollInfoAct.setViewportView(CalTxtAreaInfoAct);</span>
+
+<span class="nc" id="L424">        CalLblInfoActividad.setText(&quot;Información de la Actividad: &quot;);</span>
+
+<span class="nc" id="L426">        CalBtnEditar.setText(&quot;Editar&quot;);</span>
+<span class="nc" id="L427">        CalBtnEditar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L429">                CalBtnEditarActionPerformed(evt);</span>
+<span class="nc" id="L430">            }</span>
+        });
+
+<span class="nc" id="L433">        CalLblRealizada.setText(&quot;Fue realizada:&quot;);</span>
+
+<span class="nc" id="L435">        CalBtnGroupRealizada.add(CalBtnRealizadaSi);</span>
+<span class="nc" id="L436">        CalBtnRealizadaSi.setText(&quot;Si&quot;);</span>
+<span class="nc" id="L437">        CalBtnRealizadaSi.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L439">                CalBtnRealizadaSiActionPerformed(evt);</span>
+<span class="nc" id="L440">            }</span>
+        });
+
+<span class="nc" id="L443">        CalBtnGroupRealizada.add(CalBtnRealizadaNo);</span>
+<span class="nc" id="L444">        CalBtnRealizadaNo.setText(&quot;No&quot;);</span>
+<span class="nc" id="L445">        CalBtnRealizadaNo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L447">                CalBtnRealizadaNoActionPerformed(evt);</span>
+<span class="nc" id="L448">            }</span>
+        });
+
+<span class="nc" id="L451">        CalSpinDistancia.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(0.5d)));</span>
+
+<span class="nc" id="L453">        CalLblKilometros.setText(&quot;Kilómetros&quot;);</span>
+
+<span class="nc" id="L455">        CalBtnRuta.setText(&quot;Agregar Ruta&quot;);</span>
+<span class="nc" id="L456">        CalBtnRuta.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L458">                CalBtnRutaActionPerformed(evt);</span>
+<span class="nc" id="L459">            }</span>
+        });
+
+<span class="nc" id="L462">        CalLblRuta.setText(&quot;Ruta:&quot;);</span>
+
+<span class="nc" id="L464">        CalLblDistancia.setText(&quot;Distancia:&quot;);</span>
+
+<span class="nc" id="L466">        javax.swing.GroupLayout CalPanRutaLayout = new javax.swing.GroupLayout(CalPanRuta);</span>
+<span class="nc" id="L467">        CalPanRuta.setLayout(CalPanRutaLayout);</span>
+<span class="nc" id="L468">        CalPanRutaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L469">            CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L470">            .addGroup(CalPanRutaLayout.createSequentialGroup()</span>
+<span class="nc" id="L471">                .addGroup(CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L472">                    .addComponent(CalLblRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L473">                    .addComponent(CalLblDistancia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))</span>
+<span class="nc" id="L474">                .addGroup(CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L475">                    .addGroup(CalPanRutaLayout.createSequentialGroup()</span>
+<span class="nc" id="L476">                        .addGap(24, 24, 24)</span>
+<span class="nc" id="L477">                        .addComponent(CalSpinDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L478">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L479">                        .addComponent(CalLblKilometros))</span>
+<span class="nc" id="L480">                    .addGroup(CalPanRutaLayout.createSequentialGroup()</span>
+<span class="nc" id="L481">                        .addGap(7, 7, 7)</span>
+<span class="nc" id="L482">                        .addComponent(CalBtnRuta)))</span>
+<span class="nc" id="L483">                .addContainerGap())</span>
+        );
+<span class="nc" id="L485">        CalPanRutaLayout.setVerticalGroup(</span>
+<span class="nc" id="L486">            CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L487">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CalPanRutaLayout.createSequentialGroup()</span>
+<span class="nc" id="L488">                .addGroup(CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L489">                    .addComponent(CalBtnRuta)</span>
+<span class="nc" id="L490">                    .addComponent(CalLblRuta))</span>
+<span class="nc" id="L491">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L492">                .addGroup(CalPanRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L493">                    .addComponent(CalSpinDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L494">                    .addComponent(CalLblKilometros)</span>
+<span class="nc" id="L495">                    .addComponent(CalLblDistancia))</span>
+<span class="nc" id="L496">                .addGap(49, 49, 49))</span>
+        );
+
+<span class="nc" id="L499">        CalBtnAgregarDatos.setText(&quot;Agregar Datos Precargados&quot;);</span>
+<span class="nc" id="L500">        CalBtnAgregarDatos.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L502">                CalBtnAgregarDatosActionPerformed(evt);</span>
+<span class="nc" id="L503">            }</span>
+        });
+
+<span class="nc" id="L506">        CalBtnVerRuta.setText(&quot;Ver Ruta&quot;);</span>
+<span class="nc" id="L507">        CalBtnVerRuta.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L509">                CalBtnVerRutaActionPerformed(evt);</span>
+<span class="nc" id="L510">            }</span>
+        });
+
+<span class="nc" id="L513">        javax.swing.GroupLayout panCalendarioLayout = new javax.swing.GroupLayout(panCalendario);</span>
+<span class="nc" id="L514">        panCalendario.setLayout(panCalendarioLayout);</span>
+<span class="nc" id="L515">        panCalendarioLayout.setHorizontalGroup(</span>
+<span class="nc" id="L516">            panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L517">            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L518">                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L519">                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L520">                        .addContainerGap()</span>
+<span class="nc" id="L521">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L522">                            .addComponent(CalDayChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L523">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L524">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L525">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L526">                                        .addComponent(CalLblActividadesDelDia, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L527">                                        .addGap(70, 70, 70))</span>
+<span class="nc" id="L528">                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L529">                                        .addComponent(CalScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L530">                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))</span>
+<span class="nc" id="L531">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L532">                                    .addComponent(CalLblInfoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L533">                                    .addComponent(CalScrollInfoAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L534">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L535">                                .addComponent(CalMonthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L536">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L537">                                .addComponent(CalYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+<span class="nc" id="L538">                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L539">                        .addGap(189, 189, 189)</span>
+<span class="nc" id="L540">                        .addComponent(CalLblTituloFecha)))</span>
+<span class="nc" id="L541">                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L542">                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L543">                        .addGap(6, 6, 6)</span>
+<span class="nc" id="L544">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L545">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L546">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L547">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L548">                                        .addGap(116, 116, 116)</span>
+<span class="nc" id="L549">                                        .addComponent(CalBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L550">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L551">                                        .addGap(59, 59, 59)</span>
+<span class="nc" id="L552">                                        .addComponent(CalBtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L553">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L554">                                        .addGap(25, 25, 25)</span>
+<span class="nc" id="L555">                                        .addComponent(CalBtnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L556">                                    .addComponent(CalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L557">                                .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L558">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L559">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L560">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L561">                                        .addComponent(CalPanRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L562">                                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L563">                                        .addComponent(CalBtnVerRuta))</span>
+<span class="nc" id="L564">                                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L565">                                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L566">                                            .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L567">                                                .addComponent(CalTxtTipoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L568">                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L569">                                                    .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L570">                                                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L571">                                                            .addComponent(CalLblTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L572">                                                            .addComponent(CalLblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L573">                                                            .addComponent(CalLblPerro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L574">                                                            .addComponent(CalLblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L575">                                                            .addComponent(CalLblHora))</span>
+<span class="nc" id="L576">                                                        .addComponent(CalLblNombre))</span>
+<span class="nc" id="L577">                                                    .addGap(18, 18, 18)</span>
+<span class="nc" id="L578">                                                    .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L579">                                                        .addComponent(CalComboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L580">                                                        .addComponent(CalComboUsuario, javax.swing.GroupLayout.Alignment.LEADING, 0, 134, Short.MAX_VALUE)</span>
+<span class="nc" id="L581">                                                        .addComponent(CalComboPerro, javax.swing.GroupLayout.Alignment.LEADING, 0, 134, Short.MAX_VALUE)</span>
+<span class="nc" id="L582">                                                        .addComponent(CalLblFechaResp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L583">                                                        .addComponent(CalTxtNombreResp)</span>
+<span class="nc" id="L584">                                                        .addComponent(CalComboHora, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))</span>
+<span class="nc" id="L585">                                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L586">                                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L587">                                                    .addComponent(CalLblRealizada)</span>
+<span class="nc" id="L588">                                                    .addComponent(CalLblTipoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L589">                                                .addGap(29, 29, 29)</span>
+<span class="nc" id="L590">                                                .addComponent(CalBtnRealizadaSi)</span>
+<span class="nc" id="L591">                                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L592">                                                .addComponent(CalBtnRealizadaNo)))</span>
+<span class="nc" id="L593">                                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L594">                                            .addComponent(CalPanVeterinaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L595">                                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L596">                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L597">                                                .addComponent(CalPanHoraPersonalizada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))</span>
+<span class="nc" id="L598">                                .addContainerGap(18, Short.MAX_VALUE))))</span>
+<span class="nc" id="L599">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L600">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L601">                        .addComponent(CalLblTituloActividad)</span>
+<span class="nc" id="L602">                        .addGap(291, 291, 291))))</span>
+        );
+<span class="nc" id="L604">        panCalendarioLayout.setVerticalGroup(</span>
+<span class="nc" id="L605">            panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L606">            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L607">                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L608">                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L609">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L610">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L611">                                .addGap(39, 39, 39)</span>
+<span class="nc" id="L612">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L613">                                    .addComponent(CalLblTipo)</span>
+<span class="nc" id="L614">                                    .addComponent(CalComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L615">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L616">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L617">                                    .addComponent(CalLblNombre)</span>
+<span class="nc" id="L618">                                    .addComponent(CalTxtNombreResp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L619">                                .addGap(8, 8, 8)</span>
+<span class="nc" id="L620">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L621">                                    .addComponent(CalLblUsuario)</span>
+<span class="nc" id="L622">                                    .addComponent(CalComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L623">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L624">                                .addGap(28, 28, 28)</span>
+<span class="nc" id="L625">                                .addComponent(CalPanVeterinaria, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L626">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L627">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L628">                            .addComponent(CalLblPerro)</span>
+<span class="nc" id="L629">                            .addComponent(CalComboPerro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L630">                        .addGap(10, 10, 10)</span>
+<span class="nc" id="L631">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L632">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L633">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L634">                                    .addComponent(CalLblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L635">                                    .addComponent(CalLblFechaResp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+<span class="nc" id="L636">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L637">                                    .addComponent(CalLblHora)</span>
+<span class="nc" id="L638">                                    .addComponent(CalComboHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L639">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L640">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L641">                                    .addComponent(CalLblRealizada)</span>
+<span class="nc" id="L642">                                    .addComponent(CalBtnRealizadaSi)</span>
+<span class="nc" id="L643">                                    .addComponent(CalBtnRealizadaNo))</span>
+<span class="nc" id="L644">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L645">                                .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L646">                                    .addComponent(CalLblTipoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L647">                                    .addComponent(CalTxtTipoAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L648">                            .addComponent(CalPanHoraPersonalizada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L649">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L650">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L651">                            .addComponent(CalPanRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L652">                            .addComponent(CalBtnVerRuta))</span>
+<span class="nc" id="L653">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L654">                        .addComponent(CalBtnEditar)</span>
+<span class="nc" id="L655">                        .addGap(12, 12, 12)</span>
+<span class="nc" id="L656">                        .addComponent(CalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L657">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L658">                        .addComponent(CalBtnAgregar)</span>
+<span class="nc" id="L659">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L660">                        .addComponent(CalBtnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L661">                    .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L662">                        .addGap(15, 15, 15)</span>
+<span class="nc" id="L663">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L664">                            .addComponent(CalLblTituloFecha)</span>
+<span class="nc" id="L665">                            .addComponent(CalLblTituloActividad))</span>
+<span class="nc" id="L666">                        .addGap(3, 3, 3)</span>
+<span class="nc" id="L667">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L668">                            .addComponent(CalMonthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L669">                            .addComponent(CalYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L670">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L671">                        .addComponent(CalDayChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L672">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L673">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L674">                            .addComponent(CalLblActividadesDelDia)</span>
+<span class="nc" id="L675">                            .addComponent(CalLblInfoActividad))</span>
+<span class="nc" id="L676">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L677">                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L678">                            .addGroup(panCalendarioLayout.createSequentialGroup()</span>
+<span class="nc" id="L679">                                .addComponent(CalScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L680">                                .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L681">                            .addComponent(CalScrollInfoAct))))</span>
+<span class="nc" id="L682">                .addGap(326, 326, 326))</span>
+        );
+
+<span class="nc" id="L685">        Panel.addTab(&quot;Calendario&quot;, panCalendario);</span>
+
+<span class="nc" id="L687">        UsuarioLblUsuarios.setText(&quot;Usuario&quot;);</span>
+
+<span class="nc" id="L689">        UsuarioComboUsuarios.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L691">                UsuarioComboUsuariosActionPerformed(evt);</span>
+<span class="nc" id="L692">            }</span>
+        });
+
+<span class="nc" id="L695">        UsuarioLblNombre.setText(&quot;Nombre:&quot;);</span>
+
+<span class="nc" id="L697">        UsuarioLblMail.setText(&quot;Mail:&quot;);</span>
+
+<span class="nc" id="L699">        UsuarioTxtMail.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L701">                UsuarioTxtMailActionPerformed(evt);</span>
+<span class="nc" id="L702">            }</span>
+        });
+
+<span class="nc" id="L705">        UsuarioBtnAgregar.setText(&quot;Agregar Usuario&quot;);</span>
+<span class="nc" id="L706">        UsuarioBtnAgregar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L708">                UsuarioBtnAgregarActionPerformed(evt);</span>
+<span class="nc" id="L709">            }</span>
+        });
+
+<span class="nc" id="L712">        UsuarioLblActividades.setText(&quot;Próximas Actividades&quot;);</span>
+
+<span class="nc" id="L714">        UsuarioScrollActividades.setViewportView(UsuarioLstActividades);</span>
+
+<span class="nc" id="L716">        UsuarioLblActividad.setText(&quot;Activiad:&quot;);</span>
+
+<span class="nc" id="L718">        UsuarioLblFecha.setText(&quot;Fecha&quot;);</span>
+
+<span class="nc" id="L720">        UsuarioScrollFechas.setViewportView(UsuarioLstFechas);</span>
+
+<span class="nc" id="L722">        javax.swing.GroupLayout panUsuariosLayout = new javax.swing.GroupLayout(panUsuarios);</span>
+<span class="nc" id="L723">        panUsuarios.setLayout(panUsuariosLayout);</span>
+<span class="nc" id="L724">        panUsuariosLayout.setHorizontalGroup(</span>
+<span class="nc" id="L725">            panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L726">            .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L727">                .addContainerGap()</span>
+<span class="nc" id="L728">                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L729">                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L730">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L731">                            .addComponent(UsuarioLblUsuarios)</span>
+<span class="nc" id="L732">                            .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L733">                                .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L734">                                .addGap(58, 58, 58)</span>
+<span class="nc" id="L735">                                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L736">                                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L737">                                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L738">                                            .addComponent(UsuarioLblNombre)</span>
+<span class="nc" id="L739">                                            .addComponent(UsuarioLblMail))</span>
+<span class="nc" id="L740">                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)</span>
+<span class="nc" id="L741">                                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L742">                                            .addComponent(UsuarioTxtMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L743">                                            .addComponent(UsuarioTxtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L744">                                    .addComponent(UsuarioLblAdvertencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))</span>
+<span class="nc" id="L745">                        .addGap(39, 39, 39))</span>
+<span class="nc" id="L746">                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L747">                        .addGap(0, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L748">                        .addComponent(UsuarioBtnAgregar)</span>
+<span class="nc" id="L749">                        .addGap(102, 102, 102)))</span>
+<span class="nc" id="L750">                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L751">                    .addComponent(UsuarioLblActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L752">                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L753">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L754">                            .addComponent(UsuarioLblActividad)</span>
+<span class="nc" id="L755">                            .addComponent(UsuarioScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L756">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L757">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L758">                            .addComponent(UsuarioLblFecha)</span>
+<span class="nc" id="L759">                            .addComponent(UsuarioScrollFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+<span class="nc" id="L760">                .addGap(89, 89, 89))</span>
+        );
+<span class="nc" id="L762">        panUsuariosLayout.setVerticalGroup(</span>
+<span class="nc" id="L763">            panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L764">            .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L765">                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L766">                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L767">                        .addGap(53, 53, 53)</span>
+<span class="nc" id="L768">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L769">                            .addComponent(UsuarioLblNombre)</span>
+<span class="nc" id="L770">                            .addComponent(UsuarioTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L771">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L772">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L773">                            .addComponent(UsuarioTxtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L774">                            .addComponent(UsuarioLblMail))</span>
+<span class="nc" id="L775">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L776">                        .addComponent(UsuarioLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L777">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L778">                        .addComponent(UsuarioBtnAgregar))</span>
+<span class="nc" id="L779">                    .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L780">                        .addGap(17, 17, 17)</span>
+<span class="nc" id="L781">                        .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L782">                            .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L783">                                .addComponent(UsuarioLblActividades)</span>
+<span class="nc" id="L784">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L785">                                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L786">                                    .addComponent(UsuarioLblActividad)</span>
+<span class="nc" id="L787">                                    .addComponent(UsuarioLblFecha))</span>
+<span class="nc" id="L788">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L789">                                .addGroup(panUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L790">                                    .addComponent(UsuarioScrollFechas)</span>
+<span class="nc" id="L791">                                    .addComponent(UsuarioScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L792">                            .addGroup(panUsuariosLayout.createSequentialGroup()</span>
+<span class="nc" id="L793">                                .addComponent(UsuarioLblUsuarios)</span>
+<span class="nc" id="L794">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L795">                                .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))</span>
+<span class="nc" id="L796">                .addContainerGap(255, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L799">        Panel.addTab(&quot;Usuarios&quot;, panUsuarios);</span>
+
+<span class="nc" id="L801">        PerroBtnAgregar.setText(&quot;Ingresar Perro&quot;);</span>
+<span class="nc" id="L802">        PerroBtnAgregar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L804">                PerroBtnAgregarActionPerformed(evt);</span>
+<span class="nc" id="L805">            }</span>
+        });
+
+<span class="nc" id="L808">        PerroLblPerros.setText(&quot;Perros&quot;);</span>
+
+<span class="nc" id="L810">        javax.swing.GroupLayout PerroPanFotoLayout = new javax.swing.GroupLayout(PerroPanFoto);</span>
+<span class="nc" id="L811">        PerroPanFoto.setLayout(PerroPanFotoLayout);</span>
+<span class="nc" id="L812">        PerroPanFotoLayout.setHorizontalGroup(</span>
+<span class="nc" id="L813">            PerroPanFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L814">            .addGroup(PerroPanFotoLayout.createSequentialGroup()</span>
+<span class="nc" id="L815">                .addContainerGap()</span>
+<span class="nc" id="L816">                .addComponent(PerroLblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L817">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L819">        PerroPanFotoLayout.setVerticalGroup(</span>
+<span class="nc" id="L820">            PerroPanFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L821">            .addGroup(PerroPanFotoLayout.createSequentialGroup()</span>
+<span class="nc" id="L822">                .addContainerGap()</span>
+<span class="nc" id="L823">                .addComponent(PerroLblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L824">                .addContainerGap(12, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L827">        PerroLblAltura.setText(&quot;Altura&quot;);</span>
+
+<span class="nc" id="L829">        PerroLblComentarios.setText(&quot;Comentarios&quot;);</span>
+
+<span class="nc" id="L831">        PerroLblNombre.setText(&quot;Nombre&quot;);</span>
+
+<span class="nc" id="L833">        PerroLblPeso.setText(&quot;Peso&quot;);</span>
+
+<span class="nc" id="L835">        PerroTxtNombre.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L837">                PerroTxtNombreActionPerformed(evt);</span>
+<span class="nc" id="L838">            }</span>
+        });
+
+<span class="nc" id="L841">        PerroBtnExaminar.setText(&quot;Examinar&quot;);</span>
+<span class="nc" id="L842">        PerroBtnExaminar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L844">                PerroBtnExaminarActionPerformed(evt);</span>
+<span class="nc" id="L845">            }</span>
+        });
+
+<span class="nc" id="L848">        PerroLblFotoBoton.setText(&quot;Foto:&quot;);</span>
+
+<span class="nc" id="L850">        PerroSpinAltura.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));</span>
+
+<span class="nc" id="L852">        PerroSpinPeso.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(0.1d)));</span>
+
+<span class="nc" id="L854">        CalLblCentimetros.setText(&quot;Centímetros&quot;);</span>
+
+<span class="nc" id="L856">        CalLblKilogramos.setText(&quot;Kilogramos&quot;);</span>
+
+<span class="nc" id="L858">        javax.swing.GroupLayout PerroPanInformacionLayout = new javax.swing.GroupLayout(PerroPanInformacion);</span>
+<span class="nc" id="L859">        PerroPanInformacion.setLayout(PerroPanInformacionLayout);</span>
+<span class="nc" id="L860">        PerroPanInformacionLayout.setHorizontalGroup(</span>
+<span class="nc" id="L861">            PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L862">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L863">                .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L864">                    .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L865">                        .addContainerGap()</span>
+<span class="nc" id="L866">                        .addComponent(PerroTxtComentarios))</span>
+<span class="nc" id="L867">                    .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L868">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L869">                            .addComponent(PerroPanFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L870">                            .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L871">                                .addContainerGap()</span>
+<span class="nc" id="L872">                                .addComponent(PerroLblComentarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L873">                                .addGap(7, 7, 7)))</span>
+<span class="nc" id="L874">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L875">                            .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L876">                                .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L877">                                    .addComponent(PerroLblNombre)</span>
+<span class="nc" id="L878">                                    .addComponent(PerroLblAltura))</span>
+<span class="nc" id="L879">                                .addGap(26, 26, 26)</span>
+<span class="nc" id="L880">                                .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L881">                                    .addComponent(PerroTxtNombre)</span>
+<span class="nc" id="L882">                                    .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L883">                                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L884">                                            .addComponent(PerroSpinPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L885">                                            .addComponent(PerroSpinAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L886">                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L887">                                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L888">                                            .addComponent(CalLblCentimetros)</span>
+<span class="nc" id="L889">                                            .addComponent(CalLblKilogramos))</span>
+<span class="nc" id="L890">                                        .addGap(0, 0, Short.MAX_VALUE))))</span>
+<span class="nc" id="L891">                            .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L892">                                .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L893">                                    .addComponent(PerroLblPeso)</span>
+<span class="nc" id="L894">                                    .addComponent(PerroLblFotoBoton))</span>
+<span class="nc" id="L895">                                .addGap(42, 42, 42)</span>
+<span class="nc" id="L896">                                .addComponent(PerroBtnExaminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))</span>
+<span class="nc" id="L897">                .addContainerGap())</span>
+        );
+<span class="nc" id="L899">        PerroPanInformacionLayout.setVerticalGroup(</span>
+<span class="nc" id="L900">            PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L901">            .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L902">                .addContainerGap()</span>
+<span class="nc" id="L903">                .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</span>
+<span class="nc" id="L904">                    .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L905">                        .addGap(14, 14, 14)</span>
+<span class="nc" id="L906">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L907">                            .addComponent(PerroLblNombre)</span>
+<span class="nc" id="L908">                            .addComponent(PerroTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L909">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L910">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L911">                            .addComponent(PerroLblAltura)</span>
+<span class="nc" id="L912">                            .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L913">                                .addComponent(PerroSpinAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L914">                                .addComponent(CalLblCentimetros)))</span>
+<span class="nc" id="L915">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L916">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L917">                            .addComponent(PerroLblPeso)</span>
+<span class="nc" id="L918">                            .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L919">                                .addComponent(PerroSpinPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L920">                                .addComponent(CalLblKilogramos)))</span>
+<span class="nc" id="L921">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L922">                        .addGroup(PerroPanInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L923">                            .addComponent(PerroBtnExaminar)</span>
+<span class="nc" id="L924">                            .addComponent(PerroLblFotoBoton)))</span>
+<span class="nc" id="L925">                    .addGroup(PerroPanInformacionLayout.createSequentialGroup()</span>
+<span class="nc" id="L926">                        .addComponent(PerroPanFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L927">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L928">                        .addComponent(PerroLblComentarios)))</span>
+<span class="nc" id="L929">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L930">                .addComponent(PerroTxtComentarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L931">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L934">        PerroComboPerros.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L936">                PerroComboPerrosMouseClicked(evt);</span>
+<span class="nc" id="L937">            }</span>
+        });
+<span class="nc" id="L939">        PerroComboPerros.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L941">                PerroComboPerrosActionPerformed(evt);</span>
+<span class="nc" id="L942">            }</span>
+        });
+
+<span class="nc" id="L945">        PerroBtnEditar.setText(&quot;Editar&quot;);</span>
+<span class="nc" id="L946">        PerroBtnEditar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L948">                PerroBtnEditarActionPerformed(evt);</span>
+<span class="nc" id="L949">            }</span>
+        });
+
+<span class="nc" id="L952">        PerroBtnGuardar.setText(&quot;Guardar&quot;);</span>
+<span class="nc" id="L953">        PerroBtnGuardar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L955">                PerroBtnGuardarActionPerformed(evt);</span>
+<span class="nc" id="L956">            }</span>
+        });
+
+<span class="nc" id="L959">        javax.swing.GroupLayout panPerrosLayout = new javax.swing.GroupLayout(panPerros);</span>
+<span class="nc" id="L960">        panPerros.setLayout(panPerrosLayout);</span>
+<span class="nc" id="L961">        panPerrosLayout.setHorizontalGroup(</span>
+<span class="nc" id="L962">            panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L963">            .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L964">                .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L965">                    .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L966">                        .addGap(24, 24, 24)</span>
+<span class="nc" id="L967">                        .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L968">                            .addComponent(PerroLblPerros)</span>
+<span class="nc" id="L969">                            .addComponent(PerroComboPerros, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L970">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L971">                        .addContainerGap()</span>
+<span class="nc" id="L972">                        .addComponent(PerroBtnEditar)</span>
+<span class="nc" id="L973">                        .addGap(22, 22, 22)))</span>
+<span class="nc" id="L974">                .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L975">                    .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L976">                        .addGap(268, 268, 268)</span>
+<span class="nc" id="L977">                        .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L978">                            .addComponent(PerroBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L979">                            .addComponent(PerroBtnAgregar)))</span>
+<span class="nc" id="L980">                    .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L981">                        .addGap(122, 122, 122)</span>
+<span class="nc" id="L982">                        .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L983">                            .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L984">                                .addGap(6, 6, 6)</span>
+<span class="nc" id="L985">                                .addComponent(PerroLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L986">                            .addComponent(PerroPanInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))</span>
+<span class="nc" id="L987">                .addContainerGap(251, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L989">        panPerrosLayout.setVerticalGroup(</span>
+<span class="nc" id="L990">            panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L991">            .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L992">                .addGroup(panPerrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L993">                    .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L994">                        .addGap(15, 15, 15)</span>
+<span class="nc" id="L995">                        .addComponent(PerroLblPerros)</span>
+<span class="nc" id="L996">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L997">                        .addComponent(PerroComboPerros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L998">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L999">                        .addComponent(PerroBtnEditar))</span>
+<span class="nc" id="L1000">                    .addGroup(panPerrosLayout.createSequentialGroup()</span>
+<span class="nc" id="L1001">                        .addContainerGap()</span>
+<span class="nc" id="L1002">                        .addComponent(PerroPanInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L1003">                .addGap(15, 15, 15)</span>
+<span class="nc" id="L1004">                .addComponent(PerroLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L1005">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L1006">                .addComponent(PerroBtnGuardar)</span>
+<span class="nc" id="L1007">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L1008">                .addComponent(PerroBtnAgregar)</span>
+<span class="nc" id="L1009">                .addContainerGap(241, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L1012">        Panel.addTab(&quot;Perros&quot;, panPerros);</span>
+
+<span class="nc" id="L1014">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L1015">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L1016">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L1017">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L1018">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L1019">                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L1020">                .addGap(0, 6, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L1022">        layout.setVerticalGroup(</span>
+<span class="nc" id="L1023">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L1024">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L1025">                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L1026">                .addGap(0, 8, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L1029">        bindingGroup.bind();</span>
+
+<span class="nc" id="L1031">        pack();</span>
+<span class="nc" id="L1032">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void PerroBtnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroBtnExaminarActionPerformed
+<span class="nc" id="L1035">        JFileChooser elegirImagen = new JFileChooser();</span>
+<span class="nc" id="L1036">        FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;*.Images&quot;, &quot;jpg&quot;, &quot;gif&quot;, &quot;png&quot;);</span>
+<span class="nc" id="L1037">        elegirImagen.setFileFilter(filter);</span>
+<span class="nc" id="L1038">        int result = elegirImagen.showDialog(this, &quot;Elija una imagen&quot;);</span>
+<span class="nc bnc" id="L1039" title="All 2 branches missed.">        if (result == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L1040">            File imgSeleccionada = elegirImagen.getSelectedFile();</span>
+<span class="nc" id="L1041">            rutaImagenAgregar = imgSeleccionada.getAbsolutePath();</span>
+<span class="nc" id="L1042">            PerroLblFoto.setIcon(crearIcono(imgSeleccionada, 100));</span>
+<span class="nc" id="L1043">        } else {</span>
+<span class="nc" id="L1044">            PerroLblAdvertencia.setText(&quot;No se ha podido ingresar la imágen de forma correcta&quot;);</span>
+        }
+<span class="nc" id="L1046">    }//GEN-LAST:event_PerroBtnExaminarActionPerformed</span>
+
+    private void PerroTxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroTxtNombreActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1050">    }//GEN-LAST:event_PerroTxtNombreActionPerformed</span>
+
+    private void PerroBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroBtnAgregarActionPerformed
+<span class="nc bnc" id="L1053" title="All 2 branches missed.">        if (agregarPerroSeleccionado == false) {</span>
+<span class="nc" id="L1054">            mostrarAgregarPerro();</span>
+        } else {
+<span class="nc bnc" id="L1056" title="All 2 branches missed.">            if (PerroTxtNombre.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1057">                PerroLblAdvertencia.setText(&quot;Por favor ingrese un nombre&quot;);</span>
+<span class="nc bnc" id="L1058" title="All 2 branches missed.">            } else if (PerroSpinAltura.getValue().equals(0)) {</span>
+<span class="nc" id="L1059">                PerroLblAdvertencia.setText(&quot;Por favor ingrese una altura válida&quot;);</span>
+<span class="nc bnc" id="L1060" title="All 2 branches missed.">            } else if (PerroSpinPeso.getValue().equals(0.0)) {</span>
+<span class="nc" id="L1061">                PerroLblAdvertencia.setText(&quot;Por favor ingrese un peso válido&quot;);</span>
+            } else {
+<span class="nc" id="L1063">                Perro perroAgregar = new Perro(PerroTxtNombre.getText(), Integer.parseInt(PerroSpinAltura.getValue().toString()), Double.parseDouble(PerroSpinPeso.getValue().toString()), PerroTxtComentarios.getText());</span>
+<span class="nc bnc" id="L1064" title="All 2 branches missed.">                if (rutaImagenAgregar.equals(&quot;&quot;)) {</span>
+                    try {
+<span class="nc" id="L1066">                        perroAgregar.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/perroPorDefecto.png&quot;)).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L1067">                    } catch (IOException ex) {</span>
+<span class="nc" id="L1068">                        System.out.println(ex);</span>
+<span class="nc" id="L1069">                    }</span>
+                } else {
+<span class="nc" id="L1071">                    File imagen = new File(rutaImagenAgregar);</span>
+<span class="nc" id="L1072">                    perroAgregar.setFoto(crearIcono(imagen, 100));</span>
+<span class="nc" id="L1073">                    rutaImagenAgregar = &quot;&quot;;</span>
+                }
+<span class="nc" id="L1075">                sistema.AnadirPerro(perroAgregar);</span>
+<span class="nc" id="L1076">                PerroTxtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L1077">                PerroSpinPeso.setValue((Object) 0.0);</span>
+<span class="nc" id="L1078">                PerroSpinAltura.setValue((Object) 0.0);</span>
+<span class="nc" id="L1079">                PerroTxtComentarios.setText(&quot;&quot;);</span>
+<span class="nc" id="L1080">                PerroLblAdvertencia.setText(&quot;&quot;);</span>
+<span class="nc" id="L1081">                ocultarAgregarPerro();</span>
+<span class="nc" id="L1082">                setearListaPerros();</span>
+            }
+        }
+<span class="nc" id="L1085">    }//GEN-LAST:event_PerroBtnAgregarActionPerformed</span>
+
+    public static boolean isValidEmailAddress(String email) {
+<span class="nc" id="L1088">        boolean result = true;</span>
+        try {
+<span class="nc" id="L1090">            InternetAddress emailAddr = new InternetAddress(email);</span>
+<span class="nc" id="L1091">            emailAddr.validate();</span>
+<span class="nc" id="L1092">        } catch (AddressException ex) {</span>
+<span class="nc" id="L1093">            result = false;</span>
+<span class="nc" id="L1094">        }</span>
+<span class="nc" id="L1095">        return result;</span>
+    }
+    private void UsuarioBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioBtnAgregarActionPerformed
+<span class="nc bnc" id="L1098" title="All 2 branches missed.">        if (agregarUsuarioSeleccionado == false) {</span>
+<span class="nc" id="L1099">            mostrarAgregarUsuario();</span>
+        } else {
+<span class="nc bnc" id="L1101" title="All 2 branches missed.">            if (UsuarioTxtNombre.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1102">                UsuarioLblAdvertencia.setText(&quot;Por favor ingrese un nombre para el usuario&quot;);</span>
+<span class="nc bnc" id="L1103" title="All 2 branches missed.">            } else if (UsuarioTxtMail.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1104">                UsuarioLblAdvertencia.setText(&quot;Por favor ingrese un email para el usuario&quot;);</span>
+<span class="nc bnc" id="L1105" title="All 2 branches missed.">            } else if (!isValidEmailAddress(UsuarioTxtMail.getText())) {</span>
+<span class="nc" id="L1106">                UsuarioLblAdvertencia.setText(&quot;Por favor ingrese un email correcto&quot;);</span>
+            } else {
+<span class="nc" id="L1108">                Usuario usuarioAgregar = new Usuario(UsuarioTxtNombre.getText(), UsuarioTxtMail.getText());</span>
+<span class="nc" id="L1109">                sistema.AnadirUsuario(usuarioAgregar);</span>
+<span class="nc" id="L1110">                UsuarioTxtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L1111">                UsuarioTxtMail.setText(&quot;&quot;);</span>
+<span class="nc" id="L1112">                ocultarAgregarUsuario();</span>
+<span class="nc" id="L1113">                resetearListaUsuarios();</span>
+<span class="nc" id="L1114">                UsuarioLblAdvertencia.setText(&quot;&quot;);</span>
+            }
+        }
+<span class="nc" id="L1117">    }//GEN-LAST:event_UsuarioBtnAgregarActionPerformed</span>
+
+    private void UsuarioComboUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioComboUsuariosActionPerformed
+<span class="nc" id="L1120">        ocultarAgregarUsuario();</span>
+<span class="nc bnc" id="L1121" title="All 2 branches missed.">        if (UsuarioComboUsuarios.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1122">            Usuario usuarioSeleccionado = sistema.buscarUsuarioPorNombre(UsuarioComboUsuarios.getSelectedItem().toString());</span>
+<span class="nc" id="L1123">            UsuarioLblNombre.setText(&quot;Nombre: &quot; + usuarioSeleccionado.getNombre());</span>
+<span class="nc" id="L1124">            UsuarioLblMail.setText(&quot;Mail: &quot; + usuarioSeleccionado.getMail());</span>
+<span class="nc" id="L1125">            String[] arrayActividades = new String[5];</span>
+<span class="nc" id="L1126">            String[] arrayFechas = new String[5];</span>
+<span class="nc" id="L1127">            int cantidadActividades = usuarioSeleccionado.getActividades().size();</span>
+<span class="nc bnc" id="L1128" title="All 2 branches missed.">            for (int i = 0; i &lt; cantidadActividades; i++) {</span>
+<span class="nc" id="L1129">                arrayActividades[i] = usuarioSeleccionado.getActividades().get(i).getNombre();</span>
+<span class="nc" id="L1130">                Fecha fechaActividad = usuarioSeleccionado.getActividades().get(i).getFecha();</span>
+<span class="nc" id="L1131">                arrayFechas[i] = fechaActividad.getDia() + &quot;/&quot; + fechaActividad.getMes() + &quot;/&quot; + fechaActividad.getAno();</span>
+            }
+<span class="nc" id="L1133">            UsuarioLstActividades.setListData(arrayActividades);</span>
+<span class="nc" id="L1134">            UsuarioLstFechas.setListData(arrayFechas);</span>
+<span class="nc" id="L1135">        } else {</span>
+<span class="nc" id="L1136">            UsuarioLblNombre.setText(&quot;Nombre: &quot;);</span>
+<span class="nc" id="L1137">            UsuarioLblMail.setText(&quot;Mail: &quot;);</span>
+<span class="nc" id="L1138">            String[] arrayVacio = new String[0];</span>
+<span class="nc" id="L1139">            UsuarioLstActividades.setListData(arrayVacio);</span>
+<span class="nc" id="L1140">            UsuarioLstFechas.setListData(arrayVacio);</span>
+        }
+<span class="nc" id="L1142">    }//GEN-LAST:event_UsuarioComboUsuariosActionPerformed</span>
+
+    private void setearListaDeVeterinarias() {
+<span class="nc bnc" id="L1145" title="All 2 branches missed.">        if (CalComboVeterinaria.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1146">            CalComboVeterinaria.removeAllItems();</span>
+        }
+<span class="nc bnc" id="L1148" title="All 2 branches missed.">        for (int i = 0; i &lt; sistema.getVeterinarias().size(); i++) {</span>
+<span class="nc" id="L1149">            CalComboVeterinaria.addItem(sistema.getVeterinarias().get(i).getNombre());</span>
+        }
+<span class="nc" id="L1151">    }</span>
+
+    private void mostrarAgregarPerro() {
+<span class="nc" id="L1154">        agregarPerroSeleccionado = true;</span>
+<span class="nc" id="L1155">        PerroLblNombre.setText(&quot;Nombre:&quot;);</span>
+<span class="nc" id="L1156">        PerroLblPeso.setText(&quot;Peso:&quot;);</span>
+<span class="nc" id="L1157">        PerroLblAltura.setText(&quot;Altura:&quot;);</span>
+<span class="nc" id="L1158">        PerroLblComentarios.setText(&quot;Comentarios:&quot;);</span>
+<span class="nc" id="L1159">        PerroLblFoto.setIcon(crearIcono(&quot;/images/perroPorDefecto.png&quot;, 100));</span>
+<span class="nc" id="L1160">        PerroTxtNombre.setVisible(true);</span>
+<span class="nc" id="L1161">        PerroSpinPeso.setVisible(true);</span>
+<span class="nc" id="L1162">        PerroSpinAltura.setVisible(true);</span>
+<span class="nc" id="L1163">        PerroTxtComentarios.setVisible(true);</span>
+<span class="nc" id="L1164">        PerroLblFotoBoton.setVisible(true);</span>
+<span class="nc" id="L1165">        PerroBtnExaminar.setVisible(true);</span>
+<span class="nc" id="L1166">    }</span>
+
+    private void ocultarAgregarPerro() {
+<span class="nc" id="L1169">        PerroTxtNombre.setVisible(false);</span>
+<span class="nc" id="L1170">        PerroTxtNombre.setText(&quot;&quot;);</span>
+<span class="nc" id="L1171">        PerroSpinPeso.setVisible(false);</span>
+<span class="nc" id="L1172">        PerroSpinPeso.setValue((Object) 0.0);</span>
+<span class="nc" id="L1173">        PerroSpinAltura.setVisible(false);</span>
+<span class="nc" id="L1174">        PerroSpinAltura.setValue((Object) 0.0);</span>
+<span class="nc" id="L1175">        PerroTxtComentarios.setVisible(false);</span>
+<span class="nc" id="L1176">        PerroTxtComentarios.setText(&quot;&quot;);</span>
+<span class="nc" id="L1177">        PerroLblFotoBoton.setVisible(false);</span>
+<span class="nc" id="L1178">        PerroBtnExaminar.setVisible(false);</span>
+<span class="nc" id="L1179">        agregarPerroSeleccionado = false;</span>
+<span class="nc" id="L1180">    }</span>
+
+    private void mostrarEditarPerro() {
+<span class="nc" id="L1183">        PerroBtnGuardar.setVisible(true);</span>
+<span class="nc" id="L1184">        PerroBtnAgregar.setVisible(false);</span>
+<span class="nc" id="L1185">        agregarPerroSeleccionado = true;</span>
+<span class="nc" id="L1186">        PerroLblNombre.setText(&quot;Nombre:&quot;);</span>
+<span class="nc" id="L1187">        PerroLblPeso.setText(&quot;Peso:&quot;);</span>
+<span class="nc" id="L1188">        PerroLblAltura.setText(&quot;Altura:&quot;);</span>
+<span class="nc" id="L1189">        PerroLblComentarios.setText(&quot;Comentarios:&quot;);</span>
+<span class="nc" id="L1190">        Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());</span>
+<span class="nc" id="L1191">        PerroLblFoto.setIcon(perroSeleccionado.getFoto());</span>
+<span class="nc" id="L1192">        PerroTxtNombre.setText(perroSeleccionado.getNombre());</span>
+<span class="nc" id="L1193">        PerroSpinPeso.setValue(perroSeleccionado.getPeso());</span>
+<span class="nc" id="L1194">        PerroSpinAltura.setValue(perroSeleccionado.getAltura());</span>
+<span class="nc" id="L1195">        PerroTxtComentarios.setText(&quot;&quot; + perroSeleccionado.getComentarios());</span>
+<span class="nc" id="L1196">        PerroTxtNombre.setVisible(true);</span>
+<span class="nc" id="L1197">        PerroSpinPeso.setVisible(true);</span>
+<span class="nc" id="L1198">        PerroSpinAltura.setVisible(true);</span>
+<span class="nc" id="L1199">        PerroTxtComentarios.setVisible(true);</span>
+<span class="nc" id="L1200">        PerroLblFotoBoton.setVisible(true);</span>
+<span class="nc" id="L1201">        PerroBtnExaminar.setVisible(true);</span>
+<span class="nc" id="L1202">    }</span>
+
+    private void setearListaPerros() {
+<span class="nc bnc" id="L1205" title="All 2 branches missed.">        if (PerroComboPerros.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1206">            PerroComboPerros.removeAllItems();</span>
+        }
+<span class="nc bnc" id="L1208" title="All 2 branches missed.">        if (CalComboPerro.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1209">            CalComboPerro.removeAllItems();</span>
+        }
+<span class="nc bnc" id="L1211" title="All 2 branches missed.">        for (int i = 0; i &lt; sistema.getPerros().size(); i++) {</span>
+<span class="nc" id="L1212">            PerroComboPerros.addItem(sistema.getPerros().get(i).getNombre());</span>
+<span class="nc" id="L1213">            CalComboPerro.addItem(sistema.getPerros().get(i).getNombre());</span>
+        }
+
+<span class="nc" id="L1216">    }</span>
+
+    private void mostrarAgregarUsuario() {
+<span class="nc" id="L1219">        agregarUsuarioSeleccionado = true;</span>
+<span class="nc" id="L1220">        UsuarioLblNombre.setText(&quot;Nombre:&quot;);</span>
+<span class="nc" id="L1221">        UsuarioLblMail.setText(&quot;Mail:&quot;);</span>
+<span class="nc" id="L1222">        UsuarioTxtNombre.setVisible(true);</span>
+<span class="nc" id="L1223">        UsuarioTxtMail.setVisible(true);</span>
+<span class="nc" id="L1224">    }</span>
+
+    private void ocultarAgregarUsuario() {
+<span class="nc" id="L1227">        UsuarioTxtNombre.setVisible(false);</span>
+<span class="nc" id="L1228">        UsuarioTxtMail.setVisible(false);</span>
+<span class="nc" id="L1229">        agregarUsuarioSeleccionado = false;</span>
+<span class="nc" id="L1230">    }</span>
+
+    private void resetearListaUsuarios() {
+<span class="nc bnc" id="L1233" title="All 2 branches missed.">        if (UsuarioComboUsuarios.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1234">            UsuarioComboUsuarios.removeAllItems();</span>
+        }
+<span class="nc bnc" id="L1236" title="All 2 branches missed.">        if (CalComboUsuario.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1237">            CalComboUsuario.removeAllItems();</span>
+        }
+<span class="nc bnc" id="L1239" title="All 2 branches missed.">        for (int i = 0; i &lt; sistema.getUsuarios().size(); i++) {</span>
+<span class="nc" id="L1240">            UsuarioComboUsuarios.addItem(sistema.getUsuarios().get(i).getNombre());</span>
+<span class="nc" id="L1241">            CalComboUsuario.addItem(sistema.getUsuarios().get(i).getNombre());</span>
+        }
+<span class="nc" id="L1243">    }</span>
+
+    private void UsuarioTxtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioTxtMailActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1247">    }//GEN-LAST:event_UsuarioTxtMailActionPerformed</span>
+
+    private void PanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelMouseClicked
+        // TODO add your handling code here:
+<span class="nc" id="L1251">    }//GEN-LAST:event_PanelMouseClicked</span>
+
+    private void PerroComboPerrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PerroComboPerrosMouseClicked
+
+<span class="nc" id="L1255">    }//GEN-LAST:event_PerroComboPerrosMouseClicked</span>
+
+    private void PerroComboPerrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroComboPerrosActionPerformed
+<span class="nc" id="L1258">        ocultarAgregarPerro();</span>
+<span class="nc bnc" id="L1259" title="All 2 branches missed.">        if (PerroComboPerros.getItemCount() &gt; 0) {</span>
+<span class="nc" id="L1260">            Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());</span>
+<span class="nc" id="L1261">            PerroLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());</span>
+<span class="nc" id="L1262">            PerroLblPeso.setText(&quot;Pesa:       &quot; + perroSeleccionado.getPeso());</span>
+<span class="nc" id="L1263">            PerroLblAltura.setText(&quot;Mide:       &quot; + perroSeleccionado.getAltura());</span>
+<span class="nc" id="L1264">            PerroLblComentarios.setText(&quot;&quot; + perroSeleccionado.getComentarios());</span>
+<span class="nc" id="L1265">            PerroLblFoto.setIcon(perroSeleccionado.getFoto());</span>
+<span class="nc" id="L1266">            PerroBtnGuardar.setVisible(false);</span>
+<span class="nc" id="L1267">            PerroBtnEditar.setVisible(true);</span>
+<span class="nc" id="L1268">            PerroBtnAgregar.setVisible(true);</span>
+<span class="nc" id="L1269">        } else {</span>
+<span class="nc" id="L1270">            PerroLblNombre.setText(&quot;Nombre: &quot;);</span>
+<span class="nc" id="L1271">            PerroLblPeso.setText(&quot;Peso &quot;);</span>
+<span class="nc" id="L1272">            PerroLblAltura.setText(&quot;Altura: &quot;);</span>
+<span class="nc" id="L1273">            PerroLblComentarios.setText(&quot;Comentarios: &quot;);</span>
+            try {
+<span class="nc" id="L1275">                PerroLblFoto.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/perroPorDefecto.png&quot;)).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L1276">            } catch (IOException ex) {</span>
+<span class="nc" id="L1277">                System.out.println(ex);</span>
+<span class="nc" id="L1278">            }</span>
+        }
+<span class="nc" id="L1280">    }//GEN-LAST:event_PerroComboPerrosActionPerformed</span>
+
+    private void PerroBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroBtnEditarActionPerformed
+<span class="nc" id="L1283">        mostrarEditarPerro();</span>
+<span class="nc" id="L1284">    }//GEN-LAST:event_PerroBtnEditarActionPerformed</span>
+
+    private void PerroBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroBtnGuardarActionPerformed
+<span class="nc" id="L1287">        Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());</span>
+<span class="nc" id="L1288">        String valor = PerroSpinAltura.getValue() + &quot;&quot;;</span>
+<span class="nc" id="L1289">        double altura = Double.parseDouble(valor);</span>
+<span class="nc" id="L1290">        perroSeleccionado.setAltura(altura);</span>
+<span class="nc" id="L1291">        perroSeleccionado.setComentarios(PerroTxtComentarios.getText());</span>
+<span class="nc" id="L1292">        perroSeleccionado.setNombre(PerroTxtNombre.getText());</span>
+<span class="nc" id="L1293">        valor = PerroSpinPeso.getValue() + &quot;&quot;;</span>
+<span class="nc" id="L1294">        double peso = Double.parseDouble(valor);</span>
+<span class="nc" id="L1295">        perroSeleccionado.setPeso(peso);</span>
+<span class="nc bnc" id="L1296" title="All 2 branches missed.">        if (!rutaImagenAgregar.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1297">            File imagen = new File(rutaImagenAgregar);</span>
+<span class="nc" id="L1298">            perroSeleccionado.setFoto(crearIcono(imagen, 100));</span>
+<span class="nc" id="L1299">            rutaImagenAgregar = &quot;&quot;;</span>
+        }
+<span class="nc" id="L1301">        ocultarAgregarPerro();</span>
+<span class="nc" id="L1302">        int pos = PerroComboPerros.getSelectedIndex();</span>
+<span class="nc" id="L1303">        setearListaPerros();</span>
+<span class="nc" id="L1304">        PerroComboPerros.setSelectedIndex(pos);</span>
+<span class="nc" id="L1305">    }//GEN-LAST:event_PerroBtnGuardarActionPerformed</span>
+
+    private void CalBtnAgregarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnAgregarDatosActionPerformed
+        try {
+<span class="nc" id="L1309">            Usuario persona = new Usuario(&quot;Alex&quot;, &quot;alexkmass@gmail.com&quot;);</span>
+<span class="nc" id="L1310">            sistema.AnadirUsuario(persona);</span>
+<span class="nc" id="L1311">            Perro rasta = new Perro(&quot;Rasta&quot;, 50, 23, &quot;Es un buen perro, le gusta comer&quot;);</span>
+<span class="nc" id="L1312">            rasta.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/perroPorDefecto.png&quot;)).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L1313">            sistema.AnadirPerro(rasta);</span>
+<span class="nc" id="L1314">            Usuario persona2 = new Usuario(&quot;Marcelo&quot;, &quot;marcelo@gmail.com&quot;);</span>
+<span class="nc" id="L1315">            sistema.AnadirUsuario(persona2);</span>
+<span class="nc" id="L1316">            Perro ori = new Perro(&quot;Ori&quot;, 50, 23, &quot;Es un buen perro&quot;);</span>
+<span class="nc" id="L1317">            ori.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/perroFoto.png&quot;)).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L1318">            sistema.AnadirPerro(ori);</span>
+<span class="nc" id="L1319">            Fecha fecha = new Fecha(22, 11, 2018);</span>
+<span class="nc" id="L1320">            sistema.AnadirFecha(fecha);</span>
+<span class="nc" id="L1321">            LocalTime hora = LocalTime.now();</span>
+<span class="nc" id="L1322">            Paseo act = new Paseo(&quot;Paseo Rasta&quot;, persona, rasta, 0.0, false, hora, fecha);</span>
+<span class="nc" id="L1323">            act.setRuta(new ImageIcon(ImageIO.read(this.getClass().getResource(&quot;images/rutaPorDefecto.png&quot;)).getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH)));</span>
+<span class="nc" id="L1324">            sistema.AnadirActividad(act);</span>
+<span class="nc" id="L1325">            sistema.getPaseos().add(act);</span>
+<span class="nc" id="L1326">            hora = LocalTime.now();</span>
+<span class="nc" id="L1327">            Alimentacion act2 = new Alimentacion(&quot;Alimentación de Ori&quot;, persona, ori, &quot;DogChow&quot;, false, hora, fecha);</span>
+<span class="nc" id="L1328">            sistema.AnadirActividad(act2);</span>
+<span class="nc" id="L1329">            sistema.getAlimentaciones().add(act2);</span>
+<span class="nc" id="L1330">            ActividadCualquiera act3 = new ActividadCualquiera(&quot;Ir a una cita con Rasta&quot;, persona, rasta, true, hora, fecha);</span>
+<span class="nc" id="L1331">            sistema.AnadirActividad(act3);</span>
+<span class="nc" id="L1332">            sistema.getActsCualquieras().add(act3);</span>
+<span class="nc" id="L1333">            Veterinaria vet1 = new Veterinaria(&quot;Pocitos&quot;, new ArrayList&lt;&gt;(), 8, 16);</span>
+<span class="nc" id="L1334">            sistema.getVeterinarias().add(vet1);</span>
+<span class="nc" id="L1335">            Veterinaria vet2 = new Veterinaria(&quot;Carrasco&quot;, new ArrayList&lt;&gt;(), 10, 15);</span>
+<span class="nc" id="L1336">            sistema.getVeterinarias().add(vet2);</span>
+<span class="nc" id="L1337">            Veterinaria vet3 = new Veterinaria(&quot;Cordon&quot;, new ArrayList&lt;&gt;(), 8, 23);</span>
+<span class="nc" id="L1338">            sistema.getVeterinarias().add(vet3);</span>
+<span class="nc" id="L1339">            VisitaVeterinaria visita = new VisitaVeterinaria(&quot;Visita a VetCordon&quot;, hora, persona, rasta, false, fecha, vet3, &quot;Rasta tiene fiebre&quot;);</span>
+<span class="nc" id="L1340">            sistema.AnadirActividad(visita);</span>
+<span class="nc" id="L1341">            sistema.getVisitas().add(visita);</span>
+<span class="nc" id="L1342">        } catch (IOException ex) {</span>
+<span class="nc" id="L1343">            System.out.println(ex);</span>
+<span class="nc" id="L1344">        }</span>
+<span class="nc" id="L1345">        resetearPestanaPerros();</span>
+<span class="nc" id="L1346">        inicializarPestanaUsuarios();</span>
+<span class="nc" id="L1347">        setearListaDeVeterinarias();</span>
+<span class="nc" id="L1348">        CalBtnAgregarDatos.setVisible(false);</span>
+<span class="nc" id="L1349">        int dia = CalDayChooser.getDay();</span>
+<span class="nc" id="L1350">        int mes = CalMonthChooser.getMonth() + 1;</span>
+<span class="nc" id="L1351">        int ano = CalYearChooser.getYear();</span>
+<span class="nc" id="L1352">        ArrayList&lt;Actividad&gt; listaActividades = sistema.listaActividadesPorFecha(dia, mes, ano);</span>
+<span class="nc" id="L1353">        String[] arrActividades = new String[listaActividades.size()];</span>
+<span class="nc bnc" id="L1354" title="All 2 branches missed.">        for (int i = 0; i &lt; listaActividades.size(); i++) {</span>
+<span class="nc" id="L1355">            Actividad act = listaActividades.get(i);</span>
+<span class="nc" id="L1356">            arrActividades[i] = act.getNombre();</span>
+        }
+<span class="nc" id="L1358">        CalLstActividades.setListData(arrActividades);</span>
+
+<span class="nc" id="L1360">        CalLblFechaResp.setText(dia + &quot;/&quot; + mes + &quot;/&quot; + ano);</span>
+<span class="nc" id="L1361">        fechaSeleccionada = new Fecha(dia, mes, ano);</span>
+<span class="nc" id="L1362">    }//GEN-LAST:event_CalBtnAgregarDatosActionPerformed</span>
+
+    private void CalBtnRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnRutaActionPerformed
+<span class="nc" id="L1365">        JFileChooser elegirImagen = new JFileChooser();</span>
+<span class="nc" id="L1366">        FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;*.Images&quot;, &quot;jpg&quot;, &quot;gif&quot;, &quot;png&quot;);</span>
+<span class="nc" id="L1367">        elegirImagen.setFileFilter(filter);</span>
+<span class="nc" id="L1368">        int result = elegirImagen.showDialog(this, &quot;Elija una imagen&quot;);</span>
+<span class="nc bnc" id="L1369" title="All 2 branches missed.">        if (result == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L1370">            File imgSeleccionada = elegirImagen.getSelectedFile();</span>
+<span class="nc" id="L1371">            rutaImagenRuta = imgSeleccionada.getAbsolutePath();</span>
+<span class="nc" id="L1372">        } else {</span>
+<span class="nc" id="L1373">            CalLblAdvertencia.setText(&quot;No se pudo ingresar la ruta correctamente&quot;);</span>
+        }
+<span class="nc" id="L1375">    }//GEN-LAST:event_CalBtnRutaActionPerformed</span>
+
+    private void CalBtnRealizadaNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnRealizadaNoActionPerformed
+<span class="nc" id="L1378">        CalPanRuta.setVisible(false);</span>
+<span class="nc" id="L1379">    }//GEN-LAST:event_CalBtnRealizadaNoActionPerformed</span>
+
+    private void CalBtnRealizadaSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnRealizadaSiActionPerformed
+<span class="nc bnc" id="L1382" title="All 2 branches missed.">        if (CalComboTipo.getSelectedIndex() == 0) {</span>
+<span class="nc" id="L1383">            CalPanRuta.setVisible(true);</span>
+        } else {
+<span class="nc" id="L1385">            CalPanRuta.setVisible(false);</span>
+        }
+<span class="nc" id="L1387">    }//GEN-LAST:event_CalBtnRealizadaSiActionPerformed</span>
+
+    private void CalBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnEditarActionPerformed
+<span class="nc" id="L1390">        CalLstActividades.setEnabled(false);</span>
+<span class="nc" id="L1391">        String nombreAct = CalLstActividades.getSelectedValue();</span>
+<span class="nc" id="L1392">        Paseo paseo = sistema.buscarPaseoPorNombre(nombreAct);</span>
+<span class="nc" id="L1393">        CalBtnVeterinariaNo.setSelected(true);</span>
+<span class="nc" id="L1394">        CalBtnVeterinariaNoActionPerformed(evt);</span>
+<span class="nc" id="L1395">        CalBtnGroupRealizada.clearSelection();</span>
+<span class="nc" id="L1396">        CalBtnRealizadaNo.setSelected(true);</span>
+<span class="nc bnc" id="L1397" title="All 2 branches missed.">        if (paseo != null) {</span>
+<span class="nc bnc" id="L1398" title="All 2 branches missed.">            if (paseo.getFueRealizado()) {</span>
+<span class="nc" id="L1399">                CalBtnRealizadaSi.setSelected(true);</span>
+            }
+<span class="nc" id="L1401">            CalPanRuta.setVisible(true);</span>
+<span class="nc" id="L1402">            CalComboTipo.setSelectedIndex(0);</span>
+<span class="nc bnc" id="L1403" title="All 2 branches missed.">            if (paseo.getFueRealizado()) {</span>
+<span class="nc" id="L1404">                CalPanRuta.setVisible(true);</span>
+            }
+<span class="nc bnc" id="L1406" title="All 2 branches missed.">            if (paseo.getRuta() == null) {</span>
+<span class="nc" id="L1407">                CalBtnVerRuta.setVisible(false);</span>
+            }
+<span class="nc" id="L1409">            CalTxtNombreResp.setText(nombreAct);</span>
+<span class="nc" id="L1410">            CalComboUsuario.setSelectedItem(paseo.getUsuario().getNombre());</span>
+<span class="nc" id="L1411">            CalComboPerro.setSelectedItem(paseo.getMascota().getNombre());</span>
+<span class="nc" id="L1412">            CalLblFechaResp.setText(paseo.getFecha().getDia() + &quot;/&quot; + paseo.getFecha().getMes() + &quot;/&quot; + paseo.getFecha().getAno());</span>
+<span class="nc" id="L1413">            CalComboHora.setSelectedIndex(1);</span>
+<span class="nc" id="L1414">            int hora = paseo.getHora().getHour();</span>
+<span class="nc" id="L1415">            String horaString = &quot;&quot; + hora;</span>
+<span class="nc bnc" id="L1416" title="All 2 branches missed.">            if (hora &lt; 10) {</span>
+<span class="nc" id="L1417">                horaString = &quot;0&quot; + horaString;</span>
+            }
+<span class="nc" id="L1419">            CalPanSpinHora.setValue((Object) horaString);</span>
+<span class="nc" id="L1420">            CalPanSpinMinutos.setValue(paseo.getHora().getMinute());</span>
+<span class="nc" id="L1421">            sistema.EliminarActividad(paseo);</span>
+<span class="nc" id="L1422">            sistema.getPaseos().remove(paseo);</span>
+<span class="nc" id="L1423">        } else {</span>
+<span class="nc" id="L1424">            Alimentacion alim = sistema.buscarAlimentacionPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1425" title="All 2 branches missed.">            if (alim != null) {</span>
+<span class="nc bnc" id="L1426" title="All 2 branches missed.">                if (alim.getFueRealizado()) {</span>
+<span class="nc" id="L1427">                    CalBtnRealizadaSi.setSelected(true);</span>
+                }
+<span class="nc" id="L1429">                CalComboTipo.setSelectedIndex(1);</span>
+<span class="nc" id="L1430">                CalTxtNombreResp.setText(nombreAct);</span>
+<span class="nc" id="L1431">                CalComboUsuario.setSelectedItem(alim.getUsuario().getNombre());</span>
+<span class="nc" id="L1432">                CalComboPerro.setSelectedItem(alim.getMascota().getNombre());</span>
+<span class="nc" id="L1433">                CalLblFechaResp.setText(alim.getFecha().getDia() + &quot;/&quot; + alim.getFecha().getMes() + &quot;/&quot; + alim.getFecha().getAno());</span>
+<span class="nc" id="L1434">                CalComboHora.setSelectedIndex(1);</span>
+<span class="nc" id="L1435">                int hora = alim.getHora().getHour();</span>
+<span class="nc" id="L1436">                String horaString = &quot;&quot; + hora;</span>
+<span class="nc bnc" id="L1437" title="All 2 branches missed.">                if (hora &lt; 10) {</span>
+<span class="nc" id="L1438">                    horaString = &quot;0&quot; + horaString;</span>
+                }
+<span class="nc" id="L1440">                CalPanSpinHora.setValue((Object) horaString);</span>
+<span class="nc" id="L1441">                CalPanSpinMinutos.setValue(alim.getHora().getMinute());</span>
+<span class="nc" id="L1442">                CalTxtTipoAlimento.setText(alim.getTipoAlimento());</span>
+<span class="nc" id="L1443">                CalTxtTipoAlimento.setVisible(true);</span>
+<span class="nc" id="L1444">                sistema.EliminarActividad(alim);</span>
+<span class="nc" id="L1445">                sistema.getAlimentaciones().remove(alim);</span>
+<span class="nc" id="L1446">            } else {</span>
+<span class="nc" id="L1447">                VisitaVeterinaria visita = sistema.buscarVisitaPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1448" title="All 2 branches missed.">                if (visita != null) {</span>
+<span class="nc bnc" id="L1449" title="All 2 branches missed.">                    if (visita.getFueRealizado()) {</span>
+<span class="nc" id="L1450">                        CalBtnRealizadaSi.setSelected(true);</span>
+                    }
+<span class="nc" id="L1452">                    CalComboTipo.setSelectedIndex(2);</span>
+<span class="nc" id="L1453">                    CalTxtNombreResp.setText(nombreAct);</span>
+<span class="nc" id="L1454">                    CalComboUsuario.setSelectedItem(visita.getUsuario().getNombre());</span>
+<span class="nc" id="L1455">                    CalComboPerro.setSelectedItem(visita.getMascota().getNombre());</span>
+<span class="nc" id="L1456">                    CalLblFechaResp.setText(visita.getFecha().getDia() + &quot;/&quot; + visita.getFecha().getMes() + &quot;/&quot; + visita.getFecha().getAno());</span>
+<span class="nc" id="L1457">                    CalComboHora.setSelectedIndex(1);</span>
+<span class="nc" id="L1458">                    int hora = visita.getHora().getHour();</span>
+<span class="nc" id="L1459">                    String horaString = &quot;&quot; + hora;</span>
+<span class="nc bnc" id="L1460" title="All 2 branches missed.">                    if (hora &lt; 10) {</span>
+<span class="nc" id="L1461">                        horaString = &quot;0&quot; + horaString;</span>
+                    }
+<span class="nc" id="L1463">                    CalPanSpinHora.setValue((Object) horaString);</span>
+<span class="nc" id="L1464">                    CalPanSpinMinutos.setValue(visita.getHora().getMinute());</span>
+<span class="nc" id="L1465">                    CalBtnVeterinariaSi.setSelected(true);</span>
+<span class="nc" id="L1466">                    CalComboVeterinaria.setSelectedItem(visita.getVeterinaria().getNombre());</span>
+<span class="nc" id="L1467">                    CalComboMotivo.setSelectedItem(visita.getMotivo());</span>
+<span class="nc" id="L1468">                    CalPanVeterinaria.setVisible(true);</span>
+<span class="nc" id="L1469">                    CalLblHorarios.setVisible(true);</span>
+<span class="nc" id="L1470">                    visita.getVeterinaria().getActividadesAgendadas().remove(visita);</span>
+<span class="nc" id="L1471">                    sistema.EliminarActividad(visita);</span>
+<span class="nc" id="L1472">                    sistema.getVisitas().remove(visita);</span>
+<span class="nc" id="L1473">                } else {</span>
+<span class="nc" id="L1474">                    ActividadCualquiera actividad = sistema.buscarActCualquieraPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1475" title="All 2 branches missed.">                    if (actividad.getFueRealizado()) {</span>
+<span class="nc" id="L1476">                        CalBtnRealizadaSi.setSelected(true);</span>
+                    }
+<span class="nc" id="L1478">                    CalComboTipo.setSelectedIndex(2);</span>
+<span class="nc" id="L1479">                    CalTxtNombreResp.setText(nombreAct);</span>
+<span class="nc" id="L1480">                    CalComboUsuario.setSelectedItem(actividad.getUsuario().getNombre());</span>
+<span class="nc" id="L1481">                    CalComboPerro.setSelectedItem(actividad.getMascota().getNombre());</span>
+<span class="nc" id="L1482">                    CalLblFechaResp.setText(actividad.getFecha().getDia() + &quot;/&quot; + actividad.getFecha().getMes() + &quot;/&quot; + actividad.getFecha().getAno());</span>
+<span class="nc" id="L1483">                    CalComboHora.setSelectedIndex(1);</span>
+<span class="nc" id="L1484">                    int hora = actividad.getHora().getHour();</span>
+<span class="nc" id="L1485">                    String horaString = &quot;&quot; + hora;</span>
+<span class="nc bnc" id="L1486" title="All 2 branches missed.">                    if (hora &lt; 10) {</span>
+<span class="nc" id="L1487">                        horaString = &quot;0&quot; + horaString;</span>
+                    }
+<span class="nc" id="L1489">                    CalPanSpinHora.setValue((Object) horaString);</span>
+<span class="nc" id="L1490">                    CalPanSpinMinutos.setValue(actividad.getHora().getMinute());</span>
+<span class="nc" id="L1491">                    CalTxtTipoAlimento.setVisible(true);</span>
+<span class="nc" id="L1492">                    sistema.EliminarActividad(actividad);</span>
+<span class="nc" id="L1493">                    sistema.getActsCualquieras().remove(actividad);</span>
+                }
+            }
+        }
+<span class="nc" id="L1497">        CalLblAdvertencia.setText(&quot;Edite la actividad y agreguela&quot;);</span>
+<span class="nc" id="L1498">        CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L1499">    }//GEN-LAST:event_CalBtnEditarActionPerformed</span>
+
+    private void CalTxtTipoAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalTxtTipoAlimentoActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1503">    }//GEN-LAST:event_CalTxtTipoAlimentoActionPerformed</span>
+
+    private void CalComboVeterinariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalComboVeterinariaActionPerformed
+<span class="nc" id="L1506">        Veterinaria vet = sistema.buscarVetPorNombre((String) CalComboVeterinaria.getSelectedItem());</span>
+<span class="nc" id="L1507">        CalLblHorarios.setVisible(true);</span>
+<span class="nc" id="L1508">        CalLblHorarios.setText(&quot;Horarios: &quot; + vet.getHoraInicial() + &quot; - &quot; + vet.getHoraFinal());</span>
+<span class="nc" id="L1509">    }//GEN-LAST:event_CalComboVeterinariaActionPerformed</span>
+
+    private void CalBtnVeterinariaNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnVeterinariaNoActionPerformed
+<span class="nc" id="L1512">        CalComboVeterinaria.setVisible(false);</span>
+<span class="nc" id="L1513">        CalComboMotivo.setVisible(false);</span>
+<span class="nc" id="L1514">        CalLblMotivo.setVisible(false);</span>
+<span class="nc" id="L1515">        CalLblHorarios.setVisible(false);</span>
+<span class="nc" id="L1516">    }//GEN-LAST:event_CalBtnVeterinariaNoActionPerformed</span>
+
+    private void CalBtnVeterinariaSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnVeterinariaSiActionPerformed
+<span class="nc" id="L1519">        CalComboVeterinaria.setVisible(true);</span>
+<span class="nc" id="L1520">        CalComboMotivo.setVisible(true);</span>
+<span class="nc" id="L1521">        CalLblMotivo.setVisible(true);</span>
+<span class="nc" id="L1522">        CalLblHorarios.setVisible(true);</span>
+<span class="nc" id="L1523">    }//GEN-LAST:event_CalBtnVeterinariaSiActionPerformed</span>
+
+    private void CalTxtNombreRespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalTxtNombreRespActionPerformed
+        // TODO add your handling code here:
+<span class="nc" id="L1527">    }//GEN-LAST:event_CalTxtNombreRespActionPerformed</span>
+
+    private void CalComboHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalComboHoraActionPerformed
+<span class="nc bnc" id="L1530" title="All 2 branches missed.">        if (CalComboHora.getSelectedIndex() == 0) {</span>
+<span class="nc" id="L1531">            CalPanHoraPersonalizada.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1533">            CalPanHoraPersonalizada.setVisible(true);</span>
+        }
+<span class="nc" id="L1535">    }//GEN-LAST:event_CalComboHoraActionPerformed</span>
+
+    private void CalComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalComboTipoActionPerformed
+<span class="nc bnc" id="L1538" title="All 2 branches missed.">        if (CalComboTipo.getSelectedIndex() == 2) {</span>
+<span class="nc bnc" id="L1539" title="All 2 branches missed.">            if (CalBtnVeterinariaSi.isSelected()) {</span>
+<span class="nc" id="L1540">                cambiarVisibilidadVeterinaria(true, true);</span>
+            } else {
+<span class="nc" id="L1542">                cambiarVisibilidadVeterinaria(true, false);</span>
+            }
+        } else {
+<span class="nc" id="L1545">            cambiarVisibilidadVeterinaria(false, false);</span>
+        }
+<span class="nc bnc" id="L1547" title="All 2 branches missed.">        if (CalComboTipo.getSelectedIndex() == 1) {</span>
+<span class="nc" id="L1548">            CalLblTipoAlimento.setVisible(true);</span>
+<span class="nc" id="L1549">            CalTxtTipoAlimento.setVisible(true);</span>
+        } else {
+<span class="nc" id="L1551">            CalLblTipoAlimento.setVisible(false);</span>
+<span class="nc" id="L1552">            CalTxtTipoAlimento.setVisible(false);</span>
+<span class="nc" id="L1553">            CalTxtTipoAlimento.setText(&quot;&quot;);</span>
+        }
+<span class="nc bnc" id="L1555" title="All 4 branches missed.">        if (CalComboTipo.getSelectedIndex() == 0 &amp;&amp; CalBtnRealizadaSi.isSelected()) {</span>
+<span class="nc" id="L1556">            CalPanRuta.setVisible(true);</span>
+        } else {
+<span class="nc" id="L1558">            CalPanRuta.setVisible(false);</span>
+        }
+<span class="nc" id="L1560">    }//GEN-LAST:event_CalComboTipoActionPerformed</span>
+
+    private void CalBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnAgregarActionPerformed
+<span class="nc" id="L1563">        String nombreAct = CalTxtNombreResp.getText();</span>
+<span class="nc" id="L1564">        boolean fueRealizada = true;</span>
+<span class="nc bnc" id="L1565" title="All 2 branches missed.">        if (CalBtnRealizadaNo.isSelected()) {</span>
+<span class="nc" id="L1566">            fueRealizada = false;</span>
+        }
+<span class="nc bnc" id="L1568" title="All 2 branches missed.">        if (nombreAct.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1569">            CalLblAdvertencia.setText(&quot;No se ingresó un nombre, ingrese el nombre de la actividad.&quot;);</span>
+<span class="nc bnc" id="L1570" title="All 2 branches missed.">        } else if (CalComboUsuario.getItemCount() == 0) {</span>
+<span class="nc" id="L1571">            CalLblAdvertencia.setText(&quot;Por favor, ingrese un usuario para agregar una actividad.&quot;);</span>
+<span class="nc bnc" id="L1572" title="All 2 branches missed.">        } else if (CalComboPerro.getItemCount() == 0) {</span>
+<span class="nc" id="L1573">            CalLblAdvertencia.setText(&quot;Por favor, ingrese un perro para agregar una actividad.&quot;);</span>
+        } else {
+<span class="nc" id="L1575">            Usuario usuario = sistema.buscarUsuarioPorNombre((String) CalComboUsuario.getSelectedItem());</span>
+<span class="nc" id="L1576">            Perro perro = sistema.buscarPerroPorNombre((String) CalComboPerro.getSelectedItem());</span>
+            LocalTime time;
+<span class="nc bnc" id="L1578" title="All 2 branches missed.">            if (((String) CalComboHora.getSelectedItem()).equals(&quot;Ahora&quot;)) {</span>
+<span class="nc" id="L1579">                time = LocalTime.now();</span>
+            } else {
+<span class="nc" id="L1581">                String hora = CalPanSpinHora.getValue() + &quot;&quot;;</span>
+<span class="nc" id="L1582">                String min = CalPanSpinMinutos.getValue() + &quot;&quot;;</span>
+<span class="nc" id="L1583">                time = LocalTime.of(Integer.parseInt(hora), Integer.parseInt(min));</span>
+            }
+<span class="nc bnc" id="L1585" title="All 2 branches missed.">            if (CalBtnVeterinariaSi.isSelected()) {</span>
+<span class="nc" id="L1586">                Veterinaria vet = sistema.buscarVetPorNombre((String) CalComboVeterinaria.getSelectedItem());</span>
+<span class="nc" id="L1587">                String motivo = (String) CalComboMotivo.getSelectedItem();</span>
+<span class="nc" id="L1588">                VisitaVeterinaria visita = new VisitaVeterinaria(nombreAct, time, usuario, perro, fueRealizada, fechaSeleccionada, vet, motivo);</span>
+<span class="nc bnc" id="L1589" title="All 2 branches missed.">                if (vet.AgendarActividad(visita)) {</span>
+<span class="nc" id="L1590">                    sistema.AnadirActividad(visita);</span>
+<span class="nc" id="L1591">                    sistema.getVisitas().add(visita);</span>
+<span class="nc bnc" id="L1592" title="All 2 branches missed.">                    if (CalComboHora.getSelectedIndex() != 0) {</span>
+<span class="nc" id="L1593">                        timerNuevo(visita);</span>
+                    }
+<span class="nc" id="L1595">                    CalLblAdvertencia.setText(&quot;Se agrego la visita a la veterinaria con éxito&quot;);</span>
+<span class="nc" id="L1596">                    CalLstActividades.setEnabled(true);</span>
+<span class="nc" id="L1597">                    CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L1598">                    CalTxtNombreResp.setText(&quot;&quot;);</span>
+<span class="nc" id="L1599">                    CalPanVeterinaria.setVisible(false);</span>
+<span class="nc" id="L1600">                    CalLblHorarios.setVisible(false);</span>
+                } else {
+<span class="nc" id="L1602">                    CalLblAdvertencia.setText(&quot;La veterinaria no tiene horarios disponibles en ese horario, por favor ingrse una &quot;</span>
+<span class="nc" id="L1603">                            + &quot;hora distinta entre las &quot; + vet.getHoraInicial() + &quot; y las &quot; + vet.getHoraFinal());</span>
+                }
+<span class="nc" id="L1605">            } else {</span>
+<span class="nc" id="L1606">                String tipoAct = (String) CalComboTipo.getSelectedItem();</span>
+<span class="nc bnc" id="L1607" title="All 2 branches missed.">                if (tipoAct.equals(&quot;Paseo&quot;)) {</span>
+<span class="nc" id="L1608">                    Paseo paseo = new Paseo(nombreAct, usuario, perro, 0, fueRealizada, time, fechaSeleccionada);</span>
+<span class="nc" id="L1609">                    double distanciaPaseo = Double.parseDouble(CalSpinDistancia.getValue().toString());</span>
+<span class="nc bnc" id="L1610" title="All 2 branches missed.">                    if (distanciaPaseo != 0.0) {</span>
+<span class="nc" id="L1611">                        paseo.setDistancia(distanciaPaseo);</span>
+                    }
+<span class="nc" id="L1613">                    sistema.AnadirActividad(paseo);</span>
+<span class="nc" id="L1614">                    sistema.getPaseos().add(paseo);</span>
+<span class="nc bnc" id="L1615" title="All 2 branches missed.">                    if (CalComboHora.getSelectedIndex() != 0) {</span>
+<span class="nc" id="L1616">                        timerNuevo(paseo);</span>
+                    }
+<span class="nc bnc" id="L1618" title="All 2 branches missed.">                    if (!rutaImagenRuta.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1619">                        File imagen = new File(rutaImagenRuta);</span>
+<span class="nc" id="L1620">                        paseo.setRuta(crearIcono(imagen, 500));</span>
+<span class="nc" id="L1621">                        rutaImagenRuta = &quot;&quot;;</span>
+                    }
+<span class="nc" id="L1623">                    CalLblAdvertencia.setText(&quot;Se añadió el paseo correctamente al calendario&quot;);</span>
+<span class="nc" id="L1624">                    CalLstActividades.setEnabled(true);</span>
+<span class="nc" id="L1625">                    CalTxtNombreResp.setText(&quot;&quot;);</span>
+<span class="nc" id="L1626">                    CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L1627">                    CalPanRuta.setVisible(false);</span>
+<span class="nc" id="L1628">                } else {</span>
+<span class="nc bnc" id="L1629" title="All 2 branches missed.">                    if (tipoAct.equals(&quot;Alimentación&quot;)) {</span>
+<span class="nc" id="L1630">                        String tipoAlimento = CalTxtTipoAlimento.getText();</span>
+<span class="nc bnc" id="L1631" title="All 2 branches missed.">                        if (tipoAlimento.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L1632">                            CalLblAdvertencia.setText(&quot;No se ingresó el tipo del alimento, ingrse el tipo del alimento&quot;);</span>
+                        } else {
+<span class="nc" id="L1634">                            Alimentacion alim = new Alimentacion(nombreAct, usuario, perro, tipoAlimento, fueRealizada, time, fechaSeleccionada);</span>
+<span class="nc" id="L1635">                            sistema.AnadirActividad(alim);</span>
+<span class="nc" id="L1636">                            sistema.getAlimentaciones().add(alim);</span>
+<span class="nc bnc" id="L1637" title="All 2 branches missed.">                            if (CalComboHora.getSelectedIndex() != 0) {</span>
+<span class="nc" id="L1638">                                timerNuevo(alim);</span>
+                            }
+<span class="nc" id="L1640">                            CalLblAdvertencia.setText(&quot;Se añadió la alimentación correctamente al calendario&quot;);</span>
+<span class="nc" id="L1641">                            CalTxtNombreResp.setText(&quot;&quot;);</span>
+<span class="nc" id="L1642">                            CalTxtTipoAlimento.setText(&quot;&quot;);</span>
+<span class="nc" id="L1643">                            CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L1644">                            CalLstActividades.setEnabled(true);</span>
+                        }
+<span class="nc" id="L1646">                    } else {</span>
+<span class="nc" id="L1647">                        ActividadCualquiera actividad = new ActividadCualquiera(nombreAct, usuario, perro, fueRealizada, time, fechaSeleccionada);</span>
+<span class="nc" id="L1648">                        sistema.AnadirActividad(actividad);</span>
+<span class="nc" id="L1649">                        sistema.getActsCualquieras().add(actividad);</span>
+<span class="nc bnc" id="L1650" title="All 2 branches missed.">                        if (CalComboHora.getSelectedIndex() != 0) {</span>
+<span class="nc" id="L1651">                            timerNuevo(actividad);</span>
+                        }
+<span class="nc" id="L1653">                        CalLblAdvertencia.setText(&quot;Se añadió la actividad correctamente al calendario&quot;);</span>
+<span class="nc" id="L1654">                        CalTxtNombreResp.setText(&quot;&quot;);</span>
+<span class="nc" id="L1655">                        CalBtnEditar.setVisible(false);</span>
+<span class="nc" id="L1656">                        CalLstActividades.setEnabled(true);</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L1661">        CalPanRuta.setVisible(false);</span>
+<span class="nc" id="L1662">        int dia = CalDayChooser.getDay();</span>
+<span class="nc" id="L1663">        int mes = CalMonthChooser.getMonth() + 1;</span>
+<span class="nc" id="L1664">        int ano = CalYearChooser.getYear();</span>
+<span class="nc" id="L1665">        ArrayList&lt;Actividad&gt; listaActividades = sistema.listaActividadesPorFecha(dia, mes, ano);</span>
+<span class="nc" id="L1666">        String[] arrActividades = new String[listaActividades.size()];</span>
+<span class="nc bnc" id="L1667" title="All 2 branches missed.">        for (int i = 0; i &lt; listaActividades.size(); i++) {</span>
+<span class="nc" id="L1668">            Actividad act = listaActividades.get(i);</span>
+<span class="nc" id="L1669">            arrActividades[i] = act.getNombre();</span>
+        }
+<span class="nc" id="L1671">        CalLstActividades.setListData(arrActividades);</span>
+
+<span class="nc" id="L1673">        CalLblFechaResp.setText(dia + &quot;/&quot; + mes + &quot;/&quot; + ano);</span>
+<span class="nc" id="L1674">        fechaSeleccionada = new Fecha(dia, mes, ano);</span>
+<span class="nc" id="L1675">    }//GEN-LAST:event_CalBtnAgregarActionPerformed</span>
+
+    private void CalLstActividadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_CalLstActividadesValueChanged
+<span class="nc" id="L1678">        String nombreAct = CalLstActividades.getSelectedValue();</span>
+<span class="nc" id="L1679">        String cero = &quot;&quot;;</span>
+<span class="nc" id="L1680">        CalBtnVerRuta.setVisible(false);</span>
+<span class="nc bnc" id="L1681" title="All 2 branches missed.">        if (nombreAct != null) {</span>
+<span class="nc" id="L1682">            Paseo paseo = sistema.buscarPaseoPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1683" title="All 2 branches missed.">            if (paseo != null) {</span>
+<span class="nc" id="L1684">                CalBtnVerRuta.setVisible(true);</span>
+<span class="nc bnc" id="L1685" title="All 2 branches missed.">                if (paseo.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1686">                    cero = &quot;0&quot;;</span>
+                }
+<span class="nc" id="L1688">                String fueRealizada = &quot;No&quot;;</span>
+<span class="nc bnc" id="L1689" title="All 2 branches missed.">                if (paseo.getFueRealizado()) {</span>
+<span class="nc" id="L1690">                    fueRealizada = &quot;Si&quot;;</span>
+                }
+<span class="nc bnc" id="L1692" title="All 2 branches missed.">                if (paseo.getDistancia() == 0.0) {</span>
+<span class="nc" id="L1693">                    CalTxtAreaInfoAct.setText(&quot;Nombre: &quot; + paseo.getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1694">                            + &quot;Usuario responsable: &quot; + paseo.getUsuario().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1695">                            + &quot;Perro: &quot; + paseo.getMascota().getNombre() + &quot;\n&quot;</span>
+                            + &quot;Realizada: &quot; + fueRealizada + &quot;\n&quot;
+<span class="nc" id="L1697">                            + &quot;Hora: &quot; + paseo.getHora().getHour() + &quot;:&quot; + cero + paseo.getHora().getMinute());</span>
+                } else {
+<span class="nc" id="L1699">                    CalTxtAreaInfoAct.setText(&quot;Nombre: &quot; + paseo.getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1700">                            + &quot;Usuario responsable: &quot; + paseo.getUsuario().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1701">                            + &quot;Perro: &quot; + paseo.getMascota().getNombre() + &quot;\n&quot;</span>
+                            + &quot;Realizada: &quot; + fueRealizada + &quot;\n&quot;
+<span class="nc" id="L1703">                            + &quot;Hora: &quot; + paseo.getHora().getHour() + &quot;:&quot; + cero + paseo.getHora().getMinute() + &quot;\n&quot;</span>
+<span class="nc" id="L1704">                            + &quot;Distancia: &quot; + paseo.getDistancia() + &quot;kilómetros&quot;);</span>
+                }
+<span class="nc bnc" id="L1706" title="All 2 branches missed.">                if (paseo.getRuta() != null) {</span>
+
+                }
+<span class="nc" id="L1709">            } else {</span>
+<span class="nc" id="L1710">                Alimentacion alim = sistema.buscarAlimentacionPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1711" title="All 2 branches missed.">                if (alim != null) {</span>
+<span class="nc bnc" id="L1712" title="All 2 branches missed.">                    if (alim.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1713">                        cero = &quot;0&quot;;</span>
+                    }
+<span class="nc" id="L1715">                    String fueRealizada = &quot;No&quot;;</span>
+<span class="nc bnc" id="L1716" title="All 2 branches missed.">                    if (alim.getFueRealizado()) {</span>
+<span class="nc" id="L1717">                        fueRealizada = &quot;Si&quot;;</span>
+                    }
+
+<span class="nc" id="L1720">                    CalTxtAreaInfoAct.setText(&quot;Nombre: &quot; + alim.getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1721">                            + &quot;Usuario responsable: &quot; + alim.getUsuario().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1722">                            + &quot;Perro: &quot; + alim.getMascota().getNombre() + &quot;\n&quot;</span>
+                            + &quot;Realizada: &quot; + fueRealizada + &quot;\n&quot;
+<span class="nc" id="L1724">                            + &quot;Tipo Alimento: &quot; + alim.getTipoAlimento() + &quot;\n&quot;</span>
+<span class="nc" id="L1725">                            + &quot;Hora: &quot; + alim.getHora().getHour() + &quot;:&quot; + cero + alim.getHora().getMinute());</span>
+<span class="nc" id="L1726">                } else {</span>
+<span class="nc" id="L1727">                    VisitaVeterinaria visita = sistema.buscarVisitaPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1728" title="All 2 branches missed.">                    if (visita != null) {</span>
+<span class="nc bnc" id="L1729" title="All 2 branches missed.">                        if (visita.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1730">                            cero = &quot;0&quot;;</span>
+                        }
+<span class="nc" id="L1732">                        String fueRealizada = &quot;No&quot;;</span>
+<span class="nc bnc" id="L1733" title="All 2 branches missed.">                        if (visita.getFueRealizado()) {</span>
+<span class="nc" id="L1734">                            fueRealizada = &quot;Si&quot;;</span>
+                        }
+<span class="nc" id="L1736">                        CalTxtAreaInfoAct.setText(&quot;Nombre: &quot; + visita.getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1737">                                + &quot;Usuario responsable: &quot; + visita.getUsuario().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1738">                                + &quot;Perro: &quot; + visita.getMascota().getNombre() + &quot;\n&quot;</span>
+                                + &quot;Realizada: &quot; + fueRealizada + &quot;\n&quot;
+<span class="nc" id="L1740">                                + &quot;Motivo: &quot; + visita.getMotivo() + &quot;\n&quot;</span>
+<span class="nc" id="L1741">                                + &quot;Veterinaria: &quot; + visita.getVeterinaria().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1742">                                + &quot;Hora: &quot; + visita.getHora().getHour() + &quot;:&quot; + cero + visita.getHora().getMinute());</span>
+<span class="nc" id="L1743">                    } else {</span>
+<span class="nc" id="L1744">                        ActividadCualquiera act = sistema.buscarActCualquieraPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1745" title="All 2 branches missed.">                        if (act.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1746">                            cero = &quot;0&quot;;</span>
+                        }
+<span class="nc" id="L1748">                        String fueRealizada = &quot;No&quot;;</span>
+<span class="nc bnc" id="L1749" title="All 2 branches missed.">                        if (act.getFueRealizado()) {</span>
+<span class="nc" id="L1750">                            fueRealizada = &quot;Si&quot;;</span>
+                        }
+
+<span class="nc" id="L1753">                        CalTxtAreaInfoAct.setText(&quot;Nombre: &quot; + act.getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1754">                                + &quot;Usuario responsable: &quot; + act.getUsuario().getNombre() + &quot;\n&quot;</span>
+<span class="nc" id="L1755">                                + &quot;Perro: &quot; + act.getMascota().getNombre() + &quot;\n&quot;</span>
+                                + &quot;Realizada: &quot; + fueRealizada + &quot;\n&quot;
+<span class="nc" id="L1757">                                + &quot;Hora: &quot; + act.getHora().getHour() + &quot;:&quot; + cero + act.getHora().getMinute());</span>
+                    }
+                }
+            }
+<span class="nc" id="L1761">            CalBtnEditar.setVisible(true);</span>
+<span class="nc" id="L1762">        } else {</span>
+<span class="nc" id="L1763">            CalTxtAreaInfoAct.setText(&quot;Seleccione un paseo para&quot; + &quot;\n&quot;</span>
+                    + &quot;poder ver su información&quot;);
+        }
+<span class="nc" id="L1766">    }//GEN-LAST:event_CalLstActividadesValueChanged</span>
+
+    private void CalDayChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_CalDayChooserPropertyChange
+<span class="nc" id="L1769">        int dia = CalDayChooser.getDay();</span>
+<span class="nc" id="L1770">        int mes = CalMonthChooser.getMonth() + 1;</span>
+<span class="nc" id="L1771">        int ano = CalYearChooser.getYear();</span>
+<span class="nc" id="L1772">        ArrayList&lt;Actividad&gt; listaActividades = sistema.listaActividadesPorFecha(dia, mes, ano);</span>
+<span class="nc" id="L1773">        String[] arrActividades = new String[listaActividades.size()];</span>
+<span class="nc bnc" id="L1774" title="All 2 branches missed.">        for (int i = 0; i &lt; listaActividades.size(); i++) {</span>
+<span class="nc" id="L1775">            Actividad act = listaActividades.get(i);</span>
+<span class="nc" id="L1776">            arrActividades[i] = act.getNombre();</span>
+        }
+<span class="nc" id="L1778">        CalLstActividades.setListData(arrActividades);</span>
+
+<span class="nc" id="L1780">        CalLblFechaResp.setText(dia + &quot;/&quot; + mes + &quot;/&quot; + ano);</span>
+<span class="nc" id="L1781">        fechaSeleccionada = new Fecha(dia, mes, ano);</span>
+<span class="nc" id="L1782">    }//GEN-LAST:event_CalDayChooserPropertyChange</span>
+
+    private void CalBtnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalBtnVerRutaActionPerformed
+<span class="nc" id="L1785">        String nombreAct = CalLstActividades.getSelectedValue();</span>
+<span class="nc" id="L1786">        Paseo paseo = sistema.buscarPaseoPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1787" title="All 2 branches missed.">        if (paseo != null) {</span>
+<span class="nc bnc" id="L1788" title="All 2 branches missed.">            if (paseo.getRuta() != null) {</span>
+                try {
+<span class="nc" id="L1790">                    new VentanaFotoRuta(paseo).setVisible(true);</span>
+<span class="nc" id="L1791">                } catch (IOException ex) {</span>
+<span class="nc" id="L1792">                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L1793">                }</span>
+            } else {
+<span class="nc" id="L1795">                CalLblAdvertencia.setText(&quot;No hay ruta agregada a este paseo&quot;);</span>
+            }
+        }
+<span class="nc" id="L1798">    }//GEN-LAST:event_CalBtnVerRutaActionPerformed</span>
+
+    private void cambiarVisibilidadVeterinaria(boolean opcionCombo, boolean usaVeterinaria) {
+<span class="nc" id="L1801">        CalPanVeterinaria.setVisible(opcionCombo);</span>
+<span class="nc" id="L1802">        CalBtnVeterinariaSi.setSelected(usaVeterinaria);</span>
+<span class="nc bnc" id="L1803" title="All 2 branches missed.">        CalBtnVeterinariaNo.setSelected(!usaVeterinaria);</span>
+<span class="nc" id="L1804">        CalComboVeterinaria.setVisible(usaVeterinaria);</span>
+<span class="nc" id="L1805">        CalComboMotivo.setVisible(usaVeterinaria);</span>
+<span class="nc" id="L1806">        CalLblMotivo.setVisible(usaVeterinaria);</span>
+<span class="nc" id="L1807">        CalLblHorarios.setVisible(opcionCombo);</span>
+<span class="nc" id="L1808">    }</span>
+
+    private ImageIcon crearIcono(String ruta, int tamano) {
+<span class="nc" id="L1811">        ImageIcon retorno = null;</span>
+        try {
+<span class="nc" id="L1813">            retorno = new ImageIcon(ImageIO.read(getClass().getResource(ruta)).getScaledInstance(tamano, -1, Image.SCALE_SMOOTH));</span>
+<span class="nc" id="L1814">        } catch (IOException e) {</span>
+<span class="nc" id="L1815">            System.out.println(e);</span>
+<span class="nc" id="L1816">        }</span>
+<span class="nc" id="L1817">        return retorno;</span>
+    }
+
+    private ImageIcon crearIcono(File file, int tamano) {
+<span class="nc" id="L1821">        ImageIcon retorno = null;</span>
+        try {
+<span class="nc" id="L1823">            retorno = new ImageIcon(ImageIO.read(file).getScaledInstance(tamano, -1, Image.SCALE_SMOOTH));</span>
+<span class="nc" id="L1824">        } catch (IOException e) {</span>
+<span class="nc" id="L1825">            System.out.println(e);</span>
+<span class="nc" id="L1826">        }</span>
+<span class="nc" id="L1827">        return retorno;</span>
+    }
+
+    private void enviarMail(Actividad actividad) {
+<span class="nc" id="L1831">        String nombreAct = actividad.getNombre();</span>
+<span class="nc" id="L1832">        Paseo paseo = sistema.buscarPaseoPorNombre(nombreAct);</span>
+        String tipoActividad;
+        String cuerpo;
+<span class="nc" id="L1835">        String cero = &quot;&quot;;</span>
+<span class="nc bnc" id="L1836" title="All 2 branches missed.">        if (paseo != null) {</span>
+<span class="nc" id="L1837">            tipoActividad = &quot;Paseo&quot;;</span>
+<span class="nc bnc" id="L1838" title="All 2 branches missed.">            if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1839">                cero = &quot;0&quot;;</span>
+            }
+<span class="nc" id="L1841">            cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                    + &quot;Te recordamos que debes pasear a &quot;
+<span class="nc" id="L1843">                    + actividad.getMascota().getNombre() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1844">                    + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                    + &quot;No lo olvides!&quot;;
+        } else {
+<span class="nc" id="L1847">            Alimentacion alimentacion = sistema.buscarAlimentacionPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1848" title="All 2 branches missed.">            if (alimentacion != null) {</span>
+<span class="nc" id="L1849">                tipoActividad = &quot;Alimentacion&quot;;</span>
+<span class="nc bnc" id="L1850" title="All 2 branches missed.">                if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1851">                    cero = &quot;0&quot;;</span>
+                }
+<span class="nc" id="L1853">                cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                        + &quot;Te recordamos que debes alimentar a &quot;
+<span class="nc" id="L1855">                        + actividad.getMascota().getNombre() + &quot; con &quot; + alimentacion.getTipoAlimento()</span>
+<span class="nc" id="L1856">                        + &quot; hoy a las &quot; + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                        + &quot;No lo olvides!&quot;;
+            } else {
+<span class="nc" id="L1859">                VisitaVeterinaria visita = sistema.buscarVisitaPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1860" title="All 2 branches missed.">                if (visita != null) {</span>
+<span class="nc" id="L1861">                    tipoActividad = &quot;Visita a Veterinaria&quot;;</span>
+<span class="nc bnc" id="L1862" title="All 2 branches missed.">                    if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1863">                        cero = &quot;0&quot;;</span>
+                    }
+<span class="nc" id="L1865">                    cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                            + &quot;Te recordamos que debes llevar a &quot;
+<span class="nc" id="L1867">                            + visita.getMascota().getNombre() + &quot;a la veterinaria &quot; + visita.getVeterinaria().getNombre()</span>
+<span class="nc" id="L1868">                            + &quot;para realizar un/una &quot; + visita.getMotivo() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1869">                            + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                            + &quot;No lo olvides!&quot;;
+                } else {
+<span class="nc" id="L1872">                    ActividadCualquiera actividadCualquiera = sistema.buscarActCualquieraPorNombre(nombreAct);</span>
+<span class="nc" id="L1873">                    tipoActividad = &quot;una Actividad&quot;;</span>
+<span class="nc bnc" id="L1874" title="All 2 branches missed.">                    if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1875">                        cero = &quot;0&quot;;</span>
+                    }
+<span class="nc" id="L1877">                    cuerpo = &quot;Hola &quot; + actividadCualquiera.getUsuario().getNombre() + &quot;,\n&quot;</span>
+<span class="nc" id="L1878">                            + &quot;Te recordamos que debes &quot; + actividadCualquiera.getNombre() + &quot; con &quot;</span>
+<span class="nc" id="L1879">                            + actividadCualquiera.getMascota().getNombre() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1880">                            + actividadCualquiera.getHora().getHour() + &quot;:&quot; + cero + actividadCualquiera.getHora().getMinute() + &quot;.\n&quot;</span>
+                            + &quot;No lo olvides!&quot;;
+                }
+            }
+        }
+<span class="nc" id="L1885">        String asunto = &quot;Recordatorio de &quot; + tipoActividad + &quot; de My Pet&quot;;</span>
+
+<span class="nc" id="L1887">        final String username = &quot;recordatoriosmypet@gmail.com&quot;;</span>
+<span class="nc" id="L1888">        final String password = &quot;canucanualex&quot;;</span>
+
+<span class="nc" id="L1890">        Properties props = new Properties();</span>
+<span class="nc" id="L1891">        props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L1892">        props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L1893">        props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
+<span class="nc" id="L1894">        props.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
+<span class="nc" id="L1895">        props.put(&quot;mail.smtp.ssl.trust&quot;, &quot;smtp.gmail.com&quot;);</span>
+
+<span class="nc" id="L1897">        Session session = Session.getInstance(props,</span>
+<span class="nc" id="L1898">                new javax.mail.Authenticator() {</span>
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+<span class="nc" id="L1901">                return new PasswordAuthentication(username, password);</span>
+            }
+        });
+
+        try {
+
+<span class="nc" id="L1907">            Message message = new MimeMessage(session);</span>
+<span class="nc" id="L1908">            message.setFrom(new InternetAddress(&quot;recordatoriosmismascotas@gmail.com&quot;));</span>
+<span class="nc" id="L1909">            message.setRecipients(Message.RecipientType.TO,</span>
+<span class="nc" id="L1910">                    InternetAddress.parse(actividad.getUsuario().getMail()));</span>
+<span class="nc" id="L1911">            message.setSubject(asunto);</span>
+<span class="nc" id="L1912">            message.setText(cuerpo);</span>
+
+<span class="nc" id="L1914">            Transport.send(message);</span>
+
+<span class="nc" id="L1916">            System.out.println(&quot;Done&quot;);</span>
+
+<span class="nc" id="L1918">        } catch (MessagingException e) {</span>
+<span class="nc" id="L1919">            throw new RuntimeException(e);</span>
+<span class="nc" id="L1920">        }</span>
+<span class="nc" id="L1921">    }</span>
+
+    public void timerNuevo(final Actividad act) {
+<span class="nc" id="L1924">        int horaActividad = act.getHora().getHour() * 60 + act.getHora().getMinute();</span>
+<span class="nc" id="L1925">        int horaActual = LocalTime.now().getHour() * 60 + LocalTime.now().getMinute();</span>
+<span class="nc" id="L1926">        int tiempoRestanteMinutos = horaActividad - horaActual;</span>
+        try {
+<span class="nc" id="L1928">            ActionListener notificacion = new ActionListener() {</span>
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+<span class="nc" id="L1931">                    enviarMail(act);</span>
+<span class="nc" id="L1932">                    mostrarNotificacion(act);</span>
+<span class="nc" id="L1933">                }</span>
+            };
+<span class="nc" id="L1935">            int tiempoRestanteMilisegundos = tiempoRestanteMinutos * 60000;</span>
+<span class="nc" id="L1936">            Timer timer = new Timer(tiempoRestanteMilisegundos, notificacion);</span>
+<span class="nc" id="L1937">            timer.setRepeats(false);</span>
+<span class="nc" id="L1938">            timer.start();</span>
+<span class="nc" id="L1939">        } catch (ArithmeticException e) {</span>
+
+<span class="nc" id="L1941">        }</span>
+<span class="nc" id="L1942">    }</span>
+
+    public void mostrarNotificacion(Actividad actividad) {
+<span class="nc" id="L1945">        String nombreAct = actividad.getNombre();</span>
+<span class="nc" id="L1946">        Paseo paseo = sistema.buscarPaseoPorNombre(nombreAct);</span>
+        String cuerpo;
+<span class="nc" id="L1948">        String cero = &quot;&quot;;</span>
+<span class="nc bnc" id="L1949" title="All 2 branches missed.">        if (paseo != null) {</span>
+<span class="nc bnc" id="L1950" title="All 2 branches missed.">            if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1951">                cero = &quot;0&quot;;</span>
+            }
+<span class="nc" id="L1953">            cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                    + &quot;Te recordamos que debes pasear a &quot;
+<span class="nc" id="L1955">                    + actividad.getMascota().getNombre() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1956">                    + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                    + &quot;No lo olvides!&quot;;
+        } else {
+<span class="nc" id="L1959">            Alimentacion alimentacion = sistema.buscarAlimentacionPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1960" title="All 2 branches missed.">            if (alimentacion != null) {</span>
+<span class="nc bnc" id="L1961" title="All 2 branches missed.">                if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1962">                    cero = &quot;0&quot;;</span>
+                }
+<span class="nc" id="L1964">                cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                        + &quot;Te recordamos que debes alimentar a &quot;
+<span class="nc" id="L1966">                        + actividad.getMascota().getNombre() + &quot; con &quot; + alimentacion.getTipoAlimento()</span>
+<span class="nc" id="L1967">                        + &quot; hoy a las &quot; + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                        + &quot;No lo olvides!&quot;;
+            } else {
+<span class="nc" id="L1970">                VisitaVeterinaria visita = sistema.buscarVisitaPorNombre(nombreAct);</span>
+<span class="nc bnc" id="L1971" title="All 2 branches missed.">                if (visita != null) {</span>
+<span class="nc bnc" id="L1972" title="All 2 branches missed.">                    if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1973">                        cero = &quot;0&quot;;</span>
+                    }
+<span class="nc" id="L1975">                    cuerpo = &quot;Hola &quot; + actividad.getUsuario().getNombre() + &quot;,\n&quot;</span>
+                            + &quot;Te recordamos que debes llevar a &quot;
+<span class="nc" id="L1977">                            + visita.getMascota().getNombre() + &quot;a la veterinaria &quot; + visita.getVeterinaria().getNombre()</span>
+<span class="nc" id="L1978">                            + &quot;para realizar un/una &quot; + visita.getMotivo() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1979">                            + actividad.getHora().getHour() + &quot;:&quot; + cero + actividad.getHora().getMinute() + &quot;.\n&quot;</span>
+                            + &quot;No lo olvides!&quot;;
+                } else {
+<span class="nc bnc" id="L1982" title="All 2 branches missed.">                    if (actividad.getHora().getMinute() &lt; 10) {</span>
+<span class="nc" id="L1983">                        cero = &quot;0&quot;;</span>
+                    }
+<span class="nc" id="L1985">                    ActividadCualquiera actividadCualquiera = sistema.buscarActCualquieraPorNombre(nombreAct);</span>
+<span class="nc" id="L1986">                    cuerpo = &quot;Hola &quot; + actividadCualquiera.getUsuario().getNombre() + &quot;,\n&quot;</span>
+<span class="nc" id="L1987">                            + &quot;Te recordamos que debes &quot; + actividadCualquiera.getNombre() + &quot; con &quot;</span>
+<span class="nc" id="L1988">                            + actividadCualquiera.getMascota().getNombre() + &quot; hoy a las &quot;</span>
+<span class="nc" id="L1989">                            + actividadCualquiera.getHora().getHour() + &quot;:&quot; + cero + actividadCualquiera.getHora().getMinute() + &quot;.\n&quot;</span>
+                            + &quot;No lo olvides!&quot;;
+                }
+            }
+        }
+<span class="nc" id="L1994">        JFrame ventana = this;</span>
+<span class="nc" id="L1995">        JOptionPane.showMessageDialog(ventana, cuerpo, &quot;Notificación&quot;, 1);</span>
+<span class="nc" id="L1996">    }</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CalBtnAgregar;
+    private javax.swing.JButton CalBtnAgregarDatos;
+    private javax.swing.JButton CalBtnEditar;
+    private javax.swing.ButtonGroup CalBtnGroupRealizada;
+    private javax.swing.ButtonGroup CalBtnGroupRepetir;
+    private javax.swing.ButtonGroup CalBtnGroupVeterinaria;
+    private javax.swing.JRadioButton CalBtnRealizadaNo;
+    private javax.swing.JRadioButton CalBtnRealizadaSi;
+    private javax.swing.JButton CalBtnRuta;
+    private javax.swing.JButton CalBtnVerRuta;
+    private javax.swing.JRadioButton CalBtnVeterinariaNo;
+    private javax.swing.JRadioButton CalBtnVeterinariaSi;
+    private javax.swing.JComboBox&lt;String&gt; CalComboHora;
+    private javax.swing.JComboBox&lt;String&gt; CalComboMotivo;
+    private javax.swing.JComboBox&lt;String&gt; CalComboPerro;
+    private javax.swing.JComboBox&lt;String&gt; CalComboTipo;
+    private javax.swing.JComboBox&lt;String&gt; CalComboUsuario;
+    private javax.swing.JComboBox&lt;String&gt; CalComboVeterinaria;
+    private com.toedter.calendar.JDayChooser CalDayChooser;
+    private javax.swing.JLabel CalLblActividadesDelDia;
+    private javax.swing.JLabel CalLblAdvertencia;
+    private javax.swing.JLabel CalLblCentimetros;
+    private javax.swing.JLabel CalLblDistancia;
+    private javax.swing.JLabel CalLblFecha;
+    private javax.swing.JLabel CalLblFechaResp;
+    private javax.swing.JLabel CalLblHora;
+    private javax.swing.JLabel CalLblHorarios;
+    private javax.swing.JLabel CalLblInfoActividad;
+    private javax.swing.JLabel CalLblKilogramos;
+    private javax.swing.JLabel CalLblKilometros;
+    private javax.swing.JLabel CalLblMotivo;
+    private javax.swing.JLabel CalLblNombre;
+    private javax.swing.JLabel CalLblPerro;
+    private javax.swing.JLabel CalLblRealizada;
+    private javax.swing.JLabel CalLblRuta;
+    private javax.swing.JLabel CalLblTipo;
+    private javax.swing.JLabel CalLblTipoAlimento;
+    private javax.swing.JLabel CalLblTituloActividad;
+    private javax.swing.JLabel CalLblTituloFecha;
+    private javax.swing.JLabel CalLblUsuario;
+    private javax.swing.JLabel CalLblVeterinaria;
+    private javax.swing.JList&lt;String&gt; CalLstActividades;
+    private com.toedter.calendar.JMonthChooser CalMonthChooser;
+    private javax.swing.JPanel CalPanHoraPersonalizada;
+    private javax.swing.JLabel CalPanLblHora;
+    private javax.swing.JLabel CalPanLblMinutos;
+    private javax.swing.JPanel CalPanRuta;
+    private javax.swing.JSpinner CalPanSpinHora;
+    private javax.swing.JSpinner CalPanSpinMinutos;
+    private javax.swing.JPanel CalPanVeterinaria;
+    private javax.swing.JScrollPane CalScrollActividades;
+    private javax.swing.JScrollPane CalScrollInfoAct;
+    private javax.swing.JSpinner CalSpinDistancia;
+    private javax.swing.JTextArea CalTxtAreaInfoAct;
+    private javax.swing.JTextField CalTxtNombreResp;
+    private javax.swing.JTextField CalTxtTipoAlimento;
+    private com.toedter.calendar.JYearChooser CalYearChooser;
+    private javax.swing.JTabbedPane Panel;
+    private javax.swing.JButton PerroBtnAgregar;
+    private javax.swing.JButton PerroBtnEditar;
+    private javax.swing.JButton PerroBtnExaminar;
+    private javax.swing.JButton PerroBtnGuardar;
+    private javax.swing.JComboBox&lt;String&gt; PerroComboPerros;
+    private javax.swing.JLabel PerroLblAdvertencia;
+    private javax.swing.JLabel PerroLblAltura;
+    private javax.swing.JLabel PerroLblComentarios;
+    private javax.swing.JLabel PerroLblFoto;
+    private javax.swing.JLabel PerroLblFotoBoton;
+    private javax.swing.JLabel PerroLblNombre;
+    private javax.swing.JLabel PerroLblPerros;
+    private javax.swing.JLabel PerroLblPeso;
+    private javax.swing.JPanel PerroPanFoto;
+    private javax.swing.JPanel PerroPanInformacion;
+    private javax.swing.JSpinner PerroSpinAltura;
+    private javax.swing.JSpinner PerroSpinPeso;
+    private javax.swing.JTextField PerroTxtComentarios;
+    private javax.swing.JTextField PerroTxtNombre;
+    private javax.swing.JButton UsuarioBtnAgregar;
+    private javax.swing.JComboBox&lt;String&gt; UsuarioComboUsuarios;
+    private javax.swing.JLabel UsuarioLblActividad;
+    private javax.swing.JLabel UsuarioLblActividades;
+    private javax.swing.JLabel UsuarioLblAdvertencia;
+    private javax.swing.JLabel UsuarioLblFecha;
+    private javax.swing.JLabel UsuarioLblMail;
+    private javax.swing.JLabel UsuarioLblNombre;
+    private javax.swing.JLabel UsuarioLblUsuarios;
+    private javax.swing.JList&lt;String&gt; UsuarioLstActividades;
+    private javax.swing.JList&lt;String&gt; UsuarioLstFechas;
+    private javax.swing.JScrollPane UsuarioScrollActividades;
+    private javax.swing.JScrollPane UsuarioScrollFechas;
+    private javax.swing.JTextField UsuarioTxtMail;
+    private javax.swing.JTextField UsuarioTxtNombre;
+    private javax.swing.JPanel panCalendario;
+    private javax.swing.JPanel panPerros;
+    private javax.swing.JPanel panUsuarios;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    // End of variables declaration//GEN-END:variables
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
