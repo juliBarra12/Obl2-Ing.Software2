@@ -1208,9 +1208,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (CalComboPerro.getItemCount() > 0) {
             CalComboPerro.removeAllItems();
         }
-        for (int i = 0; i < sistema.getPerros().size(); i++) {
-            PerroComboPerros.addItem(sistema.getPerros().get(i).getNombre());
-            CalComboPerro.addItem(sistema.getPerros().get(i).getNombre());
+        for (int i = 0; i < sistema.getAnimales().size(); i++) {
+            PerroComboPerros.addItem(sistema.getAnimales().get(i).getNombre());
+            CalComboPerro.addItem(sistema.getAnimales().get(i).getNombre());
         }
 
     }
