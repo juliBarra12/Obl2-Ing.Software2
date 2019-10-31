@@ -58,10 +58,10 @@ public class ActividadCualquieraTest {
         Fecha fecha = new Fecha();
         LocalTime time = LocalTime.now();
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         ActividadCualquiera unaAct = new ActividadCualquiera("Nombre", usuario, perro, false, time, fecha);
         Usuario resResponsable = unaAct.getUsuario();
-        Perro resMascota = unaAct.getMascota();
+        Animal resMascota = unaAct.getMascota();
         String resNombreAct = unaAct.getNombre();
         boolean resFueRealizada = unaAct.getFueRealizado();
         Fecha resFecha = unaAct.getFecha();
@@ -79,10 +79,10 @@ public class ActividadCualquieraTest {
         Fecha fecha = new Fecha();
         LocalTime time = LocalTime.now();
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         ActividadCualquiera unaAct = new ActividadCualquiera("", usuario, perro, false, time, fecha);
         Usuario resResponsable = unaAct.getUsuario();
-        Perro resMascota = unaAct.getMascota();
+        Animal resMascota = unaAct.getMascota();
         String resNombreAct = unaAct.getNombre();
         boolean resFueRealizada = unaAct.getFueRealizado();
         Fecha resFecha = unaAct.getFecha();
@@ -124,7 +124,7 @@ public class ActividadCualquieraTest {
         actividad.setHora(time);
         actividad.setFecha(fecha);
         Usuario usuario = actividad.getUsuario();
-        Perro perro = actividad.getMascota();
+        Animal perro = actividad.getMascota();
         String resToString = actividad.toString();
         assertEquals("ActividadCualquiera{" + "responsable=" + usuario + ", mascota=" + perro + ", fueRealizado=" + actividad.getFueRealizado() + ", hora=" + time + ", fecha=" + fecha + ", nombre=" + actividad.getNombre() + '}', resToString);
     }
@@ -145,8 +145,8 @@ public class ActividadCualquieraTest {
     
     @Test
     public void testSetMascota() {
-        Perro mascota;
-        mascota = new Perro();
+        Animal mascota;
+        mascota = new Animal();
        actividad.setMascota(mascota);
         assertEquals(mascota, actividad.getMascota());
     }

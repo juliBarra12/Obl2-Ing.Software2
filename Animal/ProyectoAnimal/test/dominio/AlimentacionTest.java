@@ -58,7 +58,7 @@ public class AlimentacionTest {
     @Test
     public void testConstructorPorParametros() {
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         LocalTime time = LocalTime.now();
         Fecha fecha = new Fecha();
         Alimentacion unaAlim = new Alimentacion("Nombre", usuario, perro, "Comida", true, time, fecha);
@@ -74,7 +74,7 @@ public class AlimentacionTest {
     @Test
     public void testConstructorPorParametrosVacios() {
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         LocalTime time = LocalTime.now();
         Fecha fecha = new Fecha();
         Alimentacion unaAlim = new Alimentacion("", usuario, perro, "", true, time, fecha);
@@ -115,7 +115,7 @@ public class AlimentacionTest {
 
     @Test
     public void testSetMascota() {
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         alimentacion.setMascota(perro);
         assertEquals(perro, alimentacion.getMascota());
     }
@@ -142,7 +142,7 @@ public class AlimentacionTest {
     @Test
     public void testToString() {
         Usuario responsable = alimentacion.getUsuario();
-        Perro mascota = alimentacion.getMascota();
+        Animal mascota = alimentacion.getMascota();
         String tipoAlimento = alimentacion.getTipoAlimento();
         boolean fueRealizado = alimentacion.getFueRealizado();
         LocalTime hora = alimentacion.getHora();

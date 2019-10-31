@@ -5,13 +5,13 @@ import java.time.LocalTime;
 public class ActividadCualquiera extends Actividad {
 
     private Usuario responasble;
-    private Perro mascotas;
+    private Animal mascotas;
     private boolean fueRealizado;
     private LocalTime hora;
     private Fecha fecha;
     private String nombre;
 
-    public ActividadCualquiera(String nombre, Usuario responasble, Perro mascota, boolean fueRealizado, LocalTime hora, Fecha fecha) {
+    public ActividadCualquiera(String nombre, Usuario responasble, Animal mascota, boolean fueRealizado, LocalTime hora, Fecha fecha) {
         this.responasble = responasble;
         this.mascotas = mascota;
         this.fueRealizado = fueRealizado;
@@ -22,7 +22,7 @@ public class ActividadCualquiera extends Actividad {
 
     public ActividadCualquiera() {
         this.responasble = new Usuario();
-        this.mascotas = new Perro();
+        this.mascotas = new Animal();
         this.nombre = "Sin-Nombre";
         this.fueRealizado = false;
         this.hora = LocalTime.now();
@@ -59,12 +59,12 @@ public class ActividadCualquiera extends Actividad {
     }
 
     @Override
-    public Perro getMascota() {
+    public Animal getMascota() {
         return mascotas;
     }
 
     @Override
-    public void setMascota(Perro mascotas) {
+    public void setMascota(Animal mascotas) {
         this.mascotas = mascotas;
     }
 

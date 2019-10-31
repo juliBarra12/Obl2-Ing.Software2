@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * @author marce
  */
 public class PerroTest {
-    private Perro perro;
+    private Animal perro;
     public PerroTest() {
     }
     
@@ -32,7 +32,7 @@ public class PerroTest {
     
     @Before
     public void setUp() {
-        perro = new Perro();
+        perro = new Animal();
     }
     
     @After
@@ -47,7 +47,7 @@ public class PerroTest {
     
     @Test
     public void testConstructorSinParametros() {
-        Perro unPerro = new Perro();
+        Animal unPerro = new Animal();
         assertEquals("Sin-Nombre", unPerro.getNombre());
         assertEquals(0, unPerro.getPeso(),0);
         assertEquals(0, unPerro.getAltura(),0);
@@ -57,7 +57,7 @@ public class PerroTest {
     
      @Test
     public void testConstructorPorParametros() {
-        Perro unPerro = new Perro("Rasta", 1.1, 2.3, "Es rubio");
+        Animal unPerro = new Animal("Rasta", 1.1, 2.3, "Es rubio");
         assertEquals("Rasta", unPerro.getNombre());
         assertEquals(1.1, unPerro.getAltura(), 0);
         assertEquals(2.3, unPerro.getPeso(), 0);
@@ -66,7 +66,7 @@ public class PerroTest {
     }
      @Test
     public void testConstructorPorParametrosConPesoYAlturaMenoresQue0() {
-        Perro unPerro = new Perro("Rasta", -1.1, -2.3, "Es rubio");
+        Animal unPerro = new Animal("Rasta", -1.1, -2.3, "Es rubio");
         assertEquals("Rasta", unPerro.getNombre());
         assertEquals(0.0, unPerro.getAltura(), 0);
         assertEquals(0.0, unPerro.getPeso(), 0);
@@ -76,7 +76,7 @@ public class PerroTest {
     
      @Test
     public void testConstructorPorParametrosConNombreYComentariosVacios() {
-        Perro unPerro = new Perro("", -1.1, -2.3, "");
+        Animal unPerro = new Animal("", -1.1, -2.3, "");
         assertEquals("Sin-Nombre", unPerro.getNombre());
         assertEquals(0.0, unPerro.getAltura(), 0);
         assertEquals(0.0, unPerro.getPeso(), 0);

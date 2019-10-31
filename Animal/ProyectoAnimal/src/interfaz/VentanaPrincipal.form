@@ -154,7 +154,7 @@
                                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                               <Component id="CalComboTipo" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="CalComboUsuario" alignment="0" pref="134" max="32767" attributes="0"/>
-                                                              <Component id="CalComboPerro" alignment="0" pref="134" max="32767" attributes="0"/>
+                                                              <Component id="CalComboAnimal" alignment="0" pref="134" max="32767" attributes="0"/>
                                                               <Component id="CalLblFechaResp" max="32767" attributes="0"/>
                                                               <Component id="CalTxtNombreResp" max="32767" attributes="0"/>
                                                               <Component id="CalComboHora" alignment="0" max="32767" attributes="0"/>
@@ -225,7 +225,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="CalLblPerro" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CalComboPerro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CalComboAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -406,7 +406,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="CalComboPerro">
+            <Component class="javax.swing.JComboBox" name="CalComboAnimal">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
@@ -1041,11 +1041,11 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panPerros">
+        <Container class="javax.swing.JPanel" name="panAnimales">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Perros">
-                <Property name="tabTitle" type="java.lang.String" value="Perros"/>
+              <JTabbedPaneConstraints tabName="Animales">
+                <Property name="tabTitle" type="java.lang.String" value="Animales"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -1058,13 +1058,13 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="PerroLblPerros" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PerroComboPerros" min="-2" pref="112" max="-2" attributes="0"/>
+                                  <Component id="AnimalLblAnimales" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AnimalComboPerros" min="-2" pref="112" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="PerroBtnEditar" min="-2" max="-2" attributes="0"/>
+                              <Component id="AnimalBtnEditar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1072,8 +1072,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="PerroBtnGuardar" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <Component id="PerroBtnAgregar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AnimalBtnGuardar" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="AnimalBtnAgregar" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -1081,13 +1081,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                      <Component id="PerroLblAdvertencia" min="-2" pref="375" max="-2" attributes="0"/>
+                                      <Component id="AnimalLblAdvertencia" min="-2" pref="375" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="PerroPanInformacion" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AnimalPanInformacion" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="961" max="32767" attributes="0"/>
+                      <EmptySpace pref="997" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1097,43 +1097,43 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="PerroLblPerros" min="-2" max="-2" attributes="0"/>
+                              <Component id="AnimalLblAnimales" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="PerroComboPerros" min="-2" max="-2" attributes="0"/>
+                              <Component id="AnimalComboPerros" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="PerroBtnEditar" min="-2" max="-2" attributes="0"/>
+                              <Component id="AnimalBtnEditar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="PerroPanInformacion" min="-2" max="-2" attributes="0"/>
+                              <Component id="AnimalPanInformacion" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="PerroLblAdvertencia" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="AnimalLblAdvertencia" min="-2" pref="28" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="PerroBtnGuardar" min="-2" max="-2" attributes="0"/>
+                      <Component id="AnimalBtnGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="PerroBtnAgregar" min="-2" max="-2" attributes="0"/>
+                      <Component id="AnimalBtnAgregar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="1084" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="PerroBtnAgregar">
+            <Component class="javax.swing.JButton" name="AnimalBtnAgregar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ingresar Perro"/>
+                <Property name="text" type="java.lang.String" value="Ingresar Animal"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroBtnAgregarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalBtnAgregarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PerroLblPerros">
+            <Component class="javax.swing.JLabel" name="AnimalLblAnimales">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Perros"/>
+                <Property name="text" type="java.lang.String" value="Animal"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JPanel" name="PerroPanInformacion">
+            <Container class="javax.swing.JPanel" name="AnimalPanInformacion">
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -1142,30 +1142,30 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="PerroTxtComentarios" max="32767" attributes="0"/>
+                                  <Component id="AnimaltxtComentarios" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="PerroPanFoto" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalPanFoto" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="PerroLblComentarios" max="32767" attributes="0"/>
+                                          <Component id="AnimalLblComentarios" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="PerroLblNombre" min="-2" max="-2" attributes="0"/>
-                                              <Component id="PerroLblAltura" min="-2" max="-2" attributes="0"/>
+                                              <Component id="AnimalLblNombre" min="-2" max="-2" attributes="0"/>
+                                              <Component id="AnimalLblAltura" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="PerroTxtNombre" max="32767" attributes="0"/>
+                                              <Component id="AnimalTxtNombre" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="PerroSpinPeso" min="-2" pref="113" max="-2" attributes="0"/>
-                                                      <Component id="PerroSpinAltura" min="-2" pref="113" max="-2" attributes="0"/>
+                                                      <Component id="AnimalSpinPeso" min="-2" pref="113" max="-2" attributes="0"/>
+                                                      <Component id="AnimalSpinAltura" min="-2" pref="113" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1178,11 +1178,11 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="PerroLblPeso" min="-2" max="-2" attributes="0"/>
-                                              <Component id="PerroLblFotoBoton" min="-2" max="-2" attributes="0"/>
+                                              <Component id="AnimalLblPeso" min="-2" max="-2" attributes="0"/>
+                                              <Component id="AnimalLblFotoBoton" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                          <Component id="PerroBtnExaminar" max="32767" attributes="0"/>
+                                          <Component id="AnimalBtnExaminar" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1199,46 +1199,46 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="PerroLblNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="PerroTxtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalLblNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalTxtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="PerroLblAltura" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalLblAltura" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="PerroSpinAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="AnimalSpinAltura" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="CalLblCentimetros" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="PerroLblPeso" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalLblPeso" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="PerroSpinPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="AnimalSpinPeso" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="CalLblKilogramos" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="PerroBtnExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="PerroLblFotoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalBtnExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AnimalLblFotoBoton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="PerroPanFoto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AnimalPanFoto" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="PerroLblComentarios" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AnimalLblComentarios" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="PerroTxtComentarios" min="-2" max="-2" attributes="0"/>
+                          <Component id="AnimaltxtComentarios" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="PerroPanFoto">
+                <Container class="javax.swing.JPanel" name="AnimalPanFoto">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -1265,54 +1265,54 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="PerroLblAltura">
+                <Component class="javax.swing.JLabel" name="AnimalLblAltura">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Altura"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="PerroLblComentarios">
+                <Component class="javax.swing.JLabel" name="AnimalLblComentarios">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Comentarios"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="PerroLblNombre">
+                <Component class="javax.swing.JLabel" name="AnimalLblNombre">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nombre"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="PerroLblPeso">
+                <Component class="javax.swing.JLabel" name="AnimalLblPeso">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Peso"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="PerroTxtNombre">
+                <Component class="javax.swing.JTextField" name="AnimalTxtNombre">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroTxtNombreActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalTxtNombreActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="PerroTxtComentarios">
+                <Component class="javax.swing.JTextField" name="AnimaltxtComentarios">
                 </Component>
-                <Component class="javax.swing.JButton" name="PerroBtnExaminar">
+                <Component class="javax.swing.JButton" name="AnimalBtnExaminar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Examinar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroBtnExaminarActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalBtnExaminarActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="PerroLblFotoBoton">
+                <Component class="javax.swing.JLabel" name="AnimalLblFotoBoton">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Foto:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="PerroSpinAltura">
+                <Component class="javax.swing.JSpinner" name="AnimalSpinAltura">
                   <Properties>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                       <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="PerroSpinPeso">
+                <Component class="javax.swing.JSpinner" name="AnimalSpinPeso">
                   <Properties>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                       <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
@@ -1331,37 +1331,37 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="PerroComboPerros">
+            <Component class="javax.swing.JComboBox" name="AnimalComboPerros">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PerroComboPerrosMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroComboPerrosActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AnimalComboPerrosMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalComboPerrosActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="PerroBtnEditar">
+            <Component class="javax.swing.JButton" name="AnimalBtnEditar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroBtnEditarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalBtnEditarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="PerroBtnGuardar">
+            <Component class="javax.swing.JButton" name="AnimalBtnGuardar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PerroBtnGuardarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnimalBtnGuardarActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PerroLblAdvertencia">
+            <Component class="javax.swing.JLabel" name="AnimalLblAdvertencia">
             </Component>
           </SubComponents>
         </Container>
