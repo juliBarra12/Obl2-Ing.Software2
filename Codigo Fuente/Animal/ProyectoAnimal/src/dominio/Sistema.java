@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Sistema {
 
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Perro> perros;
+    private ArrayList<Animal> animales;
     private final ArrayList<Actividad> listaActividades;
     private ArrayList<Fecha> listaFechas;
     private ArrayList<Veterinaria> listaVeterinarias;
@@ -19,7 +19,7 @@ public class Sistema {
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
-        this.perros = new ArrayList<>();
+        this.animales = new ArrayList<>();
         this.listaActividades = new ArrayList<>();
         this.listaFechas = new ArrayList<>();
         this.listaVeterinarias = new ArrayList<>();
@@ -58,27 +58,27 @@ public class Sistema {
         return usuarios;
     }
 
-    public void setPerros(ArrayList<Perro> perros) {
-        this.perros = perros;
+    public void setAnimales(ArrayList<Animal> animal) {
+        this.animales = animal;
     }
 
-    public ArrayList<Perro> getPerros() {
-        return perros;
+    public ArrayList<Animal> getAnimales() {
+        return animales;
     }
 
     public ArrayList<Actividad> getActividades() {
         return listaActividades;
     }
 
-    public void AnadirPerro(Perro perroAnadir) {
-        perros.add(perroAnadir);
+    public void AnadirPerro(Animal perroAnadir) {
+        animales.add(perroAnadir);
     }
 
-    public void EliminarPerro(Perro perro) {
-        if (perros.contains(perro)) {
-            perros.remove(perro);
+    public void EliminarPerro(Animal perro) {
+        if (animales.contains(perro)) {
+            animales.remove(perro);
         } else {
-            System.out.println("No existe tal perro");
+            System.out.println("No existe tal animal");
         }
     }
 
@@ -128,10 +128,10 @@ public class Sistema {
         return null;
     }
 
-    public Perro buscarPerroPorNombre(String nombreBuscar) {
-        for (int i = 0; i < perros.size(); i++) {
-            if (nombreBuscar.equals(perros.get(i).getNombre())) {
-                return perros.get(i);
+    public Animal buscarPerroPorNombre(String nombreBuscar) {
+        for (int i = 0; i < animales.size(); i++) {
+            if (nombreBuscar.equals(animales.get(i).getNombre())) {
+                return animales.get(i);
             }
         }
         return null;

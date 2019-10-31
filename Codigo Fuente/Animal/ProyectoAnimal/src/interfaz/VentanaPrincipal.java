@@ -84,7 +84,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void resetearPestanaPerros() {
         setearListaPerros();
         if (PerroComboPerros.getItemCount() != 0) {
-            Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
+            Animal perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
             PerroLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());
             PerroLblPeso.setText("Pesa:       " + perroSeleccionado.getPeso());
             PerroLblAltura.setText("Mide:       " + perroSeleccionado.getAltura());
@@ -1060,7 +1060,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else if (PerroSpinPeso.getValue().equals(0.0)) {
                 PerroLblAdvertencia.setText("Por favor ingrese un peso válido");
             } else {
-                Perro perroAgregar = new Perro(PerroTxtNombre.getText(), Integer.parseInt(PerroSpinAltura.getValue().toString()), Double.parseDouble(PerroSpinPeso.getValue().toString()), PerroTxtComentarios.getText());
+                Animal perroAgregar = new Animal(PerroTxtNombre.getText(), Integer.parseInt(PerroSpinAltura.getValue().toString()), Double.parseDouble(PerroSpinPeso.getValue().toString()), PerroTxtComentarios.getText());
                 if (rutaImagenAgregar.equals("")) {
                     try {
                         perroAgregar.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
@@ -1187,7 +1187,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         PerroLblPeso.setText("Peso:");
         PerroLblAltura.setText("Altura:");
         PerroLblComentarios.setText("Comentarios:");
-        Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
+        Animal perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
         PerroLblFoto.setIcon(perroSeleccionado.getFoto());
         PerroTxtNombre.setText(perroSeleccionado.getNombre());
         PerroSpinPeso.setValue(perroSeleccionado.getPeso());
@@ -1257,7 +1257,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void PerroComboPerrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroComboPerrosActionPerformed
         ocultarAgregarPerro();
         if (PerroComboPerros.getItemCount() > 0) {
-            Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
+            Animal perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
             PerroLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());
             PerroLblPeso.setText("Pesa:       " + perroSeleccionado.getPeso());
             PerroLblAltura.setText("Mide:       " + perroSeleccionado.getAltura());
@@ -1284,7 +1284,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PerroBtnEditarActionPerformed
 
     private void PerroBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerroBtnGuardarActionPerformed
-        Perro perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
+        Animal perroSeleccionado = sistema.buscarPerroPorNombre(PerroComboPerros.getSelectedItem().toString());
         String valor = PerroSpinAltura.getValue() + "";
         double altura = Double.parseDouble(valor);
         perroSeleccionado.setAltura(altura);
@@ -1308,12 +1308,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             Usuario persona = new Usuario("Alex", "alexkmass@gmail.com");
             sistema.AnadirUsuario(persona);
-            Perro rasta = new Perro("Rasta", 50, 23, "Es un buen perro, le gusta comer");
+            Animal rasta = new Animal("Rasta", 50, 23, "Es un buen perro, le gusta comer");
             rasta.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
             sistema.AnadirPerro(rasta);
             Usuario persona2 = new Usuario("Marcelo", "marcelo@gmail.com");
             sistema.AnadirUsuario(persona2);
-            Perro ori = new Perro("Ori", 50, 23, "Es un buen perro");
+            Animal ori = new Animal("Ori", 50, 23, "Es un buen perro");
             ori.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroFoto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
             sistema.AnadirPerro(ori);
             Fecha fecha = new Fecha(22, 11, 2018);
@@ -1573,7 +1573,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             CalLblAdvertencia.setText("Por favor, ingrese un perro para agregar una actividad.");
         } else {
             Usuario usuario = sistema.buscarUsuarioPorNombre((String) CalComboUsuario.getSelectedItem());
-            Perro perro = sistema.buscarPerroPorNombre((String) CalComboPerro.getSelectedItem());
+            Animal perro = sistema.buscarPerroPorNombre((String) CalComboPerro.getSelectedItem());
             LocalTime time;
             if (((String) CalComboHora.getSelectedItem()).equals("Ahora")) {
                 time = LocalTime.now();

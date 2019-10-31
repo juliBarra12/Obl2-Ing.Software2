@@ -59,11 +59,11 @@ public class VisitaVeterinariaTest {
         Fecha fecha = new Fecha();
         LocalTime time = LocalTime.now();
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         Veterinaria vet = new Veterinaria();
         VisitaVeterinaria unaVisita = new VisitaVeterinaria("Nombre", time, usuario, perro, false, fecha, vet, "medico");
         Usuario resResponsable = unaVisita.getUsuario();
-        Perro resMascota = unaVisita.getMascota();
+        Animal resMascota = unaVisita.getMascota();
         String resNombreAct = unaVisita.getNombre();
         boolean resFueRealizada = unaVisita.getFueRealizado();
         Fecha resFecha = unaVisita.getFecha();
@@ -83,11 +83,11 @@ public class VisitaVeterinariaTest {
         Fecha fecha = new Fecha();
         LocalTime time = LocalTime.now();
         Usuario usuario = new Usuario();
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         Veterinaria vet = new Veterinaria();
         VisitaVeterinaria unaVisita = new VisitaVeterinaria("", time, usuario, perro, false, fecha, vet, "");
         Usuario resResponsable = unaVisita.getUsuario();
-        Perro resMascota = unaVisita.getMascota();
+        Animal resMascota = unaVisita.getMascota();
         String resNombreAct = unaVisita.getNombre();
         boolean resFueRealizada = unaVisita.getFueRealizado();
         Fecha resFecha = unaVisita.getFecha();
@@ -131,7 +131,7 @@ public class VisitaVeterinariaTest {
         visita.setHora(time);
         visita.setFecha(fecha);
         Usuario usuario = visita.getUsuario();
-        Perro perro = visita.getMascota();
+        Animal perro = visita.getMascota();
         String nombre = visita.getNombre();
         boolean fueRealizado = visita.getFueRealizado();
         Veterinaria veterinaria = visita.getVeterinaria();
@@ -155,8 +155,8 @@ public class VisitaVeterinariaTest {
 
     @Test
     public void testSetMascota() {
-        Perro mascota;
-        mascota = new Perro();
+        Animal mascota;
+        mascota = new Animal();
         visita.setMascota(mascota);
         assertEquals(mascota, visita.getMascota());
     }

@@ -5,14 +5,14 @@ import java.time.LocalTime;
 public class Alimentacion extends Actividad {
 
     private Usuario responsable;
-    private Perro mascota;
+    private Animal mascota;
     private String tipoAlimento;
     private boolean fueRealizado;
     private LocalTime hora;
     private Fecha fecha;
     private String nombre;
 
-    public Alimentacion(String nombre, Usuario responasble, Perro mascota, String tipoAlimento, boolean fueRealizado, LocalTime hora, Fecha fecha) {
+    public Alimentacion(String nombre, Usuario responasble, Animal mascota, String tipoAlimento, boolean fueRealizado, LocalTime hora, Fecha fecha) {
         this.responsable = responasble;
         this.mascota = mascota;
         setTipoAlimento(tipoAlimento);
@@ -24,7 +24,7 @@ public class Alimentacion extends Actividad {
 
     public Alimentacion(){
         this.responsable = new Usuario();
-        this.mascota = new Perro();
+        this.mascota = new Animal();
         this.tipoAlimento = "Sin-Tipo";
         this.fueRealizado = false;
         this.hora = LocalTime.now();
@@ -66,12 +66,12 @@ public class Alimentacion extends Actividad {
     }
 
     @Override
-    public Perro getMascota() {
+    public Animal getMascota() {
         return mascota;
     }
 
     @Override
-    public void setMascota(Perro mascota) {
+    public void setMascota(Animal mascota) {
         this.mascota = mascota;
     }
 

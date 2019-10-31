@@ -16,7 +16,7 @@ public class VisitaVeterinaria extends Actividad {
     private String nombre;
     private LocalTime hora;
     private Usuario responsable;
-    private Perro perro;
+    private Animal animal;
     private boolean fueRealizado;
     private Fecha fecha;
     private Veterinaria veterinaria;
@@ -26,18 +26,18 @@ public class VisitaVeterinaria extends Actividad {
         this.nombre = "Sin-Nombre";
         this.hora = LocalTime.now();
         this.responsable = new Usuario();
-        this.perro = new Perro();
+        this.animal = new Animal();
         this.fueRealizado = false;
         this.fecha = new Fecha();
         this.veterinaria = new Veterinaria();
         this.motivo = "Sin-Motivo";
     }
 
-    public VisitaVeterinaria(String nombre, LocalTime hora, Usuario responsable, Perro perro, boolean fueRealizado, Fecha fecha, Veterinaria veterinaria, String motivo) {
+    public VisitaVeterinaria(String nombre, LocalTime hora, Usuario responsable, Animal animal, boolean fueRealizado, Fecha fecha, Veterinaria veterinaria, String motivo) {
         setNombre(nombre);
         this.hora = hora;
         this.responsable = responsable;
-        this.perro = perro;
+        this.animal = animal;
         this.fueRealizado = fueRealizado;
         this.fecha = fecha;
         this.veterinaria = veterinaria;
@@ -98,13 +98,13 @@ public class VisitaVeterinaria extends Actividad {
     }
 
     @Override
-    public Perro getMascota() {
-        return this.perro;
+    public Animal getMascota() {
+        return this.animal;
     }
 
     @Override
-    public void setMascota(Perro mascota) {
-        this.perro = mascota;
+    public void setMascota(Animal mascota) {
+        this.animal = mascota;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class VisitaVeterinaria extends Actividad {
 
     @Override
     public String toString() {
-        return "VisitaVeterinaria{" + "nombre=" + nombre + ", hora=" + hora + ", responsable=" + responsable + ", perro=" + perro + ", fueRealizado=" + fueRealizado + ", fecha=" + fecha + ", veterinaria=" + veterinaria + '}';
+        return "VisitaVeterinaria{" + "nombre=" + nombre + ", hora=" + hora + ", responsable=" + responsable + ", perro=" + animal + ", fueRealizado=" + fueRealizado + ", fecha=" + fecha + ", veterinaria=" + veterinaria + '}';
     }
 
   

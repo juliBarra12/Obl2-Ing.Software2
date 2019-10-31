@@ -286,8 +286,8 @@ public class SistemaTest {
 
     @Test
     public void testSetPerros() {
-        ArrayList<Perro> lstPerros = new ArrayList<>();
-        Perro perro = new Perro();
+        ArrayList<Animal> lstPerros = new ArrayList<>();
+        Animal perro = new Animal();
         lstPerros.add(perro);
         sis.setPerros(lstPerros);
         assertTrue(sis.getPerros().contains(perro));
@@ -295,21 +295,21 @@ public class SistemaTest {
 
     @Test
     public void testSetPerrosVacio() {
-        ArrayList<Perro> lstPerros = new ArrayList<>();
+        ArrayList<Animal> lstPerros = new ArrayList<>();
         sis.setPerros(lstPerros);
         assertTrue(sis.getPerros().isEmpty());
     }
 
     @Test
     public void testAnadirPerro() {
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         sis.AnadirPerro(perro);
         assertTrue(sis.getPerros().contains(perro));
     }
 
     @Test
     public void testEliminarPerro() {
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         sis.getPerros().add(perro);
         sis.EliminarPerro(perro);
         assertFalse(sis.getPerros().contains(perro));
@@ -317,8 +317,8 @@ public class SistemaTest {
 
     @Test
     public void testEliminarPerroQueNoEsta() {
-        Perro perro = new Perro();
-        Perro perro2 = new Perro();
+        Animal perro = new Animal();
+        Animal perro2 = new Animal();
         sis.AnadirPerro(perro2);
         sis.EliminarPerro(perro);
         assertFalse(sis.getPerros().contains(perro));
@@ -434,7 +434,7 @@ public class SistemaTest {
     
     @Test
     public void testBuscarPerroPorNombre() {
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         perro.setNombre("Marcel");
         sis.AnadirPerro(perro);
         assertEquals(perro, sis.buscarPerroPorNombre("Marcel"));
@@ -442,7 +442,7 @@ public class SistemaTest {
     
     @Test
     public void testBuscarPerroPorNombreDistintos() {
-        Perro perro = new Perro();
+        Animal perro = new Animal();
         perro.setNombre("Marcel");
         sis.AnadirPerro(perro);
         assertEquals(null, sis.buscarPerroPorNombre("Alejandro"));
