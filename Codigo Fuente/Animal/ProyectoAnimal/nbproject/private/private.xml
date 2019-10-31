@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/ActividadCualquieraTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/src/dominio/Paseo.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/src/interfaz/VentanaPrincipal.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/FechaTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/PerroTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/SistemaTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/AlimentacionTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/test/dominio/PaseoTest.java</file>
-            <file>file:/D:/Users/Julieta/Desktop/RepoIS2/Ing-de-Software-2/Obligatorio1/Animal/ProyectoAnimal/src/dominio/ActividadCualquiera.java</file>
+            <file>file:/D:/Users/Lucas/Desktop/OBL2-ing/copia%20proyecto%20netbeans/Animal/ProyectoAnimal/src/interfaz/VentanaPrincipal.java</file>
+            <file>file:/D:/Users/Lucas/Desktop/OBL2-ing/copia%20proyecto%20netbeans/Animal/ProyectoAnimal/src/dominio/Main.java</file>
+            <file>file:/D:/Users/Lucas/Desktop/OBL2-ing/copia%20proyecto%20netbeans/Animal/ProyectoAnimal/src/interfaz/VentanaLogin.java</file>
+            <file>file:/D:/Users/Lucas/Desktop/OBL2-ing/copia%20proyecto%20netbeans/Animal/ProyectoAnimal/src/interfaz/VentanaFotoRuta.java</file>
         </group>
     </open-files>
 </project-private>

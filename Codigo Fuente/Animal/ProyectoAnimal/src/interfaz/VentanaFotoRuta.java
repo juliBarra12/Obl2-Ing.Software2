@@ -56,10 +56,6 @@ public class VentanaFotoRuta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
-<<<<<<< HEAD
-=======
-			@Override
->>>>>>> 6a96c2be92adc0029620f917837c2d605d00e9e0
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
