@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package interfaz;
-
+import encryption.PasswordUtils;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 /**
  *
  * @author lucas
@@ -153,9 +155,10 @@ public class PanelRegistro extends javax.swing.JPanel {
                     .addGap(0, 0, 0)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

@@ -10,5 +10,7 @@ public class Main {
         Sistema sis = new Sistema();
         VentanaRegistroLogin ventana = new VentanaRegistroLogin();
         ventana.inicializarVentana();
+        /*VentanaPrincipal vent = new VentanaPrincipal(sis);
+        vent.setVisible(true);*/
     } 
 }
