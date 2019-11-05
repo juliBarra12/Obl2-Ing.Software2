@@ -14,14 +14,21 @@ import encryption.PasswordUtils;
 public class Funcionario {
     private String username;
     private String password;
+    private String email;
     private String generatedSalt;
 
     
-    public Funcionario(String user,String pass){
+    public Funcionario(String user,String pass,String correo){
         this.username = user;
-        this.password = pass;
+        this.generatedSalt = PasswordUtils.getSalt(30);
+        this.password = PasswordUtils.generarPasswordSeguro(pass, this.generatedSalt);
+        this.email = correo;
     }
 
+    public String getEmail(){
+        return this.email;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -38,17 +45,26 @@ public class Funcionario {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public void setEmail(String e){
+        this.email = e;
+    }
 
     public void setPassword(String password) {
-        // Generar salt para luego encriptar el password del usuario.
-        String salt = PasswordUtils.getSalt(30);
         //Guardamos el salt generado para el usuario, con el fin de poder autenticar el password 
         //ingresado en el inicio de sesion.
-        this.generatedSalt = salt;
-        // Proteger el password del usuario
-        String passwordEncriptado = PasswordUtils.generateSecurePassword(password, salt);
-        this.password = passwordEncriptado;
+        this.generatedSalt = PasswordUtils.getSalt(30); 
+        // Proteger el password del usuario, creamos la contraseña asegurada.
+        this.password = PasswordUtils.generarPasswordSeguro(password, this.generatedSalt);
+        
     }
     
-    
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Funcionario) {
+            Funcionario func = (Funcionario) o;
+            return this.username.equals(func.getUsername()) || this.email.equals(func.getEmail());
+        } 
+        return false;
+    }
 }

@@ -1,11 +1,17 @@
 package dominio;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
 
-public class Sistema {
+public class Sistema implements Serializable {
 
     private ArrayList<Usuario> usuarios;
     private ArrayList<Animal> mascotas;
@@ -16,6 +22,8 @@ public class Sistema {
     private ArrayList<Paseo> listaPaseos;
     private ArrayList<Alimentacion> listaAlimentaciones;
     private ArrayList<VisitaVeterinaria> listaVisitas;
+    //Agregamos la lista de Funcionarios al sistema
+    private ArrayList<Funcionario> listafuncionarios;
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
@@ -27,6 +35,7 @@ public class Sistema {
         this.listaAlimentaciones = new ArrayList<>();
         this.listaVisitas = new ArrayList<>();
         this.listaActividadesCualquiera = new ArrayList<>();
+        this.listafuncionarios = new ArrayList<>();
     }
 
     public ArrayList<Actividad> listaActividadesPorFecha(int dia, int mes, int ano) {
@@ -218,8 +227,107 @@ public class Sistema {
         return listaFechas;
     }
 
+    
+    public Funcionario buscarFuncionario(Funcionario func){
+        for(Funcionario f : this.listafuncionarios){
+            if (f.equals(func)) return f;
+        }
+        return null;
+    }
+    public boolean existeFuncionario(Funcionario func){
+        return this.listafuncionarios.contains(func);
+    }
+    public void agregarFuncionario(Funcionario f){
+        this.listafuncionarios.add(f);
+    }
+    
     public void setFechas(ArrayList<Fecha> fechas) {
         this.listaFechas = fechas;
+    }
+    public void serializar(Object obj) {
+        String archivo = "";
+        FileOutputStream archivoGrabacion = null;
+        ObjectOutputStream out = null;
+
+        if (obj instanceof Sistema) {
+            archivo = "sistema.txt";
+        }
+
+        try {
+            archivoGrabacion = new FileOutputStream(archivo);
+            out = new ObjectOutputStream(archivoGrabacion);
+            out.writeObject(obj);
+            System.out.println("Sistema serializado correctamente"); 
+        } catch (IOException e) {
+            System.out.println("No pudo escribir");
+            
+        } finally {
+
+            if (out != null) {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    System.out.println("error al cerrar ObjectWriter");
+                }
+            }
+
+            if (archivoGrabacion != null) {
+                try {
+                    archivoGrabacion.flush();
+                    archivoGrabacion.close();
+                } catch (IOException e) {
+                    System.out.println("error al cerrar archivo");
+                }
+            }
+
+        }
+    }
+    
+    public Sistema deserializar(String archivo) {
+    
+        FileInputStream inputArchivo = null;
+        ObjectInputStream in = null;
+        Sistema retorno = new Sistema();
+        
+        try {
+             inputArchivo = new FileInputStream(archivo);
+             in = new ObjectInputStream(inputArchivo);
+             
+             
+             retorno = (Sistema)in.readObject();
+             System.out.println("Sistema deserializado correctamente");
+        } catch(IOException e) {
+            System.out.println("No se pudo leer");
+            
+        }
+        catch(ClassNotFoundException ex) 
+        { 
+            System.out.println("ClassNotFoundException is caught"); 
+        }
+        finally {
+        
+            if (inputArchivo != null) {
+                try {
+                    
+                    inputArchivo.close();
+                } catch (IOException e) {
+                    System.out.println("error al cerrar archivo");
+                }
+            }
+
+            if (in != null) {
+                try {
+                    
+                    in.close();
+                } catch (IOException e) {
+                    System.out.println("error al cerrar lector");
+                }
+            }
+        
+        }
+  
+     return retorno;   
     }
 
 }

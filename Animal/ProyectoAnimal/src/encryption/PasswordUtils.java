@@ -25,13 +25,13 @@ public class PasswordUtils {
     private static final int KEY_LENGTH = 256;
     
      public static String getSalt(int length) {
-        StringBuilder returnValue = new StringBuilder(length);
+        StringBuilder retorno = new StringBuilder(length);
 
         for (int i = 0; i < length; i++) {
-            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+            retorno.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
         }
 
-        return new String(returnValue);
+        return new String(retorno);
     }
 
     public static byte[] hash(char[] password, byte[] salt) {
@@ -47,28 +47,28 @@ public class PasswordUtils {
         }
     }
 
-    public static String generateSecurePassword(String password, String salt) {
-        String returnValue = null;
+    public static String generarPasswordSeguro(String password, String salt) {
+        String passwordGenerado = null;
 
-        byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
+        byte[] passwordSegura = hash(password.toCharArray(), salt.getBytes());
  
-        returnValue = Base64.getEncoder().encodeToString(securePassword);
+        passwordGenerado = Base64.getEncoder().encodeToString(passwordSegura);
  
-        return returnValue;
+        return passwordGenerado;
     }
     
-    public static boolean verifyUserPassword(String providedPassword,
-            String securedPassword, String salt)
+    public static boolean verificarPassswordUsuario(String passwordProvisto,
+            String passwordDeUsuario, String salt)
     {
-        boolean returnValue = false;
+        boolean iguales = false;
         
-        // Generate New secure password with the same salt
-        String newSecurePassword = generateSecurePassword(providedPassword, salt);
+        // Generamos una contraseña con el mismo salt con la provista
+        String nuevoPasswordGenerado = generarPasswordSeguro(passwordProvisto, salt);
         
-        // Check if two passwords are equal
-        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
+        //Verificamos si son iguales
+        iguales = nuevoPasswordGenerado.equalsIgnoreCase(passwordDeUsuario);
         
-        return returnValue;
+        return iguales;
     }
     
 }

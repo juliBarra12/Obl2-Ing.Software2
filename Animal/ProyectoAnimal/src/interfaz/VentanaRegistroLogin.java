@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import dominio.Sistema;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -18,17 +19,16 @@ public class VentanaRegistroLogin extends javax.swing.JFrame {
     /**
      * Creates new form VentanaRegistroLogin
      */
-    public VentanaRegistroLogin() {
+    public VentanaRegistroLogin(Sistema sistema) {
         initComponents();
         
         //Inicializar componentes
-        this.pnlLogin = new PanelLogin(this);
-        this.pnlRegistro = new PanelRegistro(this);
+        this.modelo = sistema;
+        this.pnlLogin = new PanelLogin(this,this.modelo);
+        this.pnlRegistro = new PanelRegistro(this,this.modelo);
+        
     }
-    
-    
-    
-    
+  
     public void inicializarVentana(){
         this.setLayout(new BorderLayout());
         this.add(this.pnlContenido,BorderLayout.CENTER);
@@ -88,6 +88,7 @@ public class VentanaRegistroLogin extends javax.swing.JFrame {
      * @param args the command line arguments
      */
    
+    private final Sistema modelo;
     private final PanelRegistro pnlRegistro;
     private final PanelLogin pnlLogin;
     // Variables declaration - do not modify//GEN-BEGIN:variables
