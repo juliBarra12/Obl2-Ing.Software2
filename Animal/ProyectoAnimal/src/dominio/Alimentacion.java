@@ -1,8 +1,9 @@
 package dominio;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Alimentacion extends Actividad {
+public class Alimentacion extends Actividad implements Serializable {
 
     private Usuario responsable;
     private Animal mascota;

@@ -1,8 +1,9 @@
 package dominio;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
-public class Animal {
+public class Animal implements Serializable {
 
     private String nombre;
     private double altura;

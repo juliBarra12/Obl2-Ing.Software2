@@ -6,12 +6,13 @@
 package dominio;
 
 import encryption.PasswordUtils;
+import java.io.Serializable;
 
 /**
  *
  * @author lucascastro
  */
-public class Funcionario {
+public class Funcionario implements Serializable {
     private String username;
     private String password;
     private String email;

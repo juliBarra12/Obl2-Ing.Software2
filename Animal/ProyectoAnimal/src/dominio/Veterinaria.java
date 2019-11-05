@@ -5,13 +5,14 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author marce
  */
-public class Veterinaria {
+public class Veterinaria implements Serializable {
 
     private String nombre;
     private ArrayList<Actividad> actividadesAgendadas;

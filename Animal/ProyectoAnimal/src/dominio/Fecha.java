@@ -1,5 +1,6 @@
 package dominio;
 
+
 import java.util.ArrayList;
 
 public class Fecha {
@@ -7,7 +8,7 @@ public class Fecha {
     private int dia;
     private int mes;
     private int ano;
-    private final ArrayList<Actividad> actividades;
+    private final ArrayList<Actividad> actividades; 
 
     public Fecha(int dia, int mes, int ano) {
         if (dia > 0) {

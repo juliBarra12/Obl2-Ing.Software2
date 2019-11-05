@@ -5,13 +5,14 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
  *
  * @author marce
  */
-public class VisitaVeterinaria extends Actividad {
+public class VisitaVeterinaria extends Actividad implements Serializable {
 
     private String nombre;
     private LocalTime hora;

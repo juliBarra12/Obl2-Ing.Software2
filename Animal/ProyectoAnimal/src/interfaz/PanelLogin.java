@@ -46,6 +46,7 @@ public class PanelLogin extends javax.swing.JPanel {
         btnRegistrar = new javax.swing.JButton();
         lblAdvertUsuario = new javax.swing.JLabel();
         lblAdvertPassword = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         pnlLogin.setBackground(new java.awt.Color(51, 204, 255));
         pnlLogin.setPreferredSize(new java.awt.Dimension(600, 670));
@@ -74,7 +75,7 @@ public class PanelLogin extends javax.swing.JPanel {
             }
         });
 
-        btnRegistrar.setText("Registrar ");
+        btnRegistrar.setText("Ir A Registrar ");
         btnRegistrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +91,14 @@ public class PanelLogin extends javax.swing.JPanel {
         lblAdvertPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAdvertPassword.setText("advertencia password");
 
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
         pnlLoginLayout.setHorizontalGroup(
@@ -104,7 +113,9 @@ public class PanelLogin extends javax.swing.JPanel {
                         .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lblAdvertUsuario, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnIngresar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAdvertPassword, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(321, Short.MAX_VALUE))
@@ -130,7 +141,9 @@ public class PanelLogin extends javax.swing.JPanel {
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -161,6 +174,11 @@ public class PanelLogin extends javax.swing.JPanel {
            
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.modelo.serializar(this.modelo);
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
     public boolean verificarDatosIngresados(){
         String username = this.txUsuario.getText();
         String password = new String(this.fieldContraseña.getPassword());
@@ -222,6 +240,7 @@ public class PanelLogin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JPasswordField fieldContraseña;
     private javax.swing.JLabel lblAdvertPassword;
     private javax.swing.JLabel lblAdvertUsuario;
