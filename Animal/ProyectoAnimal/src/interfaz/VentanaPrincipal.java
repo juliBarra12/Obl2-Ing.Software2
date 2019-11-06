@@ -131,8 +131,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CalBtnGroupRepetir = new javax.swing.ButtonGroup();
         CalBtnGroupVeterinaria = new javax.swing.ButtonGroup();
         CalBtnGroupRealizada = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
+        CalBtnGroupMetodoPago = new javax.swing.ButtonGroup();
+        CalBtnGroupMoneda = new javax.swing.ButtonGroup();
         Panel = new javax.swing.JTabbedPane();
         panCalendario = new javax.swing.JPanel();
         CalDayChooser = new com.toedter.calendar.JDayChooser();
@@ -227,6 +227,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         AnimalLblAdvertencia = new javax.swing.JLabel();
         panPadrinos = new javax.swing.JPanel();
         panelContenedor = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         PanelRegistro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -239,7 +240,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Pets");
@@ -810,7 +812,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(UsuarioLblUsuarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2045, Short.MAX_VALUE))
+                .addContainerGap(2108, Short.MAX_VALUE))
         );
 
         Panel.addTab("Usuarios", panUsuarios);
@@ -1023,12 +1025,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(AnimalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnAgregar)
-                .addContainerGap(2031, Short.MAX_VALUE))
+                .addContainerGap(2094, Short.MAX_VALUE))
         );
 
         Panel.addTab("Animales", panAnimales);
 
         panelContenedor.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1005, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1576, Short.MAX_VALUE)
+        );
+
+        panelContenedor.add(jPanel1, "card3");
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel1.setText("Registro Padrino");
@@ -1056,19 +1071,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel5.setText("Metodo de pago:");
 
+        CalBtnGroupMetodoPago.add(jRadioButton1);
         jRadioButton1.setText("Tarjeta de credito");
 
+        CalBtnGroupMetodoPago.add(jRadioButton2);
         jRadioButton2.setText("Transferencia bancaria");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel6.setText("Moneda:");
+
+        CalBtnGroupMoneda.add(jRadioButton3);
+        jRadioButton3.setText("Dolares");
+
+        CalBtnGroupMoneda.add(jRadioButton4);
+        jRadioButton4.setText("Pesos Uruguayos");
 
         javax.swing.GroupLayout PanelRegistroLayout = new javax.swing.GroupLayout(PanelRegistro);
         PanelRegistro.setLayout(PanelRegistroLayout);
         PanelRegistroLayout.setHorizontalGroup(
             PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                .addContainerGap(361, Short.MAX_VALUE)
+                .addContainerGap(382, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(358, 358, 358))
             .addGroup(PanelRegistroLayout.createSequentialGroup()
@@ -1076,35 +1099,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(jLabel2)
-                        .addGap(112, 112, 112)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(106, 106, 106))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(65, 65, 65))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(72, 72, 72))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(106, 106, 106)))))
+                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelRegistroLayout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(69, 69, 69))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(32, 32, 32))))
-                            .addGroup(PanelRegistroLayout.createSequentialGroup()
-                                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelRegistroLayout.createSequentialGroup()
-                                        .addGap(92, 92, 92)
-                                        .addComponent(jLabel5))
-                                    .addGroup(PanelRegistroLayout.createSequentialGroup()
-                                        .addGap(92, 92, 92)
-                                        .addComponent(jLabel6)))
-                                .addGap(80, 80, 80)))
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton3))
+                        .addGap(18, 18, 18)
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelRegistroLayout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jRadioButton4)
+                            .addComponent(jRadioButton2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelRegistroLayout.setVerticalGroup(
@@ -1114,12 +1136,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel2))
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addGap(56, 56, 56)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1132,25 +1154,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel6)
-                .addContainerGap(1099, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4))
+                .addContainerGap(1157, Short.MAX_VALUE))
         );
 
         panelContenedor.add(PanelRegistro, "card2");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1005, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1513, Short.MAX_VALUE)
-        );
-
-        panelContenedor.add(jPanel1, "card3");
 
         javax.swing.GroupLayout panPadrinosLayout = new javax.swing.GroupLayout(panPadrinos);
         panPadrinos.setLayout(panPadrinosLayout);
@@ -2183,6 +2195,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton CalBtnAgregar;
     private javax.swing.JButton CalBtnAgregarDatos;
     private javax.swing.JButton CalBtnEditar;
+    private javax.swing.ButtonGroup CalBtnGroupMetodoPago;
+    private javax.swing.ButtonGroup CalBtnGroupMoneda;
     private javax.swing.ButtonGroup CalBtnGroupRealizada;
     private javax.swing.ButtonGroup CalBtnGroupRepetir;
     private javax.swing.ButtonGroup CalBtnGroupVeterinaria;
@@ -2255,8 +2269,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane UsuarioScrollFechas;
     private javax.swing.JTextField UsuarioTxtMail;
     private javax.swing.JTextField UsuarioTxtNombre;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -2267,6 +2279,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panAnimales;

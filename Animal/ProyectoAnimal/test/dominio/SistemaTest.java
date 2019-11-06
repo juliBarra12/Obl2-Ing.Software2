@@ -289,26 +289,26 @@ public class SistemaTest {
         ArrayList<Animal> lstPerros = new ArrayList<>();
         Animal perro = new Animal();
         lstPerros.add(perro);
-        sis.setPerros(lstPerros);
+        sis.setMascotas(lstPerros);
         assertTrue(sis.getPerros().contains(perro));
     }
 
     @Test
     public void testSetPerrosVacio() {
-        ArrayList<Animal> lstPerros = new ArrayList<>();
-        sis.setPerros(lstPerros);
+        ArrayList<Animal> lstAnimales = new ArrayList<>();
+        sis.setMascotas(lstAnimales);
         assertTrue(sis.getPerros().isEmpty());
     }
 
     @Test
-    public void testAnadirPerro() {
+    public void testAnadirAnimal() {
         Animal perro = new Animal();
         sis.AnadirPerro(perro);
         assertTrue(sis.getPerros().contains(perro));
     }
 
     @Test
-    public void testEliminarPerro() {
+    public void testEliminarAnimal() {
         Animal perro = new Animal();
         sis.getPerros().add(perro);
         sis.EliminarPerro(perro);

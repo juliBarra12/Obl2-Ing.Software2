@@ -10,13 +10,17 @@ public class Animal implements Serializable {
     private double peso;
     private String comentarios;
     private ImageIcon foto;
+    private boolean adoptado;
+    private String tipo;
 
-    public Animal(String nombre, double altura, double peso, String comentarios) { //Sin foto
+    public Animal(String nombre, String tipo, double altura, double peso, String comentarios) { //Sin foto
         setNombre(nombre);
         setAltura(altura);
         setPeso(peso);
         setComentarios(comentarios);
         this.foto = null;
+        this.adoptado = false;
+        setTipo(tipo);
     }
 
     public Animal() { //Sin foto
@@ -84,6 +88,22 @@ public class Animal implements Serializable {
 
     public void setFoto(ImageIcon imagen) {
         this.foto = imagen;
+    }
+    
+    public void Adopcion(){
+        this.adoptado = true;
+    }
+    
+    public boolean estaAdoptado(){
+        return adoptado;
+    }
+    
+    public void setTipo(String elTipo){
+        tipo = elTipo;
+    }
+    
+    public String getTipo(){
+        return tipo;
     }
 
     @Override
