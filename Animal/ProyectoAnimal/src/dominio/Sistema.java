@@ -335,19 +335,15 @@ public class Sistema implements Serializable {
     public ArrayList<String> getListaTipoAnimales(){
         return this.listaTipoAnimales;
     }
-    
-    public void actualizarTipos(){
-        if(!this.mascotas.isEmpty()){
-            for(Animal a : this.mascotas){
-                if(!this.listaTipoAnimales.contains(a.getTipo())){
-                    this.listaTipoAnimales.add(a.getTipo());
-                }
-            }
-        }
-    
+    public void agregarTipo(String unTipo){
+       if(!this.listaTipoAnimales.contains(unTipo.toLowerCase().trim())){
+           this.listaTipoAnimales.add(unTipo.toLowerCase());
+       }
     }
     public void agregarAnimal(Animal a){
         this.mascotas.add(a);
-        this.actualizarTipos();
+        if(!this.listaTipoAnimales.contains(a.getTipo().toLowerCase().trim())){
+            this.listaTipoAnimales.add(a.getTipo().toLowerCase());
+        }
     }
 }

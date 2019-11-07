@@ -9,6 +9,8 @@ import dominio.*;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -48,14 +50,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private final int[] arrayDiasEnMes;
     private String rutaImagenRuta;
     private String tipoAnimal;
-    private ArrayList<String> tipoAnimales;
+
 
     public VentanaPrincipal(Sistema sis) {
         sistema = sis;
         fechaSeleccionada = new Fecha();
-        this.tipoAnimal = "";
-        this.tipoAnimales = this.sistema.getListaTipoAnimales();
-        this.cbTipoAnimal = new JComboBox(this.tipoAnimales.toArray());
+        this.tipoAnimal = "";      
         initComponents();
         this.setLocationRelativeTo(null);
         try {
@@ -86,9 +86,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         CalPanRuta.setVisible(false);
         this.setSize(940, 582);
+        this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                sistema.serializar(sistema);
+                System.exit(0);
+            }
+        });
         
     }
-
+    
+ 
     public void resetearPestanaPerros() {
         setearListaPerros();
         if (AnimalComboPerros.getItemCount() != 0) {
@@ -700,9 +709,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(CalLblInfoActividad))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panCalendarioLayout.createSequentialGroup()
-                                .addComponent(CalScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0))
+                            .addComponent(CalScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CalScrollInfoAct))))
                 .addGap(2000, 2000, 2000))
         );
@@ -1050,11 +1057,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(AnimalPanInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAnimalesLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(25, 25, 25)
                         .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipoAnimal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblTipoAnimal)
+                            .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOtro)))
                 .addGap(15, 15, 15)
                 .addComponent(AnimalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1062,7 +1069,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(AnimalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnAgregar)
-                .addContainerGap(2240, Short.MAX_VALUE))
+                .addContainerGap(2243, Short.MAX_VALUE))
         );
 
         Panel.addTab("Animales", panAnimales);
@@ -1274,19 +1281,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 this.AnimalLblAdvertencia.setText("Por favor, ingrese un tipo de animal");
                 
             } else {
-                Animal perroAgregar = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
+                Animal animal = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
                 if (rutaImagenAgregar.equals("")) {
                     try {
-                        perroAgregar.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+                        animal.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
                     } catch (IOException ex) {
                         System.out.println(ex);
                     }
                 } else {
                     File imagen = new File(rutaImagenAgregar);
-                    perroAgregar.setFoto(crearIcono(imagen, 100));
+                    animal.setFoto(crearIcono(imagen, 100));
                     rutaImagenAgregar = "";
                 }
-                sistema.AnadirPerro(perroAgregar);
+                sistema.agregarAnimal(animal);
                 AnimalTxtNombre.setText("");
                 AnimalSpinPeso.setValue((Object) 0.0);
                 AnimalSpinAltura.setValue((Object) 0.0);
@@ -1526,11 +1533,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String tipo = JOptionPane.showInputDialog(this, "Ingrese un tipo de animal", "Tipo De Animal", JOptionPane.QUESTION_MESSAGE);
         if(!tipo.trim().isEmpty()){
             this.tipoAnimal = tipo;
-            this.tipoAnimales.add(tipo);
-            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.tipoAnimales.toArray()));
+            this.sistema.agregarTipo(tipo);
+            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
+            this.cbTipoAnimal.setSelectedIndex(this.sistema.getListaTipoAnimales().size()-1);
         }
     }//GEN-LAST:event_btnOtroActionPerformed
-
+    
     private void cbTipoAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAnimalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoAnimalActionPerformed

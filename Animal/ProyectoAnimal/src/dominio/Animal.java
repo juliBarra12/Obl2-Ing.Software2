@@ -29,6 +29,7 @@ public class Animal implements Serializable {
         this.peso = 0;
         this.comentarios = "Sin-Comentarios";
         this.foto = null;
+        this.tipo ="Sin-Tipo";
     }
 
     public String getNombre() {
@@ -43,7 +44,7 @@ public class Animal implements Serializable {
         }
 
     }
-
+    
     public double getAltura() {
         return altura;
     }
@@ -99,7 +100,9 @@ public class Animal implements Serializable {
     }
     
     public void setTipo(String elTipo){
-        tipo = elTipo;
+       
+            this.tipo = elTipo;
+        
     }
     
     public String getTipo(){
