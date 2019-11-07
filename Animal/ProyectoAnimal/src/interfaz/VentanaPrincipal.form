@@ -114,85 +114,75 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                                              <Component id="CalBtnEditar" min="-2" pref="77" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                              <Component id="CalBtnAgregar" min="-2" pref="210" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                              <Component id="CalBtnAgregarDatos" min="-2" pref="279" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="CalLblAdvertencia" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="CalBtnEditar" min="-2" pref="77" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="CalLblAdvertencia" alignment="0" min="-2" pref="349" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="CalBtnAgregar" pref="210" max="32767" attributes="0"/>
+                                          <Component id="CalBtnAgregarDatos" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
+                                      <Component id="CalPanRuta" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="CalBtnVerRuta" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="CalPanRuta" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="CalBtnVerRuta" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="CalTxtTipoAlimento" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="CalLblTipo" max="32767" attributes="0"/>
+                                                          <Component id="CalLblUsuario" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="CalLblPerro" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="CalLblFecha" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="CalLblHora" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="CalLblNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="CalComboTipo" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="CalComboUsuario" alignment="0" pref="134" max="32767" attributes="0"/>
+                                                      <Component id="CalComboAnimal" alignment="0" pref="134" max="32767" attributes="0"/>
+                                                      <Component id="CalLblFechaResp" max="32767" attributes="0"/>
+                                                      <Component id="CalTxtNombreResp" max="32767" attributes="0"/>
+                                                      <Component id="CalComboHora" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                      <Component id="CalTxtTipoAlimento" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                                  <Component id="CalLblTipo" max="32767" attributes="0"/>
-                                                                  <Component id="CalLblUsuario" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="CalLblPerro" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="CalLblFecha" alignment="0" max="32767" attributes="0"/>
-                                                                  <Component id="CalLblHora" min="-2" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Component id="CalLblNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                              <Component id="CalComboTipo" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="CalComboUsuario" alignment="0" pref="134" max="32767" attributes="0"/>
-                                                              <Component id="CalComboAnimal" alignment="0" pref="134" max="32767" attributes="0"/>
-                                                              <Component id="CalLblFechaResp" max="32767" attributes="0"/>
-                                                              <Component id="CalTxtNombreResp" max="32767" attributes="0"/>
-                                                              <Component id="CalComboHora" alignment="0" max="32767" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="CalLblRealizada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="CalLblTipoAlimento" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                      <Component id="CalBtnRealizadaSi" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="CalBtnRealizadaNo" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="CalLblRealizada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="CalLblTipoAlimento" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="CalPanVeterinaria" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="CalPanHoraPersonalizada" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="CalBtnRealizadaSi" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="CalBtnRealizadaNo" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="969" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="CalPanVeterinaria" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="CalPanHoraPersonalizada" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="CalLblTituloActividad" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -267,7 +257,7 @@
                               <Component id="CalLblAdvertencia" min="-2" pref="31" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="CalBtnAgregar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="CalBtnAgregarDatos" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -292,13 +282,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="CalScrollActividades" min="-2" pref="174" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="CalScrollInfoAct" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2000" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -359,6 +349,9 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="CalBtnAgregar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CalBtnAgregarActionPerformed"/>
               </Events>
@@ -865,7 +858,7 @@
                                                   <Component id="UsuarioLblNombre" min="-2" max="-2" attributes="0"/>
                                                   <Component id="UsuarioLblMail" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace pref="1005" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="UsuarioTxtMail" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
                                                   <Component id="UsuarioTxtNombre" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
@@ -875,10 +868,10 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
                               <Component id="UsuarioBtnAgregar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                           </Group>
@@ -897,7 +890,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="446" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -945,7 +938,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="2108" max="32767" attributes="0"/>
+                      <EmptySpace pref="2254" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1087,11 +1080,22 @@
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Component id="AnimalLblAdvertencia" min="-2" pref="375" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="AnimalPanInformacion" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="AnimalPanInformacion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblTipoAnimal" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="cbTipoAnimal" min="-2" pref="140" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnOtro" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="1238" max="32767" attributes="0"/>
+                      <EmptySpace pref="457" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1111,6 +1115,15 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="AnimalPanInformacion" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cbTipoAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTipoAnimal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnOtro" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="AnimalLblAdvertencia" min="-2" pref="28" max="-2" attributes="0"/>
@@ -1118,7 +1131,7 @@
                       <Component id="AnimalBtnGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="AnimalBtnAgregar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="2094" max="32767" attributes="0"/>
+                      <EmptySpace pref="2240" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1367,6 +1380,37 @@
             </Component>
             <Component class="javax.swing.JLabel" name="AnimalLblAdvertencia">
             </Component>
+            <Component class="javax.swing.JComboBox" name="cbTipoAnimal">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoAnimalActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblTipoAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animal:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnOtro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Otro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOtroActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panPadrinos">
@@ -1384,7 +1428,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="panelContenedor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="857" max="32767" attributes="0"/>
+                      <EmptySpace pref="293" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1393,7 +1437,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="panelContenedor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="803" max="32767" attributes="0"/>
+                      <EmptySpace pref="949" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1403,26 +1447,6 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel1">
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                      <CardConstraints cardName="card3"/>
-                    </Constraint>
-                  </Constraints>
-
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1005" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="1576" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
-                </Container>
                 <Container class="javax.swing.JPanel" name="PanelRegistro">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -1639,6 +1663,26 @@
                       </Properties>
                     </Component>
                   </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanel1">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card3"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="1005" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="1576" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
                 </Container>
               </SubComponents>
             </Container>

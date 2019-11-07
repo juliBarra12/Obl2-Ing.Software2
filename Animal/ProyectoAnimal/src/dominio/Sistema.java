@@ -24,6 +24,8 @@ public class Sistema implements Serializable {
     private ArrayList<VisitaVeterinaria> listaVisitas;
     //Agregamos la lista de Funcionarios al sistema
     private ArrayList<Funcionario> listafuncionarios;
+    //Agregamos una lista de tipo de animales al sistema
+    private ArrayList<String> listaTipoAnimales;
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
@@ -36,6 +38,7 @@ public class Sistema implements Serializable {
         this.listaVisitas = new ArrayList<>();
         this.listaActividadesCualquiera = new ArrayList<>();
         this.listafuncionarios = new ArrayList<>();
+        this.listaTipoAnimales = new ArrayList<>();
     }
 
     public ArrayList<Actividad> listaActividadesPorFecha(int dia, int mes, int ano) {
@@ -329,5 +332,22 @@ public class Sistema implements Serializable {
   
      return retorno;   
     }
-
+    public ArrayList<String> getListaTipoAnimales(){
+        return this.listaTipoAnimales;
+    }
+    
+    public void actualizarTipos(){
+        if(!this.mascotas.isEmpty()){
+            for(Animal a : this.mascotas){
+                if(!this.listaTipoAnimales.contains(a.getTipo())){
+                    this.listaTipoAnimales.add(a.getTipo());
+                }
+            }
+        }
+    
+    }
+    public void agregarAnimal(Animal a){
+        this.mascotas.add(a);
+        this.actualizarTipos();
+    }
 }
