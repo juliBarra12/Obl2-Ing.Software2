@@ -1277,7 +1277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 AnimalLblAdvertencia.setText("Por favor ingrese una altura válida");
             } else if (AnimalSpinPeso.getValue().equals(0.0)) {
                 AnimalLblAdvertencia.setText("Por favor ingrese un peso válido");
-            }else if (this.tipoAnimal.trim().isEmpty()){
+            }else if (this.cbTipoAnimal.getSelectedItem() == null){
                 this.AnimalLblAdvertencia.setText("Por favor, ingrese un tipo de animal");
                 
             } else {
@@ -1398,6 +1398,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         AnimalLblFotoBoton.setVisible(false);
         AnimalBtnExaminar.setVisible(false);
         agregarPerroSeleccionado = false;
+        this.AnimalBtnAgregar.setVisible(false);
     }
 
     private void mostrarEditarPerro() {
@@ -1531,7 +1532,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtroActionPerformed
         String tipo = JOptionPane.showInputDialog(this, "Ingrese un tipo de animal", "Tipo De Animal", JOptionPane.QUESTION_MESSAGE);
-        if(!tipo.trim().isEmpty()){
+        if(tipo != null){
             this.tipoAnimal = tipo;
             this.sistema.agregarTipo(tipo);
             this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
