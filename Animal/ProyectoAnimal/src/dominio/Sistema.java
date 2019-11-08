@@ -26,6 +26,8 @@ public class Sistema implements Serializable {
     private ArrayList<Funcionario> listafuncionarios;
     //Agregamos una lista de tipo de animales al sistema
     private ArrayList<String> listaTipoAnimales;
+    //Agregamos una lista de padrinos al sistema
+    private ArrayList<Padrino>listaPadrinos;
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
@@ -39,6 +41,7 @@ public class Sistema implements Serializable {
         this.listaActividadesCualquiera = new ArrayList<>();
         this.listafuncionarios = new ArrayList<>();
         this.listaTipoAnimales = new ArrayList<>();
+        this.listaPadrinos = new ArrayList<>();
     }
 
     public ArrayList<Actividad> listaActividadesPorFecha(int dia, int mes, int ano) {
@@ -335,15 +338,27 @@ public class Sistema implements Serializable {
     public ArrayList<String> getListaTipoAnimales(){
         return this.listaTipoAnimales;
     }
-    public void agregarTipo(String unTipo){
-       if(!this.listaTipoAnimales.contains(unTipo.toLowerCase().trim())){
-           this.listaTipoAnimales.add(unTipo.toLowerCase());
-       }
+    
+    public void actualizarTipos(){
+        if(!this.mascotas.isEmpty()){
+            for(Animal a : this.mascotas){
+                if(!this.listaTipoAnimales.contains(a.getTipo())){
+                    this.listaTipoAnimales.add(a.getTipo());
+                }
+            }
+        }
+    
     }
     public void agregarAnimal(Animal a){
         this.mascotas.add(a);
-        if(!this.listaTipoAnimales.contains(a.getTipo().toLowerCase().trim())){
-            this.listaTipoAnimales.add(a.getTipo().toLowerCase());
-        }
+        this.actualizarTipos();
+    }
+    
+    public ArrayList<Padrino> getListaPadrinos(){
+        return this.listaPadrinos;
+    }
+    
+    public void agregarPadrino(Padrino p){
+        this.listaPadrinos.add(p);
     }
 }

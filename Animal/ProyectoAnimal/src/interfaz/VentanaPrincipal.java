@@ -9,8 +9,6 @@ import dominio.*;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -35,6 +33,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.JPanel;
 
 /**
  *
@@ -50,12 +49,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private final int[] arrayDiasEnMes;
     private String rutaImagenRuta;
     private String tipoAnimal;
-
+    private ArrayList<String> tipoAnimales;
 
     public VentanaPrincipal(Sistema sis) {
         sistema = sis;
         fechaSeleccionada = new Fecha();
-        this.tipoAnimal = "";      
+        this.tipoAnimal = "";
+        this.tipoAnimales = this.sistema.getListaTipoAnimales();
+        this.cbTipoAnimal = new JComboBox(this.tipoAnimales.toArray());
         initComponents();
         this.setLocationRelativeTo(null);
         try {
@@ -86,18 +87,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         CalPanRuta.setVisible(false);
         this.setSize(940, 582);
-        this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                sistema.serializar(sistema);
-                System.exit(0);
-            }
-        });
         
     }
-    
- 
+
     public void resetearPestanaPerros() {
         setearListaPerros();
         if (AnimalComboPerros.getItemCount() != 0) {
@@ -247,21 +239,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnOtro = new javax.swing.JButton();
         panPadrinos = new javax.swing.JPanel();
         panelContenedor = new javax.swing.JPanel();
+        PanelVistaPadrinos = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btnAgregarPadrino = new javax.swing.JButton();
         PanelRegistro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtFieldNombrePadrino = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtFieldValorDonacion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFrecuenciaDonacion = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbTarjetaCredito = new javax.swing.JRadioButton();
+        rbTransferenciaBancaria = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
+        rbDolares = new javax.swing.JRadioButton();
+        rbPesos = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        cbAnimalesApadrinar = new javax.swing.JComboBox<>();
+        btnRegistroPadrino = new javax.swing.JButton();
+        lblAdvertenciaRegistroPadrino = new javax.swing.JLabel();
+        btnAtrasPadrino = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtFieldApellidoPadrino = new javax.swing.JTextField();
+        txtFieldTelefonoPadrino = new javax.swing.JTextField();
+        txtFieldEmailPadrino = new javax.swing.JTextField();
+        txtFieldCiudadPadrino = new javax.swing.JTextField();
+        txtFieldPaisPadrino = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Pets");
@@ -825,7 +834,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(UsuarioLblUsuarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2254, Short.MAX_VALUE))
+                .addContainerGap(2316, Short.MAX_VALUE))
         );
 
         Panel.addTab("Usuarios", panUsuarios);
@@ -1040,7 +1049,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnOtro))))))
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         panAnimalesLayout.setVerticalGroup(
             panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,11 +1066,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(AnimalPanInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAnimalesLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(30, 30, 30)
                         .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTipoAnimal)
-                            .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTipoAnimal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOtro)))
                 .addGap(15, 15, 15)
                 .addComponent(AnimalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1069,12 +1078,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(AnimalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnAgregar)
-                .addContainerGap(2243, Short.MAX_VALUE))
+                .addContainerGap(2302, Short.MAX_VALUE))
         );
 
         Panel.addTab("Animales", panAnimales);
 
         panelContenedor.setLayout(new java.awt.CardLayout());
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setText("Padrinos");
+
+        btnAgregarPadrino.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnAgregarPadrino.setText("Agregar padrino");
+        btnAgregarPadrino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPadrinoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelVistaPadrinosLayout = new javax.swing.GroupLayout(PanelVistaPadrinos);
+        PanelVistaPadrinos.setLayout(PanelVistaPadrinosLayout);
+        PanelVistaPadrinosLayout.setHorizontalGroup(
+            PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                        .addGap(477, 477, 477)
+                        .addComponent(jLabel8))
+                    .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(btnAgregarPadrino)))
+                .addContainerGap(487, Short.MAX_VALUE))
+        );
+        PanelVistaPadrinosLayout.setVerticalGroup(
+            PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel8)
+                .addGap(347, 347, 347)
+                .addComponent(btnAgregarPadrino)
+                .addContainerGap(1185, Short.MAX_VALUE))
+        );
+
+        panelContenedor.add(PanelVistaPadrinos, "card3");
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel1.setText("Registro Padrino");
@@ -1082,131 +1128,195 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel2.setText("Nombre:");
 
-        jTextField1.setText("Ingrese nombre...");
-
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel3.setText("Valor de donacion:");
-
-        jTextField2.setText("Ingrese monto...");
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel4.setText("Frecuencia de la donacion:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbFrecuenciaDonacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbFrecuenciaDonacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbFrecuenciaDonacionActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel5.setText("Metodo de pago:");
 
-        CalBtnGroupMetodoPago.add(jRadioButton1);
-        jRadioButton1.setText("Tarjeta de credito");
+        CalBtnGroupMetodoPago.add(rbTarjetaCredito);
+        rbTarjetaCredito.setText("Tarjeta de credito");
 
-        CalBtnGroupMetodoPago.add(jRadioButton2);
-        jRadioButton2.setText("Transferencia bancaria");
+        CalBtnGroupMetodoPago.add(rbTransferenciaBancaria);
+        rbTransferenciaBancaria.setText("Transferencia bancaria");
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel6.setText("Moneda:");
 
-        CalBtnGroupMoneda.add(jRadioButton3);
-        jRadioButton3.setText("Dolares");
+        CalBtnGroupMoneda.add(rbDolares);
+        rbDolares.setText("Dolares");
 
-        CalBtnGroupMoneda.add(jRadioButton4);
-        jRadioButton4.setText("Pesos Uruguayos");
+        CalBtnGroupMoneda.add(rbPesos);
+        rbPesos.setText("Pesos Uruguayos");
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel7.setText("Animales a apadrinar:");
+
+        cbAnimalesApadrinar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAnimalesApadrinar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAnimalesApadrinarActionPerformed(evt);
+            }
+        });
+
+        btnRegistroPadrino.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnRegistroPadrino.setText("Registro");
+        btnRegistroPadrino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroPadrinoActionPerformed(evt);
+            }
+        });
+
+        btnAtrasPadrino.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnAtrasPadrino.setText("Atras");
+        btnAtrasPadrino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasPadrinoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel9.setText("Apellido:");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel10.setText("Telefono:");
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel11.setText("Email:");
+
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel12.setText("Ciudad:");
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel13.setText("Pais:");
 
         javax.swing.GroupLayout PanelRegistroLayout = new javax.swing.GroupLayout(PanelRegistro);
         PanelRegistro.setLayout(PanelRegistroLayout);
         PanelRegistroLayout.setHorizontalGroup(
             PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                .addContainerGap(382, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(358, 358, 358))
             .addGroup(PanelRegistroLayout.createSequentialGroup()
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel2)
-                        .addGap(106, 106, 106))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(65, 65, 65))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(72, 72, 72))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRegistroLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(106, 106, 106)))))
-                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(223, 223, 223)
+                        .addComponent(jLabel1))
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(71, 71, 71)
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(PanelRegistroLayout.createSequentialGroup()
+                                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbDolares)
+                                    .addComponent(rbTarjetaCredito))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbTransferenciaBancaria)
+                                    .addComponent(rbPesos)))
+                            .addComponent(txtFieldApellidoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldNombrePadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldTelefonoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldEmailPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldCiudadPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldPaisPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldValorDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbFrecuenciaDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAnimalesApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelRegistroLayout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAdvertenciaRegistroPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PanelRegistroLayout.createSequentialGroup()
+                                .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         PanelRegistroLayout.setVerticalGroup(
             PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelRegistroLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelRegistroLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel2))
-                    .addGroup(PanelRegistroLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel1)
+                        .addGap(49, 49, 49)
                         .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                            .addComponent(jLabel2)
+                            .addComponent(txtFieldNombrePadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldApellidoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldTelefonoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldEmailPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldCiudadPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFieldPaisPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(txtFieldValorDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(cbFrecuenciaDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(rbTarjetaCredito)
+                            .addComponent(rbTransferenciaBancaria))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6))
+                    .addGroup(PanelRegistroLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbDolares)
+                            .addComponent(rbPesos))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(26, 26, 26)
+                    .addComponent(jLabel7)
+                    .addComponent(cbAnimalesApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(lblAdvertenciaRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(18, 18, 18)
-                .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
-                .addContainerGap(1157, Short.MAX_VALUE))
+                    .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1056, Short.MAX_VALUE))
         );
 
         panelContenedor.add(PanelRegistro, "card2");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1005, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1576, Short.MAX_VALUE)
-        );
-
-        panelContenedor.add(jPanel1, "card3");
 
         javax.swing.GroupLayout panPadrinosLayout = new javax.swing.GroupLayout(panPadrinos);
         panPadrinos.setLayout(panPadrinosLayout);
@@ -1277,23 +1387,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 AnimalLblAdvertencia.setText("Por favor ingrese una altura válida");
             } else if (AnimalSpinPeso.getValue().equals(0.0)) {
                 AnimalLblAdvertencia.setText("Por favor ingrese un peso válido");
-            }else if (this.cbTipoAnimal.getSelectedItem() == null){
+            }else if (this.tipoAnimal.trim().isEmpty()){
                 this.AnimalLblAdvertencia.setText("Por favor, ingrese un tipo de animal");
                 
             } else {
-                Animal animal = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
+                Animal perroAgregar = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
                 if (rutaImagenAgregar.equals("")) {
                     try {
-                        animal.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+                        perroAgregar.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
                     } catch (IOException ex) {
                         System.out.println(ex);
                     }
                 } else {
                     File imagen = new File(rutaImagenAgregar);
-                    animal.setFoto(crearIcono(imagen, 100));
+                    perroAgregar.setFoto(crearIcono(imagen, 100));
                     rutaImagenAgregar = "";
                 }
-                sistema.agregarAnimal(animal);
+                sistema.AnadirPerro(perroAgregar);
                 AnimalTxtNombre.setText("");
                 AnimalSpinPeso.setValue((Object) 0.0);
                 AnimalSpinAltura.setValue((Object) 0.0);
@@ -1398,7 +1508,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         AnimalLblFotoBoton.setVisible(false);
         AnimalBtnExaminar.setVisible(false);
         agregarPerroSeleccionado = false;
-        this.AnimalBtnAgregar.setVisible(false);
     }
 
     private void mostrarEditarPerro() {
@@ -1526,20 +1635,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         AnimalComboPerros.setSelectedIndex(pos);
     }//GEN-LAST:event_AnimalBtnGuardarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbFrecuenciaDonacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFrecuenciaDonacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbFrecuenciaDonacionActionPerformed
 
     private void btnOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtroActionPerformed
         String tipo = JOptionPane.showInputDialog(this, "Ingrese un tipo de animal", "Tipo De Animal", JOptionPane.QUESTION_MESSAGE);
-        if(tipo != null){
+        if(!tipo.trim().isEmpty()){
             this.tipoAnimal = tipo;
-            this.sistema.agregarTipo(tipo);
-            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
-            this.cbTipoAnimal.setSelectedIndex(this.sistema.getListaTipoAnimales().size()-1);
+            this.tipoAnimales.add(tipo);
+            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.tipoAnimales.toArray()));
         }
     }//GEN-LAST:event_btnOtroActionPerformed
-    
+
     private void cbTipoAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAnimalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoAnimalActionPerformed
@@ -2036,6 +2144,119 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CalLblFechaResp.setText(dia + "/" + mes + "/" + ano);
         fechaSeleccionada = new Fecha(dia, mes, ano);
     }//GEN-LAST:event_CalDayChooserPropertyChange
+
+    private void cbAnimalesApadrinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnimalesApadrinarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAnimalesApadrinarActionPerformed
+
+    private void btnRegistroPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroPadrinoActionPerformed
+            // TODO add your handling code here:
+            if(txtFieldNombrePadrino.getText().equals("") || txtFieldNombrePadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un nombre.");
+            }
+            else if(txtFieldValorDonacion.getText().equals("") || txtFieldValorDonacion.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un valor de donacion.");
+            }
+            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una frecuencia de donacion.");
+            }
+            else if(CalBtnGroupMetodoPago.getSelection() == null){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un metodo de pago.");
+            }
+            else if(CalBtnGroupMoneda.getSelection() == null){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una moneda de pago.");
+            }
+            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un animal a apadrinar");
+            }
+            else if(txtFieldApellidoPadrino.getText().equals("") || txtFieldApellidoPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un apellido.");
+            }
+            else if(txtFieldTelefonoPadrino.getText().equals("") || txtFieldTelefonoPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un telefono.");
+            }
+            else if(txtFieldEmailPadrino.getText().equals("") || txtFieldEmailPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un correo electronico.");
+            }else if(txtFieldCiudadPadrino.getText().equals("") || txtFieldCiudadPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar una ciudad.");
+            }
+            else if(txtFieldPaisPadrino.getText().equals("") || txtFieldPaisPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un pais.");
+            }
+            else{
+                String nombrePadrino = this.txtFieldNombrePadrino.getText();
+                String apellido = this.txtFieldApellidoPadrino.getText();
+                int telefono = Integer.parseInt(this.txtFieldTelefonoPadrino.getText());
+                String email = this.txtFieldEmailPadrino.getText();
+                String ciudad = this.txtFieldCiudadPadrino.getText();
+                String pais = this.txtFieldPaisPadrino.getText();
+                int valorDonacion = Integer.parseInt(this.txtFieldValorDonacion.getText());
+                
+                String frecuencia = (String)cbFrecuenciaDonacion.getSelectedItem();
+                String metodoPago;
+                if(rbTarjetaCredito.isSelected()){
+                    metodoPago = "Tarjeta de Credito";
+                }
+                else{
+                    metodoPago = "Transaccion bancaria";
+                }
+                String moneda;
+                if(rbDolares.isSelected()){
+                    moneda = "dolares";
+                }
+                else{
+                    moneda = "pesos uruguayos";
+                }
+                Animal animalApadrinado = sistema.buscarPerroPorNombre((String)cbAnimalesApadrinar.getSelectedItem());
+                Padrino p = new Padrino(nombrePadrino, apellido, telefono, email,ciudad, pais, valorDonacion, metodoPago, moneda, frecuencia);
+                sistema.agregarPadrino(p);
+                cambiarPanel(PanelVistaPadrinos);
+            }
+            
+            
+            
+    }//GEN-LAST:event_btnRegistroPadrinoActionPerformed
+
+    private void setearListaFrecuencias(){
+        if(cbFrecuenciaDonacion.getItemCount() > 0){
+            cbFrecuenciaDonacion.removeAllItems();
+        }
+        cbFrecuenciaDonacion.addItem("solo esta vez");
+        cbFrecuenciaDonacion.addItem("mensual");
+        cbFrecuenciaDonacion.addItem("trimestral");
+        cbFrecuenciaDonacion.addItem("anual");
+    }
+    
+    private void setearListaAnimalesAApadrinar(){
+        if(cbAnimalesApadrinar.getItemCount() > 0){
+            cbAnimalesApadrinar.removeAllItems();
+        }
+        for(int i = 0; i <sistema.getPerros().size();i++){
+            Animal a = sistema.getPerros().get(i);
+            if(!a.estaAdoptado()){
+                cbAnimalesApadrinar.addItem(a.getNombre());
+            }
+        }
+    }
+    
+    public void cambiarPanel(JPanel panel){
+        this.panelContenedor.removeAll();
+        this.panelContenedor.add(panel);
+        this.panelContenedor.repaint();
+        this.panelContenedor.revalidate();
+    }
+    
+    
+    private void btnAgregarPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPadrinoActionPerformed
+        setearListaFrecuencias();
+        setearListaAnimalesAApadrinar();
+        //cambiar al panel de registro
+        cambiarPanel(PanelRegistro);
+    }//GEN-LAST:event_btnAgregarPadrinoActionPerformed
+
+    private void btnAtrasPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasPadrinoActionPerformed
+        cambiarPanel(PanelVistaPadrinos);
+    }//GEN-LAST:event_btnAtrasPadrinoActionPerformed
      
      
     private void cambiarVisibilidadVeterinaria(boolean opcionCombo, boolean usaVeterinaria) {
@@ -2317,6 +2538,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser CalYearChooser;
     private javax.swing.JTabbedPane Panel;
     private javax.swing.JPanel PanelRegistro;
+    private javax.swing.JPanel PanelVistaPadrinos;
     private javax.swing.JLabel PerroLblFoto;
     private javax.swing.JButton UsuarioBtnAgregar;
     private javax.swing.JComboBox<String> UsuarioComboUsuarios;
@@ -2333,28 +2555,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane UsuarioScrollFechas;
     private javax.swing.JTextField UsuarioTxtMail;
     private javax.swing.JTextField UsuarioTxtNombre;
+    private javax.swing.JButton btnAgregarPadrino;
+    private javax.swing.JButton btnAtrasPadrino;
     private javax.swing.JButton btnOtro;
+    private javax.swing.JButton btnRegistroPadrino;
+    private javax.swing.JComboBox<String> cbAnimalesApadrinar;
+    private javax.swing.JComboBox<String> cbFrecuenciaDonacion;
     private javax.swing.JComboBox<String> cbTipoAnimal;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblAdvertenciaRegistroPadrino;
     private javax.swing.JLabel lblTipoAnimal;
     private javax.swing.JPanel panAnimales;
     private javax.swing.JPanel panCalendario;
     private javax.swing.JPanel panPadrinos;
     private javax.swing.JPanel panUsuarios;
     private javax.swing.JPanel panelContenedor;
+    private javax.swing.JRadioButton rbDolares;
+    private javax.swing.JRadioButton rbPesos;
+    private javax.swing.JRadioButton rbTarjetaCredito;
+    private javax.swing.JRadioButton rbTransferenciaBancaria;
+    private javax.swing.JTextField txtFieldApellidoPadrino;
+    private javax.swing.JTextField txtFieldCiudadPadrino;
+    private javax.swing.JTextField txtFieldEmailPadrino;
+    private javax.swing.JTextField txtFieldNombrePadrino;
+    private javax.swing.JTextField txtFieldPaisPadrino;
+    private javax.swing.JTextField txtFieldTelefonoPadrino;
+    private javax.swing.JTextField txtFieldValorDonacion;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

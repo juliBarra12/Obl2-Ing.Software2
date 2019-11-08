@@ -5,6 +5,8 @@
  */
 package dominio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author juli
@@ -12,14 +14,28 @@ package dominio;
 public class Padrino {
     
     private String nombre;
-    private Animal apadrinado;
+    private String apellido;
+    private int telefono;
+    private String email;
+    private String ciudad;
+    private String pais;
+    private ArrayList<Animal> apadrinados;
     private int montoDonacion;
     private String metodoPago;
     private String moneda;
     private String frecuenciaDonacion;
     
-    public Padrino(String nombre, Animal animal, int monto, String metodo, String moneda, String frecuencia){
-        this.setNombre(nombre);
+    public Padrino(String nombre, String apellido, int telefono, String email, String ciudad, String pais, int monto, String metodo, String moneda, String frecuencia){
+        setNombre(nombre);
+        setApellido(apellido);
+        setTelefono(telefono);
+        setEmail(email);
+        setCiudad(ciudad);
+        setPais(pais);
+        setMonto(monto);
+        setMetodoPago(metodo);
+        setMoneda(moneda);
+        setFrecuencia(frecuencia);
     }
     
     public void setNombre(String unNombre){
@@ -30,12 +46,52 @@ public class Padrino {
         return nombre;
     }
     
-    public void setAnimalApadrinado(Animal mascota){
-        apadrinado = mascota;
+    public void setApellido(String elApellido){
+        apellido = elApellido;
     }
     
-    public Animal getApadrinado(){
-        return apadrinado;
+    public String getApellido(){
+        return apellido;
+    }
+    
+    public void setTelefono(int elTelefono){
+        telefono = elTelefono;
+    }
+    
+    public int getTelefono(){
+        return telefono;
+    }
+    
+    public void setEmail(String elEmail){
+        email = elEmail;
+    }
+    
+    public String getEmail(){
+        return email;
+    }
+    
+    public void setCiudad(String laCiudad){
+        ciudad = laCiudad;
+    }
+    
+    public String getCiudad(){
+        return ciudad;
+    }
+    
+    public void setPais(String elPais){
+        pais = elPais;
+    }
+    
+    public String getPais(){
+        return pais;
+    }
+    
+    public void addAnimalApadrinado(Animal mascota){
+        apadrinados.add(mascota);
+    }
+    
+    public ArrayList<Animal> getApadrinados(){
+        return apadrinados;
     }
     
     public void setMonto(int monto){
@@ -71,8 +127,9 @@ public class Padrino {
     }
     
     @Override
+    //Agregar los animales apadrinados
     public String toString(){
-        return"Nombre del padrino: "+nombre+"\n Animal a apadrinar: "+apadrinado.getNombre()+" \n Monto a donar: "
+        return"Nombre del padrino: "+nombre+" \n Monto a donar: "
                 +montoDonacion+" en "+moneda+" "+frecuenciaDonacion+"\n El metodo de pago utilizado es: "+metodoPago+" ";
     }
     
