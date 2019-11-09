@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VisitaVeterinaria.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProyectoAnimal&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dominio</a> &gt; <span class="el_source">VisitaVeterinaria.java</span></div><h1>VisitaVeterinaria.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dominio;
+
+import java.io.Serializable;
+import java.time.LocalTime;
+
+/**
+ *
+ * @author marce
+ */
+public class VisitaVeterinaria extends Actividad implements Serializable {
+
+    private String nombre;
+    private LocalTime hora;
+    private Usuario responsable;
+    private Animal mascota;
+    private boolean fueRealizado;
+    private Fecha fecha;
+    private Veterinaria veterinaria;
+    private String motivo;
+
+<span class="fc" id="L26">    public VisitaVeterinaria() {</span>
+<span class="fc" id="L27">        this.nombre = &quot;Sin-Nombre&quot;;</span>
+<span class="fc" id="L28">        this.hora = LocalTime.now();</span>
+<span class="fc" id="L29">        this.responsable = new Usuario();</span>
+<span class="fc" id="L30">        this.mascota = new Animal();</span>
+<span class="fc" id="L31">        this.fueRealizado = false;</span>
+<span class="fc" id="L32">        this.fecha = new Fecha();</span>
+<span class="fc" id="L33">        this.veterinaria = new Veterinaria();</span>
+<span class="fc" id="L34">        this.motivo = &quot;Sin-Motivo&quot;;</span>
+<span class="fc" id="L35">    }</span>
+
+<span class="fc" id="L37">    public VisitaVeterinaria(String nombre, LocalTime hora, Usuario responsable, Animal mascota, boolean fueRealizado, Fecha fecha, Veterinaria veterinaria, String motivo) {</span>
+<span class="fc" id="L38">        setNombre(nombre);</span>
+<span class="fc" id="L39">        this.hora = hora;</span>
+<span class="fc" id="L40">        this.responsable = responsable;</span>
+<span class="fc" id="L41">        this.mascota = mascota;</span>
+<span class="fc" id="L42">        this.fueRealizado = fueRealizado;</span>
+<span class="fc" id="L43">        this.fecha = fecha;</span>
+<span class="fc" id="L44">        this.veterinaria = veterinaria;</span>
+<span class="fc" id="L45">        setMotivo(motivo);</span>
+<span class="fc" id="L46">    }</span>
+
+    public String getMotivo() {
+<span class="fc" id="L49">        return motivo;</span>
+    }
+
+    public final void setMotivo(String motivo) {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if(motivo.equals(&quot;&quot;)){</span>
+<span class="fc" id="L54">            this.motivo = &quot;Sin-Motivo&quot;;</span>
+        }else{
+<span class="fc" id="L56">            this.motivo = motivo;</span>
+        }
+<span class="fc" id="L58">    }</span>
+
+    public Veterinaria getVeterinaria() {
+<span class="fc" id="L61">        return veterinaria;</span>
+    }
+
+    public void setVeterinaria(Veterinaria veterinaria) {
+<span class="fc" id="L65">        this.veterinaria = veterinaria;</span>
+<span class="fc" id="L66">    }</span>
+
+    @Override
+    public String getNombre() {
+<span class="fc" id="L70">        return this.nombre;</span>
+    }
+
+    public final void setNombre(String nombre) {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (nombre.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L75">            this.nombre = &quot;Sin-Nombre&quot;;</span>
+        } else {
+<span class="fc" id="L77">            this.nombre = nombre;</span>
+        }
+<span class="fc" id="L79">    }</span>
+
+    @Override
+    public LocalTime getHora() {
+<span class="fc" id="L83">        return this.hora;</span>
+    }
+
+    @Override
+    public void setHora(LocalTime hora) {
+<span class="fc" id="L88">        this.hora = hora;</span>
+<span class="fc" id="L89">    }</span>
+
+    @Override
+    public Usuario getUsuario() {
+<span class="fc" id="L93">        return this.responsable;</span>
+    }
+
+    @Override
+    public void setUsuario(Usuario responasble) {
+<span class="fc" id="L98">        this.responsable = responasble;</span>
+<span class="fc" id="L99">    }</span>
+
+    @Override
+    public Animal getMascota() {
+<span class="fc" id="L103">        return this.mascota;</span>
+    }
+
+    @Override
+    public void setMascota(Animal mascota) {
+<span class="fc" id="L108">        this.mascota = mascota;</span>
+<span class="fc" id="L109">    }</span>
+
+    @Override
+    public boolean getFueRealizado() {
+<span class="fc" id="L113">        return this.fueRealizado;</span>
+    }
+
+    @Override
+    public void setFueRealizado(boolean seCompleto) {
+<span class="fc" id="L118">        this.fueRealizado = seCompleto;</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if(fueRealizado)</span>
+<span class="fc" id="L120">            veterinaria.EliminarActividadAgendada(this);</span>
+<span class="fc" id="L121">    }</span>
+
+    @Override
+    public Fecha getFecha() {
+<span class="fc" id="L125">        return this.fecha;</span>
+    }
+
+    @Override
+    public void setFecha(Fecha fecha) {
+<span class="fc" id="L130">        this.fecha = fecha;</span>
+<span class="fc" id="L131">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L135">        return &quot;VisitaVeterinaria{&quot; + &quot;nombre=&quot; + nombre + &quot;, hora=&quot; + hora + &quot;, responsable=&quot; + responsable + &quot;, mascota=&quot; + mascota + &quot;, fueRealizado=&quot; + fueRealizado + &quot;, fecha=&quot; + fecha + &quot;, veterinaria=&quot; + veterinaria + '}';</span>
+    }
+
+  
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
