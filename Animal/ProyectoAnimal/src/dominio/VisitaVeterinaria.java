@@ -117,7 +117,7 @@ public class VisitaVeterinaria extends Actividad implements Serializable {
     public void setFueRealizado(boolean seCompleto) {
         this.fueRealizado = seCompleto;
         if(fueRealizado)
-            veterinaria.EliminarActividadAgendada(this);
+            veterinaria.eliminarActividadAgendada(this);
     }
 
     @Override

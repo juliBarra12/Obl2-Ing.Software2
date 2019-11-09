@@ -53,7 +53,7 @@ public class Veterinaria implements Serializable {
         this.actividadesAgendadas = actividadesAgendadas;
     }
 
-    public boolean AgendarActividad(VisitaVeterinaria act) {
+    public boolean agendarActividad(VisitaVeterinaria act) {
         int hora = act.getHora().getHour();
         if (hora >= horaInicial && hora <= horaFinal) {
             Fecha fecha = act.getFecha();
@@ -73,7 +73,7 @@ public class Veterinaria implements Serializable {
         return true;
     }
 
-    public void EliminarActividadAgendada(Actividad act) {
+    public void eliminarActividadAgendada(Actividad act) {
         if (actividadesAgendadas.contains(act)) {
             actividadesAgendadas.remove(act);
         }

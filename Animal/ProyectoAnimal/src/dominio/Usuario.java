@@ -58,4 +58,14 @@ public class Usuario implements Serializable {
         return "Nombre=" + nombre + ", mail=" + mail + '}';
     }
 
+    @Override
+    public boolean equals(Object o){
+        Usuario user = null;
+        if(o instanceof Usuario){
+            user = (Usuario)o;
+        }else {
+            return false;
+        }
+        return this.nombre.equals(user.getNombre());
+    }
 }
