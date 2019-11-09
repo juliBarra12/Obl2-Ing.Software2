@@ -240,8 +240,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panPadrinos = new javax.swing.JPanel();
         panelContenedor = new javax.swing.JPanel();
         PanelVistaPadrinos = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lblVistaPadrinos = new javax.swing.JLabel();
         btnAgregarPadrino = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblNombre = new javax.swing.JLabel();
+        lblApellido = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblCiudad = new javax.swing.JLabel();
+        lblPais = new javax.swing.JLabel();
+        lblDonacion = new javax.swing.JLabel();
+        lblNombreDelPadrino = new javax.swing.JLabel();
+        lblNombreDelPadrino1 = new javax.swing.JLabel();
+        lblNombreDelPadrino2 = new javax.swing.JLabel();
+        lblNombreDelPadrino3 = new javax.swing.JLabel();
+        lblNombreDelPadrino4 = new javax.swing.JLabel();
+        lblNombreDelPadrino5 = new javax.swing.JLabel();
+        lblNombreDelPadrino6 = new javax.swing.JLabel();
+        lblMetodo = new javax.swing.JLabel();
+        lblNombreDelPadrino7 = new javax.swing.JLabel();
+        lblAnimalesApadrinados = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListaAnimalesQueApadrina = new javax.swing.JList<>();
         PanelRegistro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -271,6 +291,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtFieldEmailPadrino = new javax.swing.JTextField();
         txtFieldCiudadPadrino = new javax.swing.JTextField();
         txtFieldPaisPadrino = new javax.swing.JTextField();
+        panAdopciones = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Pets");
@@ -834,7 +855,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(UsuarioLblUsuarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2316, Short.MAX_VALUE))
+                .addContainerGap(2494, Short.MAX_VALUE))
         );
 
         Panel.addTab("Usuarios", panUsuarios);
@@ -1049,7 +1070,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnOtro))))))
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(587, Short.MAX_VALUE))
         );
         panAnimalesLayout.setVerticalGroup(
             panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1078,15 +1099,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(AnimalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnAgregar)
-                .addContainerGap(2302, Short.MAX_VALUE))
+                .addContainerGap(2480, Short.MAX_VALUE))
         );
 
         Panel.addTab("Animales", panAnimales);
 
         panelContenedor.setLayout(new java.awt.CardLayout());
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setText("Padrinos");
+        lblVistaPadrinos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblVistaPadrinos.setText("Vista Padrinos");
 
         btnAgregarPadrino.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnAgregarPadrino.setText("Agregar padrino");
@@ -1096,6 +1117,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblNombre.setText("Nombre:");
+
+        lblApellido.setText("Apellido:");
+
+        lblTelefono.setText("Telefono:");
+
+        lblEmail.setText("Email:");
+
+        lblCiudad.setText("Ciudad:");
+
+        lblPais.setText("Pais:");
+
+        lblDonacion.setText("Donacion:");
+
+        lblNombreDelPadrino.setText("nombre");
+
+        lblNombreDelPadrino1.setText("apellido");
+
+        lblNombreDelPadrino2.setText("telefono");
+
+        lblNombreDelPadrino3.setText("email");
+
+        lblNombreDelPadrino4.setText("ciudad");
+
+        lblNombreDelPadrino5.setText("pais");
+
+        lblNombreDelPadrino6.setText("monto donacion + moneda + frecuencia");
+
+        lblMetodo.setText("Metodo de pago:");
+
+        lblNombreDelPadrino7.setText("metodo de pago");
+
+        lblAnimalesApadrinados.setText("Animales de los que es padrino:");
+
+        ListaAnimalesQueApadrina.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(ListaAnimalesQueApadrina);
+
         javax.swing.GroupLayout PanelVistaPadrinosLayout = new javax.swing.GroupLayout(PanelVistaPadrinos);
         PanelVistaPadrinos.setLayout(PanelVistaPadrinosLayout);
         PanelVistaPadrinosLayout.setHorizontalGroup(
@@ -1103,21 +1167,100 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
                 .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
-                        .addGap(477, 477, 477)
-                        .addComponent(jLabel8))
+                        .addGap(211, 211, 211)
+                        .addComponent(btnAgregarPadrino)
+                        .addGap(152, 152, 152)
+                        .addComponent(lblVistaPadrinos))
                     .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(btnAgregarPadrino)))
-                .addContainerGap(487, Short.MAX_VALUE))
+                        .addGap(488, 488, 488)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                                    .addComponent(lblPais)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNombreDelPadrino5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                                    .addComponent(lblCiudad)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNombreDelPadrino4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNombreDelPadrino1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                                        .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNombre)
+                                            .addComponent(lblApellido)
+                                            .addComponent(lblTelefono)
+                                            .addComponent(lblEmail))
+                                        .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                                                .addGap(74, 74, 74)
+                                                .addComponent(lblNombreDelPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVistaPadrinosLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNombreDelPadrino2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblNombreDelPadrino3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
+                                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDonacion)
+                                    .addComponent(lblMetodo))
+                                .addGap(28, 28, 28)
+                                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombreDelPadrino7)
+                                    .addComponent(lblNombreDelPadrino6)))
+                            .addComponent(lblAnimalesApadrinados)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(474, Short.MAX_VALUE))
         );
         PanelVistaPadrinosLayout.setVerticalGroup(
             PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVistaPadrinosLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel8)
-                .addGap(347, 347, 347)
-                .addComponent(btnAgregarPadrino)
-                .addContainerGap(1185, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregarPadrino)
+                    .addComponent(lblVistaPadrinos))
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre)
+                    .addComponent(lblNombreDelPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblApellido)
+                    .addComponent(lblNombreDelPadrino1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelefono)
+                    .addComponent(lblNombreDelPadrino2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(lblNombreDelPadrino3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCiudad)
+                    .addComponent(lblNombreDelPadrino4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPais)
+                    .addComponent(lblNombreDelPadrino5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDonacion)
+                    .addComponent(lblNombreDelPadrino6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMetodo)
+                    .addComponent(lblNombreDelPadrino7))
+                .addGap(18, 18, 18)
+                .addComponent(lblAnimalesApadrinados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1329, Short.MAX_VALUE))
         );
 
         panelContenedor.add(PanelVistaPadrinos, "card3");
@@ -1250,7 +1393,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(71, 71, 71)
                                 .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         PanelRegistroLayout.setVerticalGroup(
             PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1313,7 +1456,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1056, Short.MAX_VALUE))
+                .addContainerGap(1244, Short.MAX_VALUE))
         );
 
         panelContenedor.add(PanelRegistro, "card2");
@@ -1336,6 +1479,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
 
         Panel.addTab("Padrinos", panPadrinos);
+
+        javax.swing.GroupLayout panAdopcionesLayout = new javax.swing.GroupLayout(panAdopciones);
+        panAdopciones.setLayout(panAdopcionesLayout);
+        panAdopcionesLayout.setHorizontalGroup(
+            panAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1485, Short.MAX_VALUE)
+        );
+        panAdopcionesLayout.setVerticalGroup(
+            panAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2799, Short.MAX_VALUE)
+        );
+
+        Panel.addTab("Adopciones", panAdopciones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2536,6 +2692,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField CalTxtNombreResp;
     private javax.swing.JTextField CalTxtTipoAlimento;
     private com.toedter.calendar.JYearChooser CalYearChooser;
+    private javax.swing.JList<String> ListaAnimalesQueApadrina;
     private javax.swing.JTabbedPane Panel;
     private javax.swing.JPanel PanelRegistro;
     private javax.swing.JPanel PanelVistaPadrinos;
@@ -2562,6 +2719,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAnimalesApadrinar;
     private javax.swing.JComboBox<String> cbFrecuenciaDonacion;
     private javax.swing.JComboBox<String> cbTipoAnimal;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2573,10 +2731,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAdvertenciaRegistroPadrino;
+    private javax.swing.JLabel lblAnimalesApadrinados;
+    private javax.swing.JLabel lblApellido;
+    private javax.swing.JLabel lblCiudad;
+    private javax.swing.JLabel lblDonacion;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMetodo;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombreDelPadrino;
+    private javax.swing.JLabel lblNombreDelPadrino1;
+    private javax.swing.JLabel lblNombreDelPadrino2;
+    private javax.swing.JLabel lblNombreDelPadrino3;
+    private javax.swing.JLabel lblNombreDelPadrino4;
+    private javax.swing.JLabel lblNombreDelPadrino5;
+    private javax.swing.JLabel lblNombreDelPadrino6;
+    private javax.swing.JLabel lblNombreDelPadrino7;
+    private javax.swing.JLabel lblPais;
+    private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTipoAnimal;
+    private javax.swing.JLabel lblVistaPadrinos;
+    private javax.swing.JPanel panAdopciones;
     private javax.swing.JPanel panAnimales;
     private javax.swing.JPanel panCalendario;
     private javax.swing.JPanel panPadrinos;
