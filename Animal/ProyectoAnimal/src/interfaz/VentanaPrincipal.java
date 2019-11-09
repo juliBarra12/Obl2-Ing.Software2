@@ -54,9 +54,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal(Sistema sis) {
         sistema = sis;
         fechaSeleccionada = new Fecha();
-        this.tipoAnimal = "";
-        this.tipoAnimales = this.sistema.getListaTipoAnimales();
-        this.cbTipoAnimal = new JComboBox(this.tipoAnimales.toArray());
         initComponents();
         this.setLocationRelativeTo(null);
         try {
@@ -87,19 +84,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         CalPanRuta.setVisible(false);
         this.setSize(940, 582);
+        this.tipoAnimal = "";
+        this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
+        this.AnimalComboPerros.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            sistema.serializar(sistema);
+            System.exit(0);
+        }
+        });
         
     }
 
     public void resetearPestanaPerros() {
         setearListaPerros();
         if (AnimalComboPerros.getItemCount() != 0) {
-            Animal perroSeleccionado = sistema.buscarPerroPorNombre(AnimalComboPerros.getSelectedItem().toString());
-            AnimalLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());
-            AnimalLblPeso.setText("Pesa:       " + perroSeleccionado.getPeso());
-            AnimalLblAltura.setText("Mide:       " + perroSeleccionado.getAltura());
-            AnimalLblComentarios.setText("" + perroSeleccionado.getComentarios());
-            PerroLblFoto.setIcon(perroSeleccionado.getFoto());
+            Animal animal = sistema.buscarPerroPorNombre(AnimalComboPerros.getSelectedItem().toString());
+            AnimalLblNombre.setText(animal.getNombre().toUpperCase());
+            AnimalLblPeso.setText("Pesa:       " + animal.getPeso());
+            AnimalLblAltura.setText("Mide:       " + animal.getAltura());
+            AnimalLblComentarios.setText("" + animal.getComentarios());
+            PerroLblFoto.setIcon(animal.getFoto());
             AnimalBtnEditar.setVisible(true);
+            this.lblEstadoAdopcion.setText(animal.estadoAdopcion());
+            
         } else {
             AnimalLblNombre.setText("Nombre:");
             AnimalLblPeso.setText("Peso:");
@@ -107,6 +117,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             AnimalLblComentarios.setText("Comentarios:");
             PerroLblFoto.setIcon(crearIcono("/images/perroPorDefecto.png", 100));
             AnimalBtnEditar.setVisible(false);
+            this.lblEstadoAdopcion.setVisible(false);
+            
         }
         ocultarAgregarPerro();
         rutaImagenAgregar = "";
@@ -237,6 +249,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cbTipoAnimal = new javax.swing.JComboBox<>();
         lblTipoAnimal = new javax.swing.JLabel();
         btnOtro = new javax.swing.JButton();
+        lblEstadoAdopcion = new javax.swing.JLabel();
         panPadrinos = new javax.swing.JPanel();
         panelContenedor = new javax.swing.JPanel();
         PanelVistaPadrinos = new javax.swing.JPanel();
@@ -834,7 +847,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(UsuarioLblUsuarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(UsuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2316, Short.MAX_VALUE))
+                .addContainerGap(2322, Short.MAX_VALUE))
         );
 
         Panel.addTab("Usuarios", panUsuarios);
@@ -1030,7 +1043,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(22, 22, 22)))
                 .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panAnimalesLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
+                        .addGap(266, 266, 266)
                         .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(AnimalBtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AnimalBtnAgregar)))
@@ -1039,6 +1052,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panAnimalesLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
+                                .addComponent(lblEstadoAdopcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(AnimalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panAnimalesLayout.createSequentialGroup()
                                 .addComponent(AnimalPanInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1049,7 +1064,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(cbTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnOtro))))))
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(599, Short.MAX_VALUE))
         );
         panAnimalesLayout.setVerticalGroup(
             panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1072,13 +1087,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(lblTipoAnimal))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOtro)))
-                .addGap(15, 15, 15)
-                .addComponent(AnimalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panAnimalesLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(AnimalLblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAnimalesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEstadoAdopcion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AnimalBtnAgregar)
-                .addContainerGap(2302, Short.MAX_VALUE))
+                .addContainerGap(2306, Short.MAX_VALUE))
         );
 
         Panel.addTab("Animales", panAnimales);
@@ -1325,14 +1345,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(panPadrinosLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
         panPadrinosLayout.setVerticalGroup(
             panPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPadrinosLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(949, Short.MAX_VALUE))
+                .addContainerGap(959, Short.MAX_VALUE))
         );
 
         Panel.addTab("Padrinos", panPadrinos);
@@ -1378,10 +1398,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AnimalTxtNombreActionPerformed
 
     private void AnimalBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnimalBtnAgregarActionPerformed
-        if (agregarPerroSeleccionado == false) {
+        if(this.cbTipoAnimal.getSelectedItem() != null){
+            this.tipoAnimal = this.cbTipoAnimal.getSelectedItem().toString();
+        }
+        
+        if (!agregarPerroSeleccionado) {
             mostrarAgregarPerro();
         } else {
-            if (AnimalTxtNombre.getText().equals("")) {
+            if (AnimalTxtNombre.getText().trim().isEmpty()) {
                 AnimalLblAdvertencia.setText("Por favor ingrese un nombre");
             } else if (AnimalSpinAltura.getValue().equals(0)) {
                 AnimalLblAdvertencia.setText("Por favor ingrese una altura válida");
@@ -1391,19 +1415,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 this.AnimalLblAdvertencia.setText("Por favor, ingrese un tipo de animal");
                 
             } else {
-                Animal perroAgregar = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
+                
+                Animal animal = new Animal(AnimalTxtNombre.getText(),this.tipoAnimal, Integer.parseInt(AnimalSpinAltura.getValue().toString()), Double.parseDouble(AnimalSpinPeso.getValue().toString()), AnimaltxtComentarios.getText());
+                if(!this.sistema.existeAnimal(animal)){
                 if (rutaImagenAgregar.equals("")) {
                     try {
-                        perroAgregar.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+                        animal.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
                     } catch (IOException ex) {
                         System.out.println(ex);
                     }
                 } else {
                     File imagen = new File(rutaImagenAgregar);
-                    perroAgregar.setFoto(crearIcono(imagen, 100));
+                    animal.setFoto(crearIcono(imagen, 100));
                     rutaImagenAgregar = "";
                 }
-                sistema.AnadirPerro(perroAgregar);
+                sistema.agregarAnimal(animal);
                 AnimalTxtNombre.setText("");
                 AnimalSpinPeso.setValue((Object) 0.0);
                 AnimalSpinAltura.setValue((Object) 0.0);
@@ -1411,10 +1437,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 AnimalLblAdvertencia.setText("");
                 ocultarAgregarPerro();
                 setearListaPerros();
+                
+            }else{
+                 this.AnimalLblAdvertencia.setText("Ese nombre ya existe, por favor ingrese otro");   
+                }
             }
-        }
+         }
     }//GEN-LAST:event_AnimalBtnAgregarActionPerformed
+    private void mostrarAgregarPerro() {
+        agregarPerroSeleccionado = true;
+        AnimalLblNombre.setText("Nombre:");
+        AnimalLblPeso.setText("Peso:");
+        AnimalLblAltura.setText("Altura:");
+        AnimalLblComentarios.setText("Comentarios:");
+        //PerroLblFoto.setIcon(crearIcono("/images/perroPorDefecto.png", 100));
+        AnimalTxtNombre.setVisible(true);
+        AnimalSpinPeso.setVisible(true);
+        AnimalSpinAltura.setVisible(true);
+        AnimaltxtComentarios.setVisible(true);
+        AnimalLblFotoBoton.setVisible(true);
+        AnimalBtnExaminar.setVisible(true);
+        this.lblEstadoAdopcion.setVisible(false);
+    }
 
+    private void ocultarAgregarPerro() {
+        this.agregarPerroSeleccionado = false;
+        AnimalTxtNombre.setVisible(false);
+        AnimalTxtNombre.setText("");
+        AnimalSpinPeso.setVisible(false);
+        AnimalSpinPeso.setValue((Object) 0.0);
+        AnimalSpinAltura.setVisible(false);
+        AnimalSpinAltura.setValue((Object) 0.0);
+        AnimaltxtComentarios.setVisible(false);
+        AnimaltxtComentarios.setText("");
+        AnimalLblFotoBoton.setVisible(false);
+        AnimalBtnExaminar.setVisible(false);
+        this.lblEstadoAdopcion.setVisible(true);
+        
+    }
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {
@@ -1481,34 +1541,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void mostrarAgregarPerro() {
-        agregarPerroSeleccionado = true;
-        AnimalLblNombre.setText("Nombre:");
-        AnimalLblPeso.setText("Peso:");
-        AnimalLblAltura.setText("Altura:");
-        AnimalLblComentarios.setText("Comentarios:");
-        PerroLblFoto.setIcon(crearIcono("/images/perroPorDefecto.png", 100));
-        AnimalTxtNombre.setVisible(true);
-        AnimalSpinPeso.setVisible(true);
-        AnimalSpinAltura.setVisible(true);
-        AnimaltxtComentarios.setVisible(true);
-        AnimalLblFotoBoton.setVisible(true);
-        AnimalBtnExaminar.setVisible(true);
-    }
 
-    private void ocultarAgregarPerro() {
-        AnimalTxtNombre.setVisible(false);
-        AnimalTxtNombre.setText("");
-        AnimalSpinPeso.setVisible(false);
-        AnimalSpinPeso.setValue((Object) 0.0);
-        AnimalSpinAltura.setVisible(false);
-        AnimalSpinAltura.setValue((Object) 0.0);
-        AnimaltxtComentarios.setVisible(false);
-        AnimaltxtComentarios.setText("");
-        AnimalLblFotoBoton.setVisible(false);
-        AnimalBtnExaminar.setVisible(false);
-        agregarPerroSeleccionado = false;
-    }
 
     private void mostrarEditarPerro() {
         AnimalBtnGuardar.setVisible(true);
@@ -1530,6 +1563,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         AnimaltxtComentarios.setVisible(true);
         AnimalLblFotoBoton.setVisible(true);
         AnimalBtnExaminar.setVisible(true);
+        this.lblEstadoAdopcion.setVisible(true);
+        
     }
 
     private void setearListaPerros() {
@@ -1539,9 +1574,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (CalComboAnimal.getItemCount() > 0) {
             CalComboAnimal.removeAllItems();
         }
-        for (int i = 0; i < sistema.getPerros().size(); i++) {
-            AnimalComboPerros.addItem(sistema.getPerros().get(i).getNombre());
-            CalComboAnimal.addItem(sistema.getPerros().get(i).getNombre());
+        for (int i = 0; i < sistema.getAnimales().size(); i++) {
+            AnimalComboPerros.addItem(sistema.getAnimales().get(i).getNombre());
+            CalComboAnimal.addItem(sistema.getAnimales().get(i).getNombre());
         }
 
     }
@@ -1588,15 +1623,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void AnimalComboPerrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnimalComboPerrosActionPerformed
         ocultarAgregarPerro();
         if (AnimalComboPerros.getItemCount() > 0) {
-            Animal perroSeleccionado = sistema.buscarPerroPorNombre(AnimalComboPerros.getSelectedItem().toString());
-            AnimalLblNombre.setText(perroSeleccionado.getNombre().toUpperCase());
-            AnimalLblPeso.setText("Pesa:       " + perroSeleccionado.getPeso());
-            AnimalLblAltura.setText("Mide:       " + perroSeleccionado.getAltura());
-            AnimalLblComentarios.setText("" + perroSeleccionado.getComentarios());
-            PerroLblFoto.setIcon(perroSeleccionado.getFoto());
+            Animal animal = sistema.buscarPerroPorNombre(AnimalComboPerros.getSelectedItem().toString());
+            AnimalLblNombre.setText(animal.getNombre().toUpperCase());
+            AnimalLblPeso.setText("Pesa:       " + animal.getPeso());
+            AnimalLblAltura.setText("Mide:       " + animal.getAltura());
+            AnimalLblComentarios.setText("" + animal.getComentarios());
+            PerroLblFoto.setIcon(animal.getFoto());
             AnimalBtnGuardar.setVisible(false);
             AnimalBtnEditar.setVisible(true);
             AnimalBtnAgregar.setVisible(true);
+            this.lblEstadoAdopcion.setText(animal.estadoAdopcion());
         } else {
             AnimalLblNombre.setText("Nombre: ");
             AnimalLblPeso.setText("Peso ");
@@ -1641,10 +1677,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtroActionPerformed
         String tipo = JOptionPane.showInputDialog(this, "Ingrese un tipo de animal", "Tipo De Animal", JOptionPane.QUESTION_MESSAGE);
-        if(!tipo.trim().isEmpty()){
-            this.tipoAnimal = tipo;
-            this.tipoAnimales.add(tipo);
-            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.tipoAnimales.toArray()));
+        if(tipo != null){
+            this.tipoAnimal = tipo.toLowerCase();
+            this.sistema.agregarTipo(tipo);
+            this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
         }
     }//GEN-LAST:event_btnOtroActionPerformed
 
@@ -2231,8 +2267,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(cbAnimalesApadrinar.getItemCount() > 0){
             cbAnimalesApadrinar.removeAllItems();
         }
-        for(int i = 0; i <sistema.getPerros().size();i++){
-            Animal a = sistema.getPerros().get(i);
+        for(int i = 0; i <sistema.getAnimales().size();i++){
+            Animal a = sistema.getAnimales().get(i);
             if(!a.estaAdoptado()){
                 cbAnimalesApadrinar.addItem(a.getNombre());
             }
@@ -2271,11 +2307,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private ImageIcon crearIcono(String ruta, int tamano) {
         ImageIcon retorno = null;
+        
         try {
             retorno = new ImageIcon(ImageIO.read(getClass().getResource(ruta)).getScaledInstance(tamano, -1, Image.SCALE_SMOOTH));
         } catch (IOException e) {
             System.out.println(e);
         }
+        
         return retorno;
     }
 
@@ -2576,6 +2614,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblAdvertenciaRegistroPadrino;
+    private javax.swing.JLabel lblEstadoAdopcion;
     private javax.swing.JLabel lblTipoAnimal;
     private javax.swing.JPanel panAnimales;
     private javax.swing.JPanel panCalendario;

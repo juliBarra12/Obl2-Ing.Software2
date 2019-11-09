@@ -13,6 +13,7 @@ public class Animal implements Serializable {
     private boolean adoptado;
     private String tipo;
 
+    
     public Animal(String nombre, String tipo, double altura, double peso, String comentarios) { //Sin foto
         setNombre(nombre);
         setAltura(altura);
@@ -23,6 +24,11 @@ public class Animal implements Serializable {
         setTipo(tipo);
     }
 
+    public String estadoAdopcion(){
+        if(this.adoptado) return "Animal Adoptado";
+        return "Animal NO adoptado";
+    }
+    
     public Animal() { //Sin foto
         this.nombre = "Sin-Nombre";
         this.altura = 0;
@@ -108,9 +114,17 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "Perro{" + "nombre=" + nombre + ", altura=" + altura + ", peso=" + peso + ", comentarios=" + comentarios + '}';
+        return this.nombre;
     }
-
-    
+    @Override
+    public boolean equals(Object o){
+        Animal a = null;
+        if(o instanceof Animal){ 
+           a = (Animal)o;
+        }else{
+            return false;
+        }
+        return this.nombre.equals(a.getNombre());
+    }
 
 }
