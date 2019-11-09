@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Sistema implements Serializable {
 
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Animal> mascotas;
+    private ArrayList<Animal> animales;
     private final ArrayList<Actividad> listaActividades;
     private ArrayList<Fecha> listaFechas;
     private ArrayList<Veterinaria> listaVeterinarias;
@@ -26,10 +26,12 @@ public class Sistema implements Serializable {
     private ArrayList<Funcionario> listafuncionarios;
     //Agregamos una lista de tipo de animales al sistema
     private ArrayList<String> listaTipoAnimales;
+    //Agregamos una lista de padrinos al sistema
+    private ArrayList<Padrino>listaPadrinos;
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
-        this.mascotas = new ArrayList<>();
+        this.animales = new ArrayList<>();
         this.listaActividades = new ArrayList<>();
         this.listaFechas = new ArrayList<>();
         this.listaVeterinarias = new ArrayList<>();
@@ -39,6 +41,7 @@ public class Sistema implements Serializable {
         this.listaActividadesCualquiera = new ArrayList<>();
         this.listafuncionarios = new ArrayList<>();
         this.listaTipoAnimales = new ArrayList<>();
+        this.listaPadrinos = new ArrayList<>();
     }
 
     public ArrayList<Actividad> listaActividadesPorFecha(int dia, int mes, int ano) {
@@ -71,24 +74,21 @@ public class Sistema implements Serializable {
     }
 
     public void setMascotas(ArrayList<Animal> mascotas) {
-        this.mascotas = mascotas;
+        this.animales = mascotas;
     }
 
-    public ArrayList<Animal> getPerros() {
-        return mascotas;
+    public ArrayList<Animal> getAnimales() {
+        return this.animales;
     }
 
     public ArrayList<Actividad> getActividades() {
         return listaActividades;
     }
 
-    public void AnadirPerro(Animal perroAnadir) {
-        mascotas.add(perroAnadir);
-    }
 
     public void EliminarPerro(Animal perro) {
-        if (mascotas.contains(perro)) {
-            mascotas.remove(perro);
+        if (this.animales.contains(perro)) {
+            this.animales.remove(perro);
         } else {
             System.out.println("No existe tal perro");
         }
@@ -141,9 +141,9 @@ public class Sistema implements Serializable {
     }
 
     public Animal buscarPerroPorNombre(String nombreBuscar) {
-        for (int i = 0; i < mascotas.size(); i++) {
-            if (nombreBuscar.equals(mascotas.get(i).getNombre())) {
-                return mascotas.get(i);
+        for (int i = 0; i < this.animales.size(); i++) {
+            if (nombreBuscar.equals(this.animales.get(i).getNombre())) {
+                return this.animales.get(i);
             }
         }
         return null;
@@ -335,15 +335,24 @@ public class Sistema implements Serializable {
     public ArrayList<String> getListaTipoAnimales(){
         return this.listaTipoAnimales;
     }
-    public void agregarTipo(String unTipo){
-       if(!this.listaTipoAnimales.contains(unTipo.toLowerCase().trim())){
-           this.listaTipoAnimales.add(unTipo.toLowerCase());
-       }
-    }
     public void agregarAnimal(Animal a){
-        this.mascotas.add(a);
-        if(!this.listaTipoAnimales.contains(a.getTipo().toLowerCase().trim())){
-            this.listaTipoAnimales.add(a.getTipo().toLowerCase());
+        this.animales.add(a);
+    }
+    public void agregarTipo(String tipo){
+        if(!this.listaTipoAnimales.contains(tipo.toLowerCase())){
+            this.listaTipoAnimales.add(tipo.toLowerCase());
         }
+    }
+    
+    public ArrayList<Padrino> getListaPadrinos(){
+        return this.listaPadrinos;
+    }
+    
+    public void agregarPadrino(Padrino p){
+        this.listaPadrinos.add(p);
+    }
+    
+    public boolean existeAnimal(Animal a){
+        return this.animales.contains(a);
     }
 }
