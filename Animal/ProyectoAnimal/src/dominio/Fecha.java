@@ -1,9 +1,10 @@
 package dominio;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Fecha {
+public class Fecha implements Serializable{
 
     private int dia;
     private int mes;

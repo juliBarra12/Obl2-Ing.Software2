@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Nombre=" + nombre + ", mail=" + mail + '}';
+        return this.nombre;
     }
 
     @Override

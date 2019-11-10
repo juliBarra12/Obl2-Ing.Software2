@@ -248,8 +248,8 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="calPanRuta" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="calBtnVerRuta" min="-2" max="-2" attributes="0"/>
+                                  <Component id="calPanRuta" min="-2" pref="93" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="calBtnEditar" min="-2" max="-2" attributes="0"/>
@@ -285,7 +285,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="2000" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2305" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -396,6 +396,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calComboUsuarioActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -406,6 +409,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calComboAnimalActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -739,12 +745,12 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="calLblRuta" max="32767" attributes="0"/>
-                              <Component id="calLblDistancia" alignment="1" pref="100" max="32767" attributes="0"/>
+                              <Component id="calLblDistancia" alignment="1" pref="80" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="calSpinDistancia" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="calSpinDistancia" min="-2" pref="46" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="calLblKilometros" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -764,25 +770,18 @@
                               <Component id="calBtnRuta" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="calLblRuta" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="calSpinDistancia" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="calLblKilometros" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="calLblDistancia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="calSpinDistancia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JSpinner" name="calSpinDistancia">
-                  <Properties>
-                    <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                      <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.5" type="number"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="calLblKilometros">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Kil&#xf3;metros"/>
@@ -805,6 +804,8 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Distancia:"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="calSpinDistancia">
                 </Component>
               </SubComponents>
             </Container>
@@ -930,7 +931,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="2543" max="32767" attributes="0"/>
+                      <EmptySpace pref="2564" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1048,7 +1049,7 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="animalLblAnimales" min="-2" max="-2" attributes="0"/>
-                                  <Component id="animalComboPerros" min="-2" pref="112" max="-2" attributes="0"/>
+                                  <Component id="animalesCombo" min="-2" pref="112" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -1105,7 +1106,7 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Component id="animalLblAnimales" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="animalComboPerros" min="-2" max="-2" attributes="0"/>
+                              <Component id="animalesCombo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="animalBtnEditar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1137,7 +1138,7 @@
                       <Component id="animalBtnGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="animalBtnAgregar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="2496" max="32767" attributes="0"/>
+                      <EmptySpace pref="2517" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1344,15 +1345,15 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="animalComboPerros">
+            <Component class="javax.swing.JComboBox" name="animalesCombo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="animalComboPerrosMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="animalComboPerrosActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="animalesComboMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="animalesComboActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1435,7 +1436,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="panelContenedor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="982" max="32767" attributes="0"/>
+                      <EmptySpace pref="1003" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2110,7 +2111,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="2848" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="2869" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
