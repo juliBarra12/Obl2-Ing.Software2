@@ -36,6 +36,7 @@ public class Padrino {
         setMetodoPago(metodo);
         setMoneda(moneda);
         setFrecuencia(frecuencia);
+        this.apadrinados = new ArrayList<>();
     }
     
     public void setNombre(String unNombre){
@@ -129,8 +130,7 @@ public class Padrino {
     @Override
     //Agregar los animales apadrinados
     public String toString(){
-        return"Nombre del padrino: "+nombre+" \n Monto a donar: "
-                +montoDonacion+" en "+moneda+" "+frecuenciaDonacion+"\n El metodo de pago utilizado es: "+metodoPago+" ";
+        return this.nombre;
     }
     
     

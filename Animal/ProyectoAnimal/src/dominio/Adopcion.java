@@ -20,6 +20,10 @@ public class Adopcion implements Serializable{
     
     public Adopcion (String nombre, String apellido, int telefono, Animal animal){
         setNombreAdoptante(nombre);
+        setApellidoAdoptante(apellido);
+        setTelefono(telefono);
+        setAnimal(animal);
+        animal.adoptar();
     }
     
     public void setNombreAdoptante(String unNombre){

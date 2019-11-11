@@ -94,7 +94,7 @@ public class Animal implements Serializable {
         this.foto = imagen;
     }
     
-    public void Adopcion(){
+    public void adoptar(){
         this.adoptado = true;
     }
     
@@ -124,6 +124,5 @@ public class Animal implements Serializable {
          }
          return this.nombre.equals(ani.getNombre());
      }
-    
 
 }

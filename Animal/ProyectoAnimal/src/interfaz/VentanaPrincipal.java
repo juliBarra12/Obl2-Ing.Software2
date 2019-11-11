@@ -31,6 +31,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
@@ -55,6 +56,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         sistema = sis;
         fechaSeleccionada = new Fecha();
         initComponents();
+        this.setSize(987, 684);
         this.tipoAnimal = "";
         this.setLocationRelativeTo(null);
         try {
@@ -84,11 +86,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         agregarUsuarioSeleccionado = true;
         arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         calPanRuta.setVisible(false);
-        this.setSize(940, 582);
         this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));;
         this.animalesCombo.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.calComboAnimal.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.calComboUsuario.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
+        this.cbAdopciones.removeAllItems();
+        this.cbPadrinos.removeAllItems();
+        this.listaAnimalesQueApadrina.removeAll();
          this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -249,11 +253,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnOtro = new javax.swing.JButton();
         animaltxtComentarios = new javax.swing.JTextField();
         panPadrinos = new javax.swing.JPanel();
-        panelContenedor = new javax.swing.JPanel();
+        panelContenedorPadrinos = new javax.swing.JPanel();
         panelVistaPadrinos = new javax.swing.JPanel();
         lblVistaPadrinos = new javax.swing.JLabel();
         btnAgregarPadrino = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbPadrinos = new javax.swing.JComboBox<>();
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
@@ -262,18 +266,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblPais = new javax.swing.JLabel();
         lblDonacion = new javax.swing.JLabel();
         lblNombreDelPadrino = new javax.swing.JLabel();
-        lblNombreDelPadrino1 = new javax.swing.JLabel();
-        lblNombreDelPadrino2 = new javax.swing.JLabel();
-        lblNombreDelPadrino3 = new javax.swing.JLabel();
-        lblNombreDelPadrino4 = new javax.swing.JLabel();
-        lblNombreDelPadrino5 = new javax.swing.JLabel();
-        lblNombreDelPadrino6 = new javax.swing.JLabel();
+        lblApellidoPadrino = new javax.swing.JLabel();
+        lblTelefonoPadrino = new javax.swing.JLabel();
+        lblEmailPadrino = new javax.swing.JLabel();
+        lblCiudadPadrino = new javax.swing.JLabel();
+        lblPaisPadrino = new javax.swing.JLabel();
+        lblDonacionPadrino = new javax.swing.JLabel();
         lblMetodo = new javax.swing.JLabel();
-        lblNombreDelPadrino7 = new javax.swing.JLabel();
+        lblMetodoPagoPadrino = new javax.swing.JLabel();
         lblAnimalesApadrinados = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaAnimalesQueApadrina = new javax.swing.JList<>();
-        panelRegistro = new javax.swing.JPanel();
+        listaAnimalesQueApadrina = new javax.swing.JList();
+        panelRegistroPadrino = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtFieldNombrePadrino = new javax.swing.JTextField();
@@ -303,11 +307,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtFieldCiudadPadrino = new javax.swing.JTextField();
         txtFieldPaisPadrino = new javax.swing.JTextField();
         panAdopciones = new javax.swing.JPanel();
+        panelContenedorAdopcion = new javax.swing.JPanel();
+        panelVistaAdopciones = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btnAgregarAdopcion = new javax.swing.JButton();
+        lblNombreAdopcion = new javax.swing.JLabel();
+        cbAdopciones = new javax.swing.JComboBox<>();
+        lblNombreAdopcion1 = new javax.swing.JLabel();
+        lblTelefonoAdopcion = new javax.swing.JLabel();
+        lblAnimalAdopcion = new javax.swing.JLabel();
+        lblNombreAdoptante = new javax.swing.JLabel();
+        lblApellidoAdoptante = new javax.swing.JLabel();
+        lblTelefonoAdoptante = new javax.swing.JLabel();
+        lblAnimalAdoptado = new javax.swing.JLabel();
+        panelRegistroAdopciones = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtFieldNombreAdopcion = new javax.swing.JTextField();
+        txtFieldApellidoAdopcion = new javax.swing.JTextField();
+        txtFieldTelefonoAdopcion = new javax.swing.JTextField();
+        cbAnimalesParaAdoptar = new javax.swing.JComboBox<>();
+        btnRegistrarAdopcion = new javax.swing.JButton();
+        btnAtrasAdopcion = new javax.swing.JButton();
+        lblAdvertenciaRegistroAdopciones = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Pets");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
+        panel.setMaximumSize(getPreferredSize());
+        panel.setPreferredSize(new java.awt.Dimension(987, 684));
         panel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelMouseClicked(evt);
@@ -679,12 +712,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addComponent(calPanVeterinaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panCalendarioLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(calPanHoraPersonalizada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCalendarioLayout.createSequentialGroup()
+                                        .addComponent(calPanHoraPersonalizada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(panCalendarioLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calLblTituloActividad)
-                        .addGap(40, 40, 40))))
+                        .addComponent(calLblTituloActividad)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         panCalendarioLayout.setVerticalGroup(
             panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,7 +776,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(calBtnAgregarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panCalendarioLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(17, 17, 17)
                         .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(calLblTituloFecha)
                             .addComponent(calLblTituloActividad))
@@ -759,10 +791,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(calLblActividadesDelDia)
                             .addComponent(calLblInfoActividad))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(calScrollActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(calScrollActividades, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                             .addComponent(calScrollInfoAct))))
-                .addGap(2305, 2305, 2305))
+                .addGap(2093, 2093, 2093))
         );
 
         panel.addTab("Calendario", panCalendario);
@@ -873,7 +905,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(usuarioLblUsuarios)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(usuarioComboUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2564, Short.MAX_VALUE))
+                .addContainerGap(2349, Short.MAX_VALUE))
         );
 
         panel.addTab("Usuarios", panUsuarios);
@@ -1119,14 +1151,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(animalBtnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(animalBtnAgregar)
-                .addContainerGap(2517, Short.MAX_VALUE))
+                .addContainerGap(2302, Short.MAX_VALUE))
         );
 
         panel.addTab("Animales", panAnimales);
 
-        panelContenedor.setLayout(new java.awt.CardLayout());
+        panelContenedorPadrinos.setLayout(new java.awt.CardLayout());
 
-        lblVistaPadrinos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblVistaPadrinos.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblVistaPadrinos.setText("Vista Padrinos");
 
         btnAgregarPadrino.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1137,7 +1169,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPadrinos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPadrinos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPadrinosActionPerformed(evt);
+            }
+        });
 
         lblNombre.setText("Nombre:");
 
@@ -1153,30 +1190,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         lblDonacion.setText("Donacion:");
 
-        lblNombreDelPadrino.setText("nombre");
-
-        lblNombreDelPadrino1.setText("apellido");
-
-        lblNombreDelPadrino2.setText("telefono");
-
-        lblNombreDelPadrino3.setText("email");
-
-        lblNombreDelPadrino4.setText("ciudad");
-
-        lblNombreDelPadrino5.setText("pais");
-
-        lblNombreDelPadrino6.setText("monto donacion + moneda + frecuencia");
-
         lblMetodo.setText("Metodo de pago:");
-
-        lblNombreDelPadrino7.setText("metodo de pago");
 
         lblAnimalesApadrinados.setText("Animales de los que es padrino:");
 
-        listaAnimalesQueApadrina.setModel(new javax.swing.AbstractListModel<String>() {
+        listaAnimalesQueApadrina.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(listaAnimalesQueApadrina);
 
@@ -1187,95 +1208,91 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(btnAgregarPadrino)
-                        .addGap(152, 152, 152)
-                        .addComponent(lblVistaPadrinos))
-                    .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                        .addGap(488, 488, 488)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
                         .addGap(295, 295, 295)
                         .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                                    .addComponent(lblPais)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNombreDelPadrino5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                                    .addComponent(lblCiudad)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNombreDelPadrino4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblNombreDelPadrino1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                                        .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblNombre)
-                                            .addComponent(lblApellido)
-                                            .addComponent(lblTelefono)
-                                            .addComponent(lblEmail))
-                                        .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
-                                                .addGap(74, 74, 74)
-                                                .addComponent(lblNombreDelPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVistaPadrinosLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblNombreDelPadrino2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(lblNombreDelPadrino3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                             .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
                                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblDonacion)
                                     .addComponent(lblMetodo))
-                                .addGap(28, 28, 28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombreDelPadrino7)
-                                    .addComponent(lblNombreDelPadrino6)))
-                            .addComponent(lblAnimalesApadrinados)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(474, Short.MAX_VALUE))
+                                    .addComponent(lblDonacionPadrino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblMetodoPagoPadrino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
+                                .addComponent(lblPais)
+                                .addGap(104, 104, 104)
+                                .addComponent(lblPaisPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
+                                .addComponent(lblCiudad)
+                                .addGap(85, 85, 85)
+                                .addComponent(lblCiudadPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
+                                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombre)
+                                    .addComponent(lblApellido)
+                                    .addComponent(lblTelefono)
+                                    .addComponent(lblEmail))
+                                .addGap(74, 74, 74)
+                                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEmailPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTelefonoPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblApellidoPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNombreDelPadrino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
+                                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAnimalesApadrinados)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(btnAgregarPadrino)
+                        .addGap(141, 141, 141)
+                        .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbPadrinos, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVistaPadrinos))))
+                .addGap(525, 525, 525))
         );
         panelVistaPadrinosLayout.setVerticalGroup(
             panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVistaPadrinosLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarPadrino)
                     .addComponent(lblVistaPadrinos))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbPadrinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(lblNombreDelPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApellido)
-                    .addComponent(lblNombreDelPadrino1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblApellidoPadrino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblApellido))
                 .addGap(6, 6, 6)
                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
-                    .addComponent(lblNombreDelPadrino2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTelefonoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(lblNombreDelPadrino3))
+                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmailPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCiudad)
-                    .addComponent(lblNombreDelPadrino4))
+                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblCiudad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCiudadPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPais)
-                    .addComponent(lblNombreDelPadrino5))
+                    .addComponent(lblPaisPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDonacion)
-                    .addComponent(lblNombreDelPadrino6))
+                    .addComponent(lblDonacionPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMetodo)
-                    .addComponent(lblNombreDelPadrino7))
+                .addGroup(panelVistaPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblMetodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMetodoPagoPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(lblAnimalesApadrinados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1283,9 +1300,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(1329, Short.MAX_VALUE))
         );
 
-        panelContenedor.add(panelVistaPadrinos, "card3");
+        panelContenedorPadrinos.add(panelVistaPadrinos, "card3");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Registro Padrino");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -1363,18 +1380,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel13.setText("Pais:");
 
-        javax.swing.GroupLayout panelRegistroLayout = new javax.swing.GroupLayout(panelRegistro);
-        panelRegistro.setLayout(panelRegistroLayout);
-        panelRegistroLayout.setHorizontalGroup(
-            panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelRegistroPadrinoLayout = new javax.swing.GroupLayout(panelRegistroPadrino);
+        panelRegistroPadrino.setLayout(panelRegistroPadrinoLayout);
+        panelRegistroPadrinoLayout.setHorizontalGroup(
+            panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
+                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(jLabel1))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                    .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
@@ -1387,13 +1404,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(71, 71, 71)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
+                                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rbDolares)
                                     .addComponent(rbTarjetaCredito))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rbTransferenciaBancaria)
                                     .addComponent(rbPesos)))
                             .addComponent(txtFieldApellidoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1405,81 +1422,81 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(txtFieldValorDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbFrecuenciaDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbAnimalesApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                    .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                         .addGap(163, 163, 163)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblAdvertenciaRegistroPadrino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panelRegistroLayout.createSequentialGroup()
+                            .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                                 .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(71, 71, 71)
                                 .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(454, Short.MAX_VALUE))
+                .addContainerGap(460, Short.MAX_VALUE))
         );
-        panelRegistroLayout.setVerticalGroup(
-            panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRegistroLayout.createSequentialGroup()
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
+        panelRegistroPadrinoLayout.setVerticalGroup(
+            panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
+                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel1)
                         .addGap(49, 49, 49)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtFieldNombrePadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFieldApellidoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFieldTelefonoPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFieldEmailPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFieldCiudadPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFieldPaisPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                             .addComponent(txtFieldValorDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(cbFrecuenciaDonacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(rbTarjetaCredito)
                             .addComponent(rbTransferenciaBancaria))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6))
-                    .addGroup(panelRegistroLayout.createSequentialGroup()
+                    .addGroup(panelRegistroPadrinoLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbDolares)
                             .addComponent(rbPesos))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cbAnimalesApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(lblAdvertenciaRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelRegistroPadrinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtrasPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistroPadrino, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1244, Short.MAX_VALUE))
+                .addContainerGap(1259, Short.MAX_VALUE))
         );
 
-        panelContenedor.add(panelRegistro, "card2");
+        panelContenedorPadrinos.add(panelRegistroPadrino, "card2");
 
         javax.swing.GroupLayout panPadrinosLayout = new javax.swing.GroupLayout(panPadrinos);
         panPadrinos.setLayout(panPadrinosLayout);
@@ -1487,29 +1504,231 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             panPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPadrinosLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2476, Short.MAX_VALUE))
+                .addComponent(panelContenedorPadrinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panPadrinosLayout.setVerticalGroup(
             panPadrinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panPadrinosLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1003, Short.MAX_VALUE))
+                .addComponent(panelContenedorPadrinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panel.addTab("Padrinos", panPadrinos);
 
-        javax.swing.GroupLayout panAdopcionesLayout = new javax.swing.GroupLayout(panAdopciones);
-        panAdopciones.setLayout(panAdopcionesLayout);
-        panAdopcionesLayout.setHorizontalGroup(
-            panAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3647, Short.MAX_VALUE)
+        panAdopciones.setLayout(null);
+
+        panelContenedorAdopcion.setLayout(new java.awt.CardLayout());
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel8.setText("Vista Adopciones");
+
+        btnAgregarAdopcion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnAgregarAdopcion.setText("Agregar Adopcion");
+        btnAgregarAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAdopcionActionPerformed(evt);
+            }
+        });
+
+        lblNombreAdopcion.setText("Nombre:");
+
+        cbAdopciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAdopciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAdopcionesActionPerformed(evt);
+            }
+        });
+
+        lblNombreAdopcion1.setText("Apellido:");
+
+        lblTelefonoAdopcion.setText("Telefono:");
+
+        lblAnimalAdopcion.setText("Animal Adoptado:");
+
+        javax.swing.GroupLayout panelVistaAdopcionesLayout = new javax.swing.GroupLayout(panelVistaAdopciones);
+        panelVistaAdopciones.setLayout(panelVistaAdopcionesLayout);
+        panelVistaAdopcionesLayout.setHorizontalGroup(
+            panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVistaAdopcionesLayout.createSequentialGroup()
+                .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelVistaAdopcionesLayout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(btnAgregarAdopcion)
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel8))
+                    .addGroup(panelVistaAdopcionesLayout.createSequentialGroup()
+                        .addGap(303, 303, 303)
+                        .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreAdopcion)
+                            .addComponent(lblNombreAdopcion1)
+                            .addComponent(lblTelefonoAdopcion)
+                            .addComponent(lblAnimalAdopcion))
+                        .addGap(87, 87, 87)
+                        .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAnimalAdoptado, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(lblTelefonoAdoptante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblApellidoAdoptante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNombreAdoptante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(286, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVistaAdopcionesLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cbAdopciones, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(384, 384, 384))
         );
-        panAdopcionesLayout.setVerticalGroup(
-            panAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2869, Short.MAX_VALUE)
+        panelVistaAdopcionesLayout.setVerticalGroup(
+            panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVistaAdopcionesLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(btnAgregarAdopcion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbAdopciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVistaAdopcionesLayout.createSequentialGroup()
+                        .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelVistaAdopcionesLayout.createSequentialGroup()
+                                .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblNombreAdopcion)
+                                    .addComponent(lblNombreAdoptante, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNombreAdopcion1))
+                            .addComponent(lblApellidoAdoptante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTelefonoAdopcion))
+                    .addComponent(lblTelefonoAdoptante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVistaAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAnimalAdopcion)
+                    .addComponent(lblAnimalAdoptado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(392, Short.MAX_VALUE))
         );
+
+        panelContenedorAdopcion.add(panelVistaAdopciones, "card2");
+
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel14.setText("Registro Adopciones");
+
+        jLabel15.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel15.setText("Nombre:");
+
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel16.setText("Apellido:");
+
+        jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel17.setText("Telefono:");
+
+        jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel18.setText("Animal:");
+
+        txtFieldNombreAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldNombreAdopcionActionPerformed(evt);
+            }
+        });
+
+        txtFieldApellidoAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldApellidoAdopcionActionPerformed(evt);
+            }
+        });
+
+        txtFieldTelefonoAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldTelefonoAdopcionActionPerformed(evt);
+            }
+        });
+
+        cbAnimalesParaAdoptar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnRegistrarAdopcion.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        btnRegistrarAdopcion.setText("Registrar adopcion");
+        btnRegistrarAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarAdopcionActionPerformed(evt);
+            }
+        });
+
+        btnAtrasAdopcion.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        btnAtrasAdopcion.setText("Atras");
+        btnAtrasAdopcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasAdopcionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRegistroAdopcionesLayout = new javax.swing.GroupLayout(panelRegistroAdopciones);
+        panelRegistroAdopciones.setLayout(panelRegistroAdopcionesLayout);
+        panelRegistroAdopcionesLayout.setHorizontalGroup(
+            panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistroAdopcionesLayout.createSequentialGroup()
+                .addGap(423, 423, 423)
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroAdopcionesLayout.createSequentialGroup()
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistroAdopcionesLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18))
+                        .addGap(96, 96, 96))
+                    .addGroup(panelRegistroAdopcionesLayout.createSequentialGroup()
+                        .addGap(397, 397, 397)
+                        .addComponent(btnAtrasAdopcion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)))
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrarAdopcion)
+                    .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtFieldNombreAdopcion)
+                        .addComponent(txtFieldApellidoAdopcion)
+                        .addComponent(txtFieldTelefonoAdopcion)
+                        .addComponent(cbAnimalesParaAdoptar, 0, 209, Short.MAX_VALUE)))
+                .addGap(223, 223, 223))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroAdopcionesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAdvertenciaRegistroAdopciones, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(267, 267, 267))
+        );
+        panelRegistroAdopcionesLayout.setVerticalGroup(
+            panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistroAdopcionesLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldNombreAdopcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldApellidoAdopcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFieldTelefonoAdopcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbAnimalesParaAdoptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addGap(65, 65, 65)
+                .addComponent(lblAdvertenciaRegistroAdopciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRegistroAdopcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrarAdopcion)
+                    .addComponent(btnAtrasAdopcion))
+                .addGap(220, 220, 220))
+        );
+
+        panelContenedorAdopcion.add(panelRegistroAdopciones, "card3");
+
+        panAdopciones.add(panelContenedorAdopcion);
+        panelContenedorAdopcion.setBounds(9, 26, 970, 610);
 
         panel.addTab("Adopciones", panAdopciones);
 
@@ -1517,17 +1736,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 2678, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
@@ -1637,58 +1850,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return result;
     }
-    private void usuarioBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioBtnAgregarActionPerformed
-        if (agregarUsuarioSeleccionado == false) {
-            mostrarAgregarUsuario();
-        } else {
-            if (usuarioTxtNombre.getText().trim().isEmpty()) {
-                usuarioLblAdvertencia.setText("Por favor ingrese un nombre para el usuario");
-            } else if (usuarioTxtMail.getText().trim().isEmpty()) {
-                usuarioLblAdvertencia.setText("Por favor ingrese un email para el usuario");
-            } else if (!isValidEmailAddress(usuarioTxtMail.getText())) {
-                usuarioLblAdvertencia.setText("Por favor ingrese un email correcto");
-            } 
-            else {
-                Usuario usuarioAgregar = new Usuario(usuarioTxtNombre.getText(), usuarioTxtMail.getText());
-                if(!this.sistema.existeUsuario(usuarioAgregar)){
-                sistema.anadirUsuario(usuarioAgregar);
-                usuarioTxtNombre.setText("");
-                usuarioTxtMail.setText("");
-                ocultarAgregarUsuario();
-                resetearListaUsuarios();
-                usuarioLblAdvertencia.setText("");
-                }else{
-                    usuarioLblAdvertencia.setText("Por favor, elija un nombre que no este registrado");
-                }
-            }
-        }
-    }//GEN-LAST:event_usuarioBtnAgregarActionPerformed
-
-    private void usuarioComboUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioComboUsuariosActionPerformed
-        ocultarAgregarUsuario();
-        if (usuarioComboUsuarios.getItemCount() > 0) {
-            Usuario usuarioSeleccionado = sistema.buscarUsuarioPorNombre(usuarioComboUsuarios.getSelectedItem().toString());
-            usuarioLblNombre.setText("Nombre: " + usuarioSeleccionado.getNombre());
-            usuarioLblMail.setText("Mail: " + usuarioSeleccionado.getMail());
-            String[] arrayActividades = new String[5];
-            String[] arrayFechas = new String[5];
-            int cantidadActividades = usuarioSeleccionado.getActividades().size();
-            for (int i = 0; i < cantidadActividades; i++) {
-                arrayActividades[i] = usuarioSeleccionado.getActividades().get(i).getNombre();
-                Fecha fechaActividad = usuarioSeleccionado.getActividades().get(i).getFecha();
-                arrayFechas[i] = fechaActividad.getDia() + "/" + fechaActividad.getMes() + "/" + fechaActividad.getAno();
-            }
-            usuarioLstActividades.setListData(arrayActividades);
-            usuarioLstFechas.setListData(arrayFechas);
-        } else {
-            usuarioLblNombre.setText("Nombre: ");
-            usuarioLblMail.setText("Mail: ");
-            String[] arrayVacio = new String[0];
-            usuarioLstActividades.setListData(arrayVacio);
-            usuarioLstFechas.setListData(arrayVacio);
-        }
-    }//GEN-LAST:event_usuarioComboUsuariosActionPerformed
-
     private void setearListaDeVeterinarias() {
         if (calComboVeterinaria.getItemCount() > 0) {
             calComboVeterinaria.removeAllItems();
@@ -1763,10 +1924,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             calComboUsuario.addItem(sistema.getUsuarios().get(i).getNombre());
         }
     }
-
-    private void usuarioTxtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTxtMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioTxtMailActionPerformed
 
     private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
         // TODO add your handling code here:
@@ -1844,6 +2001,191 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void cbTipoAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAnimalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoAnimalActionPerformed
+
+    private void cbAnimalesApadrinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnimalesApadrinarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAnimalesApadrinarActionPerformed
+
+    private void btnRegistroPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroPadrinoActionPerformed
+            // TODO add your handling code here:
+            if(txtFieldNombrePadrino.getText().equals("") || txtFieldNombrePadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un nombre.");
+            }
+            else if(txtFieldValorDonacion.getText().equals("") || txtFieldValorDonacion.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un valor de donacion.");
+            }
+            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una frecuencia de donacion.");
+            }
+            else if(calBtnGroupMetodoPago.getSelection() == null){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un metodo de pago.");
+            }
+            else if(calBtnGroupMoneda.getSelection() == null){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una moneda de pago.");
+            }
+            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
+                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un animal a apadrinar");
+            }
+            else if(txtFieldApellidoPadrino.getText().equals("") || txtFieldApellidoPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un apellido.");
+            }
+            else if(txtFieldTelefonoPadrino.getText().equals("") || txtFieldTelefonoPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un telefono.");
+            }
+            else if(txtFieldEmailPadrino.getText().equals("") || txtFieldEmailPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un correo electronico.");
+            }else if(txtFieldCiudadPadrino.getText().equals("") || txtFieldCiudadPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar una ciudad.");
+            }
+            else if(txtFieldPaisPadrino.getText().equals("") || txtFieldPaisPadrino.getText().equals(" ")){
+                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un pais.");
+            }
+            else{
+                String nombrePadrino = this.txtFieldNombrePadrino.getText();
+                String apellido = this.txtFieldApellidoPadrino.getText();
+                int telefono = Integer.parseInt(this.txtFieldTelefonoPadrino.getText());
+                String email = this.txtFieldEmailPadrino.getText();
+                String ciudad = this.txtFieldCiudadPadrino.getText();
+                String pais = this.txtFieldPaisPadrino.getText();
+                int valorDonacion = Integer.parseInt(this.txtFieldValorDonacion.getText());
+                
+                String frecuencia = (String)cbFrecuenciaDonacion.getSelectedItem();
+                String metodoPago;
+                if(rbTarjetaCredito.isSelected()){
+                    metodoPago = "Tarjeta de Credito";
+                }
+                else{
+                    metodoPago = "Transaccion bancaria";
+                }
+                String moneda;
+                if(rbDolares.isSelected()){
+                    moneda = "dolares";
+                }
+                else{
+                    moneda = "pesos uruguayos";
+                }
+                Animal animalApadrinado = sistema.buscarPerroPorNombre((String)cbAnimalesApadrinar.getSelectedItem());
+                Padrino p = new Padrino(nombrePadrino, apellido, telefono, email,ciudad, pais, valorDonacion, metodoPago, moneda, frecuencia);
+                sistema.agregarPadrino(p);
+                p.addAnimalApadrinado(animalApadrinado);
+                listarPadrinosVista();
+                cambiarPanel(panelContenedorPadrinos,panelVistaPadrinos);
+            }
+            
+            
+            
+    }//GEN-LAST:event_btnRegistroPadrinoActionPerformed
+
+    private void setearListaFrecuencias(){
+        if(cbFrecuenciaDonacion.getItemCount() > 0){
+            cbFrecuenciaDonacion.removeAllItems();
+        }
+        cbFrecuenciaDonacion.addItem("solo esta vez");
+        cbFrecuenciaDonacion.addItem("mensual");
+        cbFrecuenciaDonacion.addItem("trimestral");
+        cbFrecuenciaDonacion.addItem("anual");
+    }
+    
+    private void setearListaAnimalesAApadrinar(){
+        if(cbAnimalesApadrinar.getItemCount() > 0){
+            cbAnimalesApadrinar.removeAllItems();
+        }
+        for(int i = 0; i <sistema.getAnimales().size();i++){
+            Animal a = sistema.getAnimales().get(i);
+            if(!a.estaAdoptado()){
+                cbAnimalesApadrinar.addItem(a.getNombre());
+            }
+        }
+    }
+    
+    public void cambiarPanel(JPanel contenedor, JPanel panel){
+        contenedor.removeAll();
+        contenedor.add(panel);
+        contenedor.repaint();
+        contenedor.revalidate();
+    }
+    
+    
+    private void btnAgregarPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPadrinoActionPerformed
+        setearListaFrecuencias();
+        setearListaAnimalesAApadrinar();
+        //cambiar al panel de registro
+        cambiarPanel(panelContenedorPadrinos,panelRegistroPadrino);
+    }//GEN-LAST:event_btnAgregarPadrinoActionPerformed
+
+    private void listarPadrinosVista(){
+        /*if(cbPadrinos.getItemCount() > 0){
+            cbPadrinos.removeAllItems();
+        }
+        for(int i = 0; i < sistema.getListaPadrinos().size(); i++){
+            this.cbPadrinos.addItem(sistema.getListaPadrinos().get(i).getNombre());
+        }*/
+        this.cbPadrinos.setModel(new DefaultComboBoxModel(this.sistema.getListaPadrinos().toArray()));
+
+    }
+    
+    
+    
+    private void btnAtrasPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasPadrinoActionPerformed
+        listarPadrinosVista();
+        cambiarPanel(panelContenedorPadrinos,panelVistaPadrinos);
+    }//GEN-LAST:event_btnAtrasPadrinoActionPerformed
+
+    private void usuarioBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioBtnAgregarActionPerformed
+        if (agregarUsuarioSeleccionado == false) {
+            mostrarAgregarUsuario();
+        } else {
+            if (usuarioTxtNombre.getText().trim().isEmpty()) {
+                usuarioLblAdvertencia.setText("Por favor ingrese un nombre para el usuario");
+            } else if (usuarioTxtMail.getText().trim().isEmpty()) {
+                usuarioLblAdvertencia.setText("Por favor ingrese un email para el usuario");
+            } else if (!isValidEmailAddress(usuarioTxtMail.getText())) {
+                usuarioLblAdvertencia.setText("Por favor ingrese un email correcto");
+            }
+            else {
+                Usuario usuarioAgregar = new Usuario(usuarioTxtNombre.getText(), usuarioTxtMail.getText());
+                if(!this.sistema.existeUsuario(usuarioAgregar)){
+                    sistema.anadirUsuario(usuarioAgregar);
+                    usuarioTxtNombre.setText("");
+                    usuarioTxtMail.setText("");
+                    ocultarAgregarUsuario();
+                    resetearListaUsuarios();
+                    usuarioLblAdvertencia.setText("");
+                }else{
+                    usuarioLblAdvertencia.setText("Por favor, elija un nombre que no este registrado");
+                }
+            }
+        }
+    }//GEN-LAST:event_usuarioBtnAgregarActionPerformed
+
+    private void usuarioTxtMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTxtMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioTxtMailActionPerformed
+
+    private void usuarioComboUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioComboUsuariosActionPerformed
+        ocultarAgregarUsuario();
+        if (usuarioComboUsuarios.getItemCount() > 0) {
+            Usuario usuarioSeleccionado = sistema.buscarUsuarioPorNombre(usuarioComboUsuarios.getSelectedItem().toString());
+            usuarioLblNombre.setText("Nombre: " + usuarioSeleccionado.getNombre());
+            usuarioLblMail.setText("Mail: " + usuarioSeleccionado.getMail());
+            String[] arrayActividades = new String[5];
+            String[] arrayFechas = new String[5];
+            int cantidadActividades = usuarioSeleccionado.getActividades().size();
+            for (int i = 0; i < cantidadActividades; i++) {
+                arrayActividades[i] = usuarioSeleccionado.getActividades().get(i).getNombre();
+                Fecha fechaActividad = usuarioSeleccionado.getActividades().get(i).getFecha();
+                arrayFechas[i] = fechaActividad.getDia() + "/" + fechaActividad.getMes() + "/" + fechaActividad.getAno();
+            }
+            usuarioLstActividades.setListData(arrayActividades);
+            usuarioLstFechas.setListData(arrayFechas);
+        } else {
+            usuarioLblNombre.setText("Nombre: ");
+            usuarioLblMail.setText("Mail: ");
+            String[] arrayVacio = new String[0];
+            usuarioLstActividades.setListData(arrayVacio);
+            usuarioLstFechas.setListData(arrayVacio);
+        }
+    }//GEN-LAST:event_usuarioComboUsuariosActionPerformed
 
     private void calBtnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calBtnVerRutaActionPerformed
         String nombreAct = calLstActividades.getSelectedValue();
@@ -2091,6 +2433,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_calComboHoraActionPerformed
 
+    private void calComboAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboAnimalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calComboAnimalActionPerformed
+
+    private void calComboUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calComboUsuarioActionPerformed
+
     private void calComboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboTipoActionPerformed
         if (calComboTipo.getSelectedIndex() == 2) {
             if (calBtnVeterinariaSi.isSelected()) {
@@ -2101,7 +2451,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             cambiarVisibilidadVeterinaria(false, false);
         }
-        if (calComboTipo.getSelectedIndex() == 1) { 
+        if (calComboTipo.getSelectedIndex() == 1) {
             calLblTipoAlimento.setVisible(true);
             calTxtTipoAlimento.setVisible(true);
         } else {
@@ -2112,7 +2462,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (calComboTipo.getSelectedIndex() == 0 && calBtnRealizadaSi.isSelected()) {
             calPanRuta.setVisible(true);
         } else {
-           calPanRuta.setVisible(false);
+            calPanRuta.setVisible(false);
         }
     }//GEN-LAST:event_calComboTipoActionPerformed
 
@@ -2129,7 +2479,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else if (calComboAnimal.getItemCount() == 0) {
             calLblAdvertencia.setText("Por favor, ingrese un perro para agregar una actividad.");
         } else {
-            
+
             Usuario usuario = sistema.buscarUsuarioPorNombre(((Usuario)calComboUsuario.getSelectedItem()).getNombre());
             Animal perro = sistema.buscarPerroPorNombre(((Animal) calComboAnimal.getSelectedItem()).getNombre());
             LocalTime time;
@@ -2169,29 +2519,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     try {
                         distanciaPaseo = Double.parseDouble(calSpinDistancia.getText().replaceAll(",","."));
                         ok = true;
-                        }
-                     catch (NumberFormatException e) {
-                            
-                        }
+                    }
+                    catch (NumberFormatException e) {
+
+                    }
                     if(ok){
-                    if (distanciaPaseo != 0.0) {
-                        paseo.setDistancia(distanciaPaseo);
-                    }
-                    sistema.anadirActividad(paseo);
-                    sistema.getPaseos().add(paseo);
-                    if (calComboHora.getSelectedIndex() != 0) {
-                        timerNuevo(paseo);
-                    }
-                    if (!rutaImagenRuta.equals("")) {
-                        File imagen = new File(rutaImagenRuta);
-                        paseo.setRuta(crearIcono(imagen, 500));
-                        rutaImagenRuta = "";
-                    }
-                    calLblAdvertencia.setText("Se añadió el paseo correctamente al calendario");
-                    calLstActividades.setEnabled(true);
-                    calTxtNombreResp.setText("");
-                    calBtnEditar.setVisible(false);
-                    calPanRuta.setVisible(false);
+                        if (distanciaPaseo != 0.0) {
+                            paseo.setDistancia(distanciaPaseo);
+                        }
+                        sistema.anadirActividad(paseo);
+                        sistema.getPaseos().add(paseo);
+                        if (calComboHora.getSelectedIndex() != 0) {
+                            timerNuevo(paseo);
+                        }
+                        if (!rutaImagenRuta.equals("")) {
+                            File imagen = new File(rutaImagenRuta);
+                            paseo.setRuta(crearIcono(imagen, 500));
+                            rutaImagenRuta = "";
+                        }
+                        calLblAdvertencia.setText("Se añadió el paseo correctamente al calendario");
+                        calLstActividades.setEnabled(true);
+                        calTxtNombreResp.setText("");
+                        calBtnEditar.setVisible(false);
+                        calPanRuta.setVisible(false);
                     }else{
                         calLblAdvertencia.setText("La distancia ingresada es incorrecta");
                     }
@@ -2351,126 +2701,143 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         fechaSeleccionada = new Fecha(dia, mes, ano);
     }//GEN-LAST:event_calDayChooserPropertyChange
 
-    private void cbAnimalesApadrinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnimalesApadrinarActionPerformed
+    private void btnAgregarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAdopcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbAnimalesApadrinarActionPerformed
+        setearListaAnimalesNoAdoptados();
+        cambiarPanel(panelContenedorAdopcion,panelRegistroAdopciones);
+    }//GEN-LAST:event_btnAgregarAdopcionActionPerformed
 
-    private void btnRegistroPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroPadrinoActionPerformed
-            // TODO add your handling code here:
-            if(txtFieldNombrePadrino.getText().equals("") || txtFieldNombrePadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un nombre.");
-            }
-            else if(txtFieldValorDonacion.getText().equals("") || txtFieldValorDonacion.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un valor de donacion.");
-            }
-            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
-                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una frecuencia de donacion.");
-            }
-            else if(calBtnGroupMetodoPago.getSelection() == null){
-                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un metodo de pago.");
-            }
-            else if(calBtnGroupMoneda.getSelection() == null){
-                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar una moneda de pago.");
-            }
-            else if(cbFrecuenciaDonacion.getSelectedIndex() == -1){
-                lblAdvertenciaRegistroPadrino.setText("Se debe seleccionar un animal a apadrinar");
-            }
-            else if(txtFieldApellidoPadrino.getText().equals("") || txtFieldApellidoPadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un apellido.");
-            }
-            else if(txtFieldTelefonoPadrino.getText().equals("") || txtFieldTelefonoPadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un telefono.");
-            }
-            else if(txtFieldEmailPadrino.getText().equals("") || txtFieldEmailPadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un correo electronico.");
-            }else if(txtFieldCiudadPadrino.getText().equals("") || txtFieldCiudadPadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar una ciudad.");
-            }
-            else if(txtFieldPaisPadrino.getText().equals("") || txtFieldPaisPadrino.getText().equals(" ")){
-                lblAdvertenciaRegistroPadrino.setText("Se debe ingresar un pais.");
-            }
-            else{
-                String nombrePadrino = this.txtFieldNombrePadrino.getText();
-                String apellido = this.txtFieldApellidoPadrino.getText();
-                int telefono = Integer.parseInt(this.txtFieldTelefonoPadrino.getText());
-                String email = this.txtFieldEmailPadrino.getText();
-                String ciudad = this.txtFieldCiudadPadrino.getText();
-                String pais = this.txtFieldPaisPadrino.getText();
-                int valorDonacion = Integer.parseInt(this.txtFieldValorDonacion.getText());
-                
-                String frecuencia = (String)cbFrecuenciaDonacion.getSelectedItem();
-                String metodoPago;
-                if(rbTarjetaCredito.isSelected()){
-                    metodoPago = "Tarjeta de Credito";
-                }
-                else{
-                    metodoPago = "Transaccion bancaria";
-                }
-                String moneda;
-                if(rbDolares.isSelected()){
-                    moneda = "dolares";
-                }
-                else{
-                    moneda = "pesos uruguayos";
-                }
-                Animal animalApadrinado = sistema.buscarPerroPorNombre((String)cbAnimalesApadrinar.getSelectedItem());
-                Padrino p = new Padrino(nombrePadrino, apellido, telefono, email,ciudad, pais, valorDonacion, metodoPago, moneda, frecuencia);
-                sistema.agregarPadrino(p);
-                cambiarPanel(panelVistaPadrinos);
-            }
-            
-            
-            
-    }//GEN-LAST:event_btnRegistroPadrinoActionPerformed
+    private void txtFieldNombreAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldNombreAdopcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldNombreAdopcionActionPerformed
 
-    private void setearListaFrecuencias(){
-        if(cbFrecuenciaDonacion.getItemCount() > 0){
-            cbFrecuenciaDonacion.removeAllItems();
+    private void txtFieldApellidoAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldApellidoAdopcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldApellidoAdopcionActionPerformed
+
+    private void txtFieldTelefonoAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldTelefonoAdopcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldTelefonoAdopcionActionPerformed
+
+    
+    public boolean esNumero(String s){
+        try{
+            int i = Integer.parseInt(s);
         }
-        cbFrecuenciaDonacion.addItem("solo esta vez");
-        cbFrecuenciaDonacion.addItem("mensual");
-        cbFrecuenciaDonacion.addItem("trimestral");
-        cbFrecuenciaDonacion.addItem("anual");
+        catch(NumberFormatException | NullPointerException nfe){
+            return false;
+        }
+        return true;
     }
     
-    private void setearListaAnimalesAApadrinar(){
-        if(cbAnimalesApadrinar.getItemCount() > 0){
-            cbAnimalesApadrinar.removeAllItems();
+    private void setearListaAnimalesNoAdoptados(){
+        if(cbAnimalesParaAdoptar.getItemCount() > 0){
+            cbAnimalesParaAdoptar.removeAllItems();
         }
         for(int i = 0; i <sistema.getAnimales().size();i++){
             Animal a = sistema.getAnimales().get(i);
             if(!a.estaAdoptado()){
-                cbAnimalesApadrinar.addItem(a.getNombre());
+                cbAnimalesParaAdoptar.addItem(a.getNombre());
             }
         }
     }
     
-    public void cambiarPanel(JPanel panel){
-        this.panelContenedor.removeAll();
-        this.panelContenedor.add(panel);
-        this.panelContenedor.repaint();
-        this.panelContenedor.revalidate();
+    
+    private void btnRegistrarAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAdopcionActionPerformed
+        // TODO add your handling code here:
+        String nombre = this.txtFieldNombreAdopcion.getText();
+        String apellido = this.txtFieldApellidoAdopcion.getText();
+        int telefono;
+        
+        if(nombre.trim().isEmpty()){
+            this.lblAdvertenciaRegistroAdopciones.setText("Debe ingresar un nombre de adoptante.");
+        }
+        else if(apellido.trim().isEmpty()){
+            this.lblAdvertenciaRegistroAdopciones.setText("Debe ingresar un apellido de adoptante.");
+        }
+        else if(!esNumero(this.txtFieldTelefonoAdopcion.getText())){
+            this.lblAdvertenciaRegistroAdopciones.setText("Debe ingresar un telefono de adoptante valido.");
+        }
+        else if(this.cbAnimalesParaAdoptar.getSelectedIndex() < 0){
+            this.lblAdvertenciaRegistroAdopciones.setText("Debe seleccionar un animal para adoptar.");
+        }
+        else{
+            Animal animal = sistema.buscarPerroPorNombre((String)this.cbAnimalesParaAdoptar.getSelectedItem());
+            telefono = Integer.parseInt(this.txtFieldTelefonoAdopcion.getText());
+            Adopcion a = new Adopcion(nombre,apellido,telefono,animal);
+            sistema.agregarAdopcion(a);
+            setearListaAdopciones();
+            cambiarPanel(panelContenedorAdopcion, panelVistaAdopciones);
+            
+        }
+        
+    }//GEN-LAST:event_btnRegistrarAdopcionActionPerformed
+
+    private void setearListaAdopciones(){
+        if(cbAdopciones.getItemCount() > 0){
+            cbAdopciones.removeAllItems();
+        }
+        for(int i = 0; i < sistema.getListaAdopciones().size(); i++){
+            cbAdopciones.addItem(sistema.getListaAdopciones().get(i).getAnimal().getNombre());
+        }
     }
     
     
-    private void btnAgregarPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPadrinoActionPerformed
-        setearListaFrecuencias();
-        setearListaAnimalesAApadrinar();
-        //cambiar al panel de registro
-        cambiarPanel(panelRegistro);
-    }//GEN-LAST:event_btnAgregarPadrinoActionPerformed
-
-    private void btnAtrasPadrinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasPadrinoActionPerformed
-        cambiarPanel(panelVistaPadrinos);
-    }//GEN-LAST:event_btnAtrasPadrinoActionPerformed
-
-    private void calComboAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboAnimalActionPerformed
+    
+    private void btnAtrasAdopcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasAdopcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_calComboAnimalActionPerformed
+        
+        cambiarPanel(panelContenedorAdopcion,panelVistaAdopciones);
+        
+        
+    }//GEN-LAST:event_btnAtrasAdopcionActionPerformed
 
-    private void calComboUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboUsuarioActionPerformed
+    private void cbPadrinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPadrinosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_calComboUsuarioActionPerformed
+        if(cbPadrinos.getSelectedIndex() == -1){
+            this.lblNombreDelPadrino.setText("");
+            this.lblApellidoPadrino.setText("");
+            this.lblTelefono.setText("");
+            this.lblEmailPadrino.setText("");
+            this.lblCiudadPadrino.setText("");
+            this.lblPaisPadrino.setText("");
+            this.lblDonacionPadrino.setText("");
+            this.lblMetodoPagoPadrino.setText("");
+        }
+        else{
+            
+            Padrino p = sistema.getListaPadrinos().get(cbPadrinos.getSelectedIndex());
+            this.lblNombreDelPadrino.setText(p.getNombre());
+            this.lblApellidoPadrino.setText(p.getApellido());
+            this.lblTelefono.setText(p.getTelefono()+"");
+            this.lblEmailPadrino.setText(p.getEmail());
+            this.lblCiudadPadrino.setText(p.getCiudad());
+            this.lblPaisPadrino.setText(p.getPais());
+            this.lblDonacionPadrino.setText(p.getMonto()+" "+p.getMoneda()+" "+p.getFrecuencia());
+            this.lblMetodoPagoPadrino.setText(p.getMetodo());
+            this.listaAnimalesQueApadrina.setListData(p.getApadrinados().toArray());
+            System.out.println("CantElementos: "+p.getApadrinados().size());
+            
+            
+        }
+    }//GEN-LAST:event_cbPadrinosActionPerformed
+
+    private void cbAdopcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAdopcionesActionPerformed
+        // TODO add your handling code here:
+        if(cbAdopciones.getSelectedIndex() == -1){
+            lblNombreAdoptante.setText("");
+            lblApellidoAdoptante.setText("");
+            lblTelefonoAdoptante.setText("");
+            lblAnimalAdoptado.setText("");
+        }
+        else{
+            Adopcion a = sistema.getListaAdopciones().get(cbAdopciones.getSelectedIndex());
+            lblNombreAdoptante.setText(a.getNombreAdoptante());
+            lblApellidoAdoptante.setText(a.getApellidoAdoptante());
+            lblTelefonoAdoptante.setText(a.getTelefono()+"");
+            lblAnimalAdoptado.setText(a.getAnimal().getNombre());
+        }
+    }//GEN-LAST:event_cbAdopcionesActionPerformed
      
      
     private void cambiarVisibilidadVeterinaria(boolean opcionCombo, boolean usaVeterinaria) {
@@ -2692,9 +3059,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField animalTxtNombre;
     private javax.swing.JComboBox<String> animalesCombo;
     private javax.swing.JTextField animaltxtComentarios;
+    private javax.swing.JButton btnAgregarAdopcion;
     private javax.swing.JButton btnAgregarPadrino;
+    private javax.swing.JButton btnAtrasAdopcion;
     private javax.swing.JButton btnAtrasPadrino;
     private javax.swing.JButton btnOtro;
+    private javax.swing.JButton btnRegistrarAdopcion;
     private javax.swing.JButton btnRegistroPadrino;
     private javax.swing.JButton calBtnAgregar;
     private javax.swing.JButton calBtnAgregarDatos;
@@ -2755,64 +3125,87 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField calTxtNombreResp;
     private javax.swing.JTextField calTxtTipoAlimento;
     private com.toedter.calendar.JYearChooser calYearChooser;
+    private javax.swing.JComboBox<String> cbAdopciones;
     private javax.swing.JComboBox<String> cbAnimalesApadrinar;
+    private javax.swing.JComboBox<String> cbAnimalesParaAdoptar;
     private javax.swing.JComboBox<String> cbFrecuenciaDonacion;
+    private javax.swing.JComboBox<String> cbPadrinos;
     private javax.swing.JComboBox<String> cbTipoAnimal;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAdvertenciaRegistroAdopciones;
     private javax.swing.JLabel lblAdvertenciaRegistroPadrino;
+    private javax.swing.JLabel lblAnimalAdopcion;
+    private javax.swing.JLabel lblAnimalAdoptado;
     private javax.swing.JLabel lblAnimalesApadrinados;
     private javax.swing.JLabel lblApellido;
+    private javax.swing.JLabel lblApellidoAdoptante;
+    private javax.swing.JLabel lblApellidoPadrino;
     private javax.swing.JLabel lblCiudad;
+    private javax.swing.JLabel lblCiudadPadrino;
     private javax.swing.JLabel lblDonacion;
+    private javax.swing.JLabel lblDonacionPadrino;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmailPadrino;
     private javax.swing.JLabel lblEstadoAdopcion;
     private javax.swing.JLabel lblMetodo;
+    private javax.swing.JLabel lblMetodoPagoPadrino;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombreAdopcion;
+    private javax.swing.JLabel lblNombreAdopcion1;
+    private javax.swing.JLabel lblNombreAdoptante;
     private javax.swing.JLabel lblNombreDelPadrino;
-    private javax.swing.JLabel lblNombreDelPadrino1;
-    private javax.swing.JLabel lblNombreDelPadrino2;
-    private javax.swing.JLabel lblNombreDelPadrino3;
-    private javax.swing.JLabel lblNombreDelPadrino4;
-    private javax.swing.JLabel lblNombreDelPadrino5;
-    private javax.swing.JLabel lblNombreDelPadrino6;
-    private javax.swing.JLabel lblNombreDelPadrino7;
     private javax.swing.JLabel lblPais;
+    private javax.swing.JLabel lblPaisPadrino;
     private javax.swing.JLabel lblTelefono;
+    private javax.swing.JLabel lblTelefonoAdopcion;
+    private javax.swing.JLabel lblTelefonoAdoptante;
+    private javax.swing.JLabel lblTelefonoPadrino;
     private javax.swing.JLabel lblTipoAnimal;
     private javax.swing.JLabel lblVistaPadrinos;
-    private javax.swing.JList<String> listaAnimalesQueApadrina;
+    private javax.swing.JList listaAnimalesQueApadrina;
     private javax.swing.JPanel panAdopciones;
     private javax.swing.JPanel panAnimales;
     private javax.swing.JPanel panCalendario;
     private javax.swing.JPanel panPadrinos;
     private javax.swing.JPanel panUsuarios;
     private javax.swing.JTabbedPane panel;
-    private javax.swing.JPanel panelContenedor;
-    private javax.swing.JPanel panelRegistro;
+    private javax.swing.JPanel panelContenedorAdopcion;
+    private javax.swing.JPanel panelContenedorPadrinos;
+    private javax.swing.JPanel panelRegistroAdopciones;
+    private javax.swing.JPanel panelRegistroPadrino;
+    private javax.swing.JPanel panelVistaAdopciones;
     private javax.swing.JPanel panelVistaPadrinos;
     private javax.swing.JLabel perroLblFoto;
     private javax.swing.JRadioButton rbDolares;
     private javax.swing.JRadioButton rbPesos;
     private javax.swing.JRadioButton rbTarjetaCredito;
     private javax.swing.JRadioButton rbTransferenciaBancaria;
+    private javax.swing.JTextField txtFieldApellidoAdopcion;
     private javax.swing.JTextField txtFieldApellidoPadrino;
     private javax.swing.JTextField txtFieldCiudadPadrino;
     private javax.swing.JTextField txtFieldEmailPadrino;
+    private javax.swing.JTextField txtFieldNombreAdopcion;
     private javax.swing.JTextField txtFieldNombrePadrino;
     private javax.swing.JTextField txtFieldPaisPadrino;
+    private javax.swing.JTextField txtFieldTelefonoAdopcion;
     private javax.swing.JTextField txtFieldTelefonoPadrino;
     private javax.swing.JTextField txtFieldValorDonacion;
     private javax.swing.JButton usuarioBtnAgregar;

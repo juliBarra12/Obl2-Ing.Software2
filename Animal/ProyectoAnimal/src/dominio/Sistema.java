@@ -28,6 +28,8 @@ public class Sistema implements Serializable {
     private ArrayList<String> listaTipoAnimales;
     //Agregamos una lista de padrinos al sistema
     private ArrayList<Padrino>listaPadrinos;
+    //Agregamos una lista de adopciones al sistema
+    private ArrayList<Adopcion>listaAdopciones;
 
     public Sistema() {
         this.usuarios = new ArrayList<>();
@@ -42,6 +44,7 @@ public class Sistema implements Serializable {
         this.listafuncionarios = new ArrayList<>();
         this.listaTipoAnimales = new ArrayList<>();
         this.listaPadrinos = new ArrayList<>();
+        this.listaAdopciones = new ArrayList<>();
     }
 
     public ArrayList<Actividad> listaActividadesPorFecha(int dia, int mes, int ano) {
@@ -357,5 +360,13 @@ public class Sistema implements Serializable {
     }
     public boolean existeUsuario(Usuario user){
         return this.usuarios.contains(user);
+    }
+    
+    public void agregarAdopcion(Adopcion a){
+        this.listaAdopciones.add(a);
+    }
+    
+    public ArrayList<Adopcion> getListaAdopciones(){
+        return this.listaAdopciones;
     }
 }
