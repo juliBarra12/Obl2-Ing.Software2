@@ -97,8 +97,12 @@ public class Sistema implements Serializable {
         }
     }
 
-    public void anadirUsuario(Usuario personaAnadir) {
-        usuarios.add(personaAnadir);
+    public boolean añadirUsuario(Usuario personaAnadir) {
+        if(!this.existeUsuario(personaAnadir)){
+            usuarios.add(personaAnadir);
+            return true;
+        }
+        return false;
     }
 
     public void eliminarUsuario(Usuario persona) {

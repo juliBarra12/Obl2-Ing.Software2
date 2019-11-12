@@ -5,13 +5,14 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author juli
  */
-public class Padrino {
+public class Padrino implements Serializable {
     
     private String nombre;
     private String apellido;
@@ -25,7 +26,7 @@ public class Padrino {
     private String moneda;
     private String frecuenciaDonacion;
     
-    public Padrino(String nombre, String apellido, int telefono, String email, String ciudad, String pais, int monto, String metodo, String moneda, String frecuencia){
+    public Padrino(String nombre, String apellido, int telefono, String email, String ciudad, String pais, int monto, String metodo, String moneda, String frecuencia) {
         setNombre(nombre);
         setApellido(apellido);
         setTelefono(telefono);

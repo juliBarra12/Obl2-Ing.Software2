@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,10 +94,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.animalesCombo.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.calComboAnimal.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.calComboUsuario.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
-        this.listarPadrinosVista();
-        this.cbAdopciones.removeAllItems();
-        this.cbPadrinos.removeAllItems();
-        this.listaAnimalesQueApadrina.removeAll();
+        this.usuarioComboUsuarios.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
+        this.cbPadrinos.setModel(new DefaultComboBoxModel(this.sistema.getListaPadrinos().toArray()));
         this.lstAnimalesApadrinar.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
          this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
@@ -2081,6 +2078,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 seleccionados.addAll(this.lstAnimalesApadrinar.getSelectedValuesList());
                 p.setApadrinados(seleccionados);
                 listarPadrinosVista();
+                this.cbPadrinos.setSelectedItem(p.getNombre());
                 cambiarPanel(panelContenedorPadrinos,panelVistaPadrinos);
                 this.listaAnimalesQueApadrina.setListData(p.getApadrinados().toArray());
             }
@@ -2145,8 +2143,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             else {
                 Usuario usuarioAgregar = new Usuario(usuarioTxtNombre.getText(), usuarioTxtMail.getText());
-                if(!this.sistema.existeUsuario(usuarioAgregar)){
-                    sistema.anadirUsuario(usuarioAgregar);
+                if(this.sistema.añadirUsuario(usuarioAgregar)){
                     usuarioTxtNombre.setText("");
                     usuarioTxtMail.setText("");
                     ocultarAgregarUsuario();
@@ -2207,12 +2204,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void calBtnAgregarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calBtnAgregarDatosActionPerformed
         try {
             Usuario persona = new Usuario("Alex", "alexkmass@gmail.com");
-            sistema.anadirUsuario(persona);
+            sistema.añadirUsuario(persona);
             Animal rasta = new Animal("Rasta","Perro", 50, 23, "Es un buen perro, le gusta comer");
             rasta.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroPorDefecto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
             sistema.agregarAnimal(rasta);
             Usuario persona2 = new Usuario("Marcelo", "marcelo@gmail.com");
-            sistema.anadirUsuario(persona2);
+            sistema.añadirUsuario(persona2);
             Animal ori = new Animal("Ori","Gato", 50, 23, "Es un buen gato");
             ori.setFoto(new ImageIcon(ImageIO.read(this.getClass().getResource("images/perroFoto.png")).getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
             sistema.agregarAnimal(ori);
@@ -2481,8 +2478,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             calLblAdvertencia.setText("Por favor, ingrese un perro para agregar una actividad.");
         } else {
 
-            Usuario usuario = sistema.buscarUsuarioPorNombre(((Usuario)calComboUsuario.getSelectedItem()).getNombre());
-            Animal perro = sistema.buscarPerroPorNombre(((Animal) calComboAnimal.getSelectedItem()).getNombre());
+            Usuario usuario = sistema.buscarUsuarioPorNombre(this.calComboUsuario.getSelectedItem().toString());
+            Animal perro = sistema.buscarPerroPorNombre(this.calComboAnimal.getSelectedItem().toString());
             LocalTime time;
             if (((String) calComboHora.getSelectedItem()).equals("Ahora")) {
                 time = LocalTime.now();
@@ -2511,18 +2508,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     calLblAdvertencia.setText("La veterinaria no tiene horarios disponibles en ese horario, por favor ingrse una "
                         + "hora distinta entre las " + vet.getHoraInicial() + " y las " + vet.getHoraFinal());
                 }
-            } else {
+            } else { 
                 String tipoAct = (String) calComboTipo.getSelectedItem();
-                boolean ok = false;
+                boolean ok = true;
                 if (tipoAct.equals("Paseo")) {
                     Paseo paseo = new Paseo(nombreAct, usuario, perro, 0, fueRealizada, time, fechaSeleccionada);
                     double distanciaPaseo = 0.0;
+                    if(this.calBtnRealizadaSi.isSelected()){
                     try {
                         distanciaPaseo = Double.parseDouble(calSpinDistancia.getText().replaceAll(",","."));
-                        ok = true;
+                       
                     }
                     catch (NumberFormatException e) {
-
+                                ok = false;
+                    }
                     }
                     if(ok){
                         if (distanciaPaseo != 0.0) {
