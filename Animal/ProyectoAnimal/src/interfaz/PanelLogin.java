@@ -183,7 +183,7 @@ public class PanelLogin extends javax.swing.JPanel {
         String username = this.txUsuario.getText();
         String password = new String(this.fieldContraseña.getPassword());
         Funcionario func = new Funcionario(username,"",username);
-        if(this.passwordAprobada(password) && !this.usernameVacio(username)){
+        if(!this.usernameVacio(username)){
             this.ocultarAdvertencias();
             func = this.modelo.buscarFuncionario(func);
             if(func != null && PasswordUtils.verificarPassswordUsuario(password, func.getPassword(), func.getGeneratedSalt())){
@@ -197,7 +197,7 @@ public class PanelLogin extends javax.swing.JPanel {
             this.ocultarAdvertencias();
             if(usernameVacio(username)){
                 this.mostrarAdvertencia(0,advUsuario);
-            }else if(!passwordAprobada(password)){
+            }else {
                 this.mostrarAdvertencia(1, advPassword);
             }
         }
@@ -226,9 +226,6 @@ public class PanelLogin extends javax.swing.JPanel {
     public void vaciarFields(){
         this.txUsuario.setText("");
         this.fieldContraseña.setText("");
-    }
-    public static boolean passwordAprobada(String password){
-        return password.length() >= 8;
     }
     public static boolean usernameVacio(String username){
         return username.trim().isEmpty();

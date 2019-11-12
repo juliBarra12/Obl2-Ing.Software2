@@ -6,7 +6,7 @@
 package interfaz;
 import dominio.Funcionario;
 import dominio.Sistema;
-import interfaz.PanelLogin;
+
 
 /**
  *
@@ -211,7 +211,7 @@ public class PanelRegistro extends javax.swing.JPanel {
         String password = new String(this.fieldContraseña.getPassword());
         String email = this.txCorreo.getText();
         Funcionario func;
-        if(PanelLogin.passwordAprobada(password) && !PanelLogin.usernameVacio(username) && VentanaPrincipal.isValidEmailAddress(email)){
+        if(this.passwordAprobada(password) && !PanelLogin.usernameVacio(username) && VentanaPrincipal.isValidEmailAddress(email)){
             this.ocultarAdvertencias();
             func = new Funcionario(username,password,email);
             if(!this.modelo.existeFuncionario(func)){
@@ -227,10 +227,12 @@ public class PanelRegistro extends javax.swing.JPanel {
             this.ocultarAdvertencias();
             if(PanelLogin.usernameVacio(username)){
                 this.mostrarAdvertencia(0,advUsuario);
-            }else if(!PanelLogin.passwordAprobada(password)){
-                this.mostrarAdvertencia(2, advPassword);
-            }else if (!VentanaPrincipal.isValidEmailAddress(email)){
+            }
+            else if (!VentanaPrincipal.isValidEmailAddress(email)){
                 this.mostrarAdvertencia(1, advEmail);
+            
+            }else if(!this.passwordAprobada(password)){
+                this.mostrarAdvertencia(2, advPassword);
             }
         }
         return false;
@@ -266,6 +268,9 @@ public class PanelRegistro extends javax.swing.JPanel {
         this.txUsuario.setText("");
         this.fieldContraseña.setText("");
         
+    }
+    public static boolean passwordAprobada(String password){
+        return password.length() >= 8;
     }
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:

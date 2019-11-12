@@ -94,6 +94,10 @@ public class Padrino {
     public ArrayList<Animal> getApadrinados(){
         return apadrinados;
     }
+
+    public void setApadrinados(ArrayList<Animal> apadrinados) {
+        this.apadrinados = apadrinados;
+    }
     
     public void setMonto(int monto){
         montoDonacion = monto;
