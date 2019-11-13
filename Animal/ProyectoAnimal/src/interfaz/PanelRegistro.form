@@ -65,10 +65,8 @@
                       <Component id="lblAdvertEmail" alignment="2" min="-2" pref="317" max="-2" attributes="0"/>
                       <Component id="txCorreo" alignment="2" min="-2" pref="322" max="-2" attributes="0"/>
                       <Component id="fieldContraseña" alignment="2" min="-2" pref="322" max="-2" attributes="0"/>
-                      <Group type="103" alignment="2" groupAlignment="2" attributes="0">
-                          <Component id="btnAtras" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="btnSalir" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAtras" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="btnSalir" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="btnRegistrar" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="367" max="32767" attributes="0"/>

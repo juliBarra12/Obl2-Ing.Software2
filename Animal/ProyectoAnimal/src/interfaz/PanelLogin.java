@@ -7,7 +7,8 @@ package interfaz;
 
 import dominio.Funcionario;
 import dominio.Sistema;
-import encryption.PasswordUtils;
+import encriptación.PasswordUtils;
+import serialización.Persistencia;
 
 /**
  *
@@ -176,7 +177,7 @@ public class PanelLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.modelo.serializar(this.modelo);
+        new Persistencia().serializar(this.modelo);
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
     public boolean verificarDatosIngresados(){

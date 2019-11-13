@@ -50,10 +50,8 @@
                       </Group>
                       <Component id="lblTitulo" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="lblAdvertUsuario" alignment="2" min="-2" pref="322" max="-2" attributes="0"/>
-                      <Group type="103" alignment="2" groupAlignment="2" attributes="0">
-                          <Component id="btnRegistrar" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
-                          <Component id="btnSalir" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnRegistrar" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="btnSalir" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="btnIngresar" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="lblAdvertPassword" alignment="2" min="-2" pref="322" max="-2" attributes="0"/>
                   </Group>

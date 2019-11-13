@@ -6,6 +6,7 @@
 package interfaz;
 import dominio.Funcionario;
 import dominio.Sistema;
+import serialización.Persistencia;
 
 
 /**
@@ -201,7 +202,7 @@ public class PanelRegistro extends javax.swing.JPanel {
     
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if(this.verificarDatosIngresados()){
-            this.modelo.serializar(this.modelo);
+            new Persistencia().serializar(this.modelo);
             this.ventana.mostrarPanelLogin();
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed

@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import serialización.Persistencia;
 
 /**
  *
@@ -100,7 +101,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-            sistema.serializar(sistema);
+            new Persistencia().serializar(sistema);
             System.exit(0);
         } 
         });
