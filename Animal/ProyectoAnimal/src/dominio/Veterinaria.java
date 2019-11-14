@@ -115,7 +115,7 @@ public class Veterinaria implements Serializable {
 
     @Override
     public String toString() {
-        return "Veterinaria{" + "nombre=" + nombre + ", actividadesAgendadas=" + actividadesAgendadas + ", horaInicial=" + horaInicial + ", horaFinal=" + horaFinal + '}';
+        return this.nombre;
     }
 
 }
