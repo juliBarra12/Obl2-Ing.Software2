@@ -2497,14 +2497,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 String motivo = (String) calComboMotivo.getSelectedItem();
                 
                 VisitaVeterinaria visita = new VisitaVeterinaria(nombreAct, time, usuario, perro, fueRealizada, fechaSeleccionada, vet, motivo);
-                if(!this.sistema.getVeterinarias().isEmpty()){
+                
                      vet = sistema.buscarVetPorNombre(calComboVeterinaria.getSelectedItem().toString());
                      if (vet.agendarActividad(visita)) {
                         sistema.anadirActividad(visita);
                         sistema.getVisitas().add(visita);
                     if (calComboHora.getSelectedIndex() != 0) {
                         timerNuevo(visita);
-                    }
+                    
                 }
                     calLblAdvertencia.setText("Se agrego la visita a la veterinaria con éxito");
                     calLstActividades.setEnabled(true);
