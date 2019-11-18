@@ -62,7 +62,7 @@ public class Adopcion implements Serializable{
     
     @Override
     public String toString(){
-        return "";
+        return this.nombre+" "+this.apellido;
     }
     
     

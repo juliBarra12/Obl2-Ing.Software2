@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,18 +91,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.sistema.agregarTipo("gato");
         this.sistema.agregarTipo("caballo");
         this.sistema.agregarTipo("vaca");
-        this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
-        this.animalesCombo.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
-        this.calComboAnimal.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
-        this.calComboUsuario.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
-        this.usuarioComboUsuarios.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
-        this.cbPadrinos.setModel(new DefaultComboBoxModel(this.sistema.getListaPadrinos().toArray()));
-        this.calComboVeterinaria.setModel(new DefaultComboBoxModel(this.sistema.getVeterinarias().toArray()));
-        this.cargarVeterinariasAlSistema();
-        if(this.sistema.getListaPadrinos().toArray().length > 0){
-            this.cbPadrinos.setSelectedIndex(0);
-        }
-        this.lstAnimalesApadrinar.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        this.cargarDatosListas();
          this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -110,6 +99,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.exit(0);
         } 
         });
+    } 
+    public void cargarDatosListas(){
+        this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
+        this.animalesCombo.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
+        this.calComboAnimal.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
+        this.calComboUsuario.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
+        this.usuarioComboUsuarios.setModel(new DefaultComboBoxModel(this.sistema.getUsuarios().toArray()));
+        if(this.sistema.getUsuarios().toArray().length > 0){
+            this.usuarioComboUsuarios.setSelectedIndex(0);
+        }
+        
+        this.calComboVeterinaria.setModel(new DefaultComboBoxModel(this.sistema.getVeterinarias().toArray()));
+        this.cbAdopciones.setModel(new DefaultComboBoxModel(this.sistema.getListaAdopciones().toArray()));
+        if(this.sistema.getListaAdopciones().toArray().length > 0){
+            this.cbAdopciones.setSelectedIndex(0);
+        }
+        this.cargarVeterinariasAlSistema();
+        this.cbPadrinos.setModel(new DefaultComboBoxModel(this.sistema.getListaPadrinos().toArray()));
+        if(this.sistema.getListaPadrinos().toArray().length > 0){
+            this.cbPadrinos.setSelectedIndex(0);
+        }
+        this.lstAnimalesApadrinar.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
     
     public void resetearPestanaPerros() {
