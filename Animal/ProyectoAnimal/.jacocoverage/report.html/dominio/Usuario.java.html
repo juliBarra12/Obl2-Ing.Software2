@@ -55,8 +55,18 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-<span class="fc" id="L58">        return &quot;Nombre=&quot; + nombre + &quot;, mail=&quot; + mail + '}';</span>
+<span class="fc" id="L58">        return this.nombre;</span>
     }
 
+    @Override
+    public boolean equals(Object o){
+<span class="fc" id="L63">        Usuario user = null;</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if(o instanceof Usuario){</span>
+<span class="fc" id="L65">            user = (Usuario)o;</span>
+        }else {
+<span class="fc" id="L67">            return false;</span>
+        }
+<span class="fc" id="L69">        return this.nombre.equals(user.getNombre());</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

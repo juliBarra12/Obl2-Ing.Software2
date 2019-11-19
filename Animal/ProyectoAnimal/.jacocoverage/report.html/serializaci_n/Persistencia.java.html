@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Persistencia.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProyectoAnimal&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">serialización</a> &gt; <span class="el_source">Persistencia.java</span></div><h1>Persistencia.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package serialización;
+
+import dominio.Sistema;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+/**
+ *
+ * @author lucascastro
+ */
+public class Persistencia {
+    
+    private FileInputStream inputArchivo;
+    private FileOutputStream archivoGrabacion;
+    
+    
+<span class="nc" id="L25">    public Persistencia(){</span>
+        
+<span class="nc" id="L27">    }</span>
+    
+<span class="nc" id="L29">    public Persistencia(Object o){</span>
+<span class="nc" id="L30">        this.serializar(o);</span>
+<span class="nc" id="L31">    }</span>
+<span class="nc" id="L32">    public Persistencia(String archivo){</span>
+<span class="nc" id="L33">        this.deserializar(archivo);</span>
+<span class="nc" id="L34">    }</span>
+    
+        public void serializar(Object obj) {
+<span class="nc" id="L37">        String archivo = &quot;&quot;;</span>
+<span class="nc" id="L38">        this.archivoGrabacion = null;</span>
+<span class="nc" id="L39">        ObjectOutputStream out = null;</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (obj instanceof Sistema) {</span>
+<span class="nc" id="L42">            archivo = &quot;sistema.txt&quot;;</span>
+        }
+
+        try {
+<span class="nc" id="L46">            archivoGrabacion = new FileOutputStream(archivo);</span>
+<span class="nc" id="L47">            out = new ObjectOutputStream(archivoGrabacion);</span>
+<span class="nc" id="L48">            out.writeObject(obj);</span>
+<span class="nc" id="L49">            System.out.println(&quot;Sistema serializado correctamente&quot;); </span>
+<span class="nc" id="L50">        } catch (IOException e) {</span>
+<span class="nc" id="L51">            System.out.println(&quot;No pudo escribir&quot;);</span>
+            
+        } finally {
+
+<span class="nc bnc" id="L55" title="All 6 branches missed.">            if (out != null) {</span>
+                try {
+<span class="nc" id="L57">                    out.flush();</span>
+<span class="nc" id="L58">                    out.close();</span>
+<span class="nc" id="L59">                } catch (IOException e) {</span>
+<span class="nc" id="L60">                    System.out.println(&quot;error al cerrar ObjectWriter&quot;);</span>
+<span class="nc" id="L61">                }</span>
+            }
+
+<span class="nc bnc" id="L64" title="All 6 branches missed.">            if (archivoGrabacion != null) {</span>
+                try {
+<span class="nc" id="L66">                    archivoGrabacion.flush();</span>
+<span class="nc" id="L67">                    archivoGrabacion.close();</span>
+<span class="nc" id="L68">                } catch (IOException e) {</span>
+<span class="nc" id="L69">                    System.out.println(&quot;error al cerrar archivo&quot;);</span>
+<span class="nc" id="L70">                }</span>
+            }
+
+        }
+<span class="nc" id="L74">    }</span>
+    
+    public Sistema deserializar(String archivo) {
+    
+<span class="nc" id="L78">        this.inputArchivo = null;</span>
+<span class="nc" id="L79">        ObjectInputStream in = null;</span>
+<span class="nc" id="L80">        Sistema retorno = new Sistema();</span>
+        
+        try {
+<span class="nc" id="L83">             inputArchivo = new FileInputStream(archivo);</span>
+<span class="nc" id="L84">             in = new ObjectInputStream(inputArchivo);</span>
+             
+             
+<span class="nc" id="L87">             retorno = (Sistema)in.readObject();</span>
+<span class="nc" id="L88">             System.out.println(&quot;Sistema deserializado correctamente&quot;);</span>
+<span class="nc" id="L89">        } catch(IOException e) {</span>
+<span class="nc" id="L90">            System.out.println(&quot;No se pudo leer&quot;);</span>
+            
+        }
+<span class="nc" id="L93">        catch(ClassNotFoundException ex) </span>
+        { 
+<span class="nc" id="L95">            System.out.println(&quot;ClassNotFoundException is caught&quot;); </span>
+        }
+        finally {
+        
+<span class="nc bnc" id="L99" title="All 8 branches missed.">            if (inputArchivo != null) {</span>
+                try {
+                    
+<span class="nc" id="L102">                    inputArchivo.close();</span>
+<span class="nc" id="L103">                } catch (IOException e) {</span>
+<span class="nc" id="L104">                    System.out.println(&quot;error al cerrar archivo&quot;);</span>
+<span class="nc" id="L105">                }</span>
+            }
+
+<span class="nc bnc" id="L108" title="All 8 branches missed.">            if (in != null) {</span>
+                try {
+                    
+<span class="nc" id="L111">                    in.close();</span>
+<span class="nc" id="L112">                } catch (IOException e) {</span>
+<span class="nc" id="L113">                    System.out.println(&quot;error al cerrar lector&quot;);</span>
+<span class="nc" id="L114">                }</span>
+            }
+        
+        }
+  
+<span class="nc" id="L119">     return retorno;   </span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

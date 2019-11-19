@@ -2,13 +2,13 @@
 
 
 
-import interfaz.VentanaPrincipal;
+import serialización.Persistencia;
 import interfaz.VentanaRegistroLogin;
 
 <span class="nc" id="L8">public class Main {</span>
     public static void main(String[] args) {
-<span class="nc" id="L10">        Sistema sis = new Sistema();</span>
-<span class="nc" id="L11">        sis = sis.deserializar(&quot;sistema.txt&quot;);</span>
+<span class="nc" id="L10">        Sistema sis = new Sistema(); </span>
+<span class="nc" id="L11">        sis = new Persistencia().deserializar(&quot;sistema.txt&quot;);</span>
 <span class="nc" id="L12">        VentanaRegistroLogin ventana = new VentanaRegistroLogin(sis);</span>
 <span class="nc" id="L13">        ventana.inicializarVentana();</span>
        

@@ -5,16 +5,138 @@
  */
 package dominio;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  *
  * @author juli
  */
-<span class="nc" id="L12">public class Padrino {</span>
+public class Padrino implements Serializable {
     
     private String nombre;
-    private Animal apadrinado;
+    private String apellido;
+    private int telefono;
+    private String email;
+    private String ciudad;
+    private String pais;
+    private ArrayList&lt;Animal&gt; apadrinados;
     private int montoDonacion;
     private String metodoPago;
+    private String moneda;
+    private String frecuenciaDonacion;
+    
+<span class="fc" id="L29">    public Padrino(String nombre, String apellido, int telefono, String email, String ciudad, String pais, int monto, String metodo, String moneda, String frecuencia) {</span>
+<span class="fc" id="L30">        setNombre(nombre);</span>
+<span class="fc" id="L31">        setApellido(apellido);</span>
+<span class="fc" id="L32">        setTelefono(telefono);</span>
+<span class="fc" id="L33">        setEmail(email);</span>
+<span class="fc" id="L34">        setCiudad(ciudad);</span>
+<span class="fc" id="L35">        setPais(pais);</span>
+<span class="fc" id="L36">        setMonto(monto);</span>
+<span class="fc" id="L37">        setMetodoPago(metodo);</span>
+<span class="fc" id="L38">        setMoneda(moneda);</span>
+<span class="fc" id="L39">        setFrecuencia(frecuencia);</span>
+<span class="fc" id="L40">        this.apadrinados = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L41">    }</span>
+    
+    public void setNombre(String unNombre){
+<span class="fc" id="L44">        nombre = unNombre;</span>
+<span class="fc" id="L45">    }</span>
+    
+    public String getNombre(){
+<span class="fc" id="L48">        return nombre;</span>
+    }
+    
+    public void setApellido(String elApellido){
+<span class="fc" id="L52">        apellido = elApellido;</span>
+<span class="fc" id="L53">    }</span>
+    
+    public String getApellido(){
+<span class="fc" id="L56">        return apellido;</span>
+    }
+    
+    public void setTelefono(int elTelefono){
+<span class="fc" id="L60">        telefono = elTelefono;</span>
+<span class="fc" id="L61">    }</span>
+    
+    public int getTelefono(){
+<span class="fc" id="L64">        return telefono;</span>
+    }
+    
+    public void setEmail(String elEmail){
+<span class="fc" id="L68">        email = elEmail;</span>
+<span class="fc" id="L69">    }</span>
+    
+    public String getEmail(){
+<span class="fc" id="L72">        return email;</span>
+    }
+    
+    public void setCiudad(String laCiudad){
+<span class="fc" id="L76">        ciudad = laCiudad;</span>
+<span class="fc" id="L77">    }</span>
+    
+    public String getCiudad(){
+<span class="fc" id="L80">        return ciudad;</span>
+    }
+    
+    public void setPais(String elPais){
+<span class="fc" id="L84">        pais = elPais;</span>
+<span class="fc" id="L85">    }</span>
+    
+    public String getPais(){
+<span class="fc" id="L88">        return pais;</span>
+    }
+    
+    public void addAnimalApadrinado(Animal mascota){
+<span class="fc" id="L92">        apadrinados.add(mascota);</span>
+<span class="fc" id="L93">    }</span>
+    
+    public ArrayList&lt;Animal&gt; getApadrinados(){
+<span class="fc" id="L96">        return apadrinados;</span>
+    }
+
+    public void setApadrinados(ArrayList&lt;Animal&gt; apadrinados) {
+<span class="fc" id="L100">        this.apadrinados = apadrinados;</span>
+<span class="fc" id="L101">    }</span>
+    
+    public void setMonto(int monto){
+<span class="fc" id="L104">        montoDonacion = monto;</span>
+<span class="fc" id="L105">    }</span>
+    
+    public int getMonto(){
+<span class="fc" id="L108">        return montoDonacion;</span>
+    }
+    
+    public void setMetodoPago(String metodo){
+<span class="fc" id="L112">        metodoPago = metodo;</span>
+<span class="fc" id="L113">    }</span>
+    
+    public String getMetodo(){
+<span class="fc" id="L116">        return metodoPago;</span>
+    }
+    
+    public void setMoneda(String unaMoneda){
+<span class="fc" id="L120">        moneda = unaMoneda;</span>
+<span class="fc" id="L121">    }</span>
+    
+    public String getMoneda(){
+<span class="fc" id="L124">        return moneda;</span>
+    }
+    
+    public void setFrecuencia(String frecuencia){
+<span class="fc" id="L128">        frecuenciaDonacion = frecuencia;</span>
+<span class="fc" id="L129">    }</span>
+    
+    public String getFrecuencia(){
+<span class="fc" id="L132">        return frecuenciaDonacion;</span>
+    }
+    
+    @Override
+    //Agregar los animales apadrinados
+    public String toString(){
+<span class="fc" id="L138">        return this.nombre;</span>
+    }
     
     
 }

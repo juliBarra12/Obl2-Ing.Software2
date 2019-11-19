@@ -6,7 +6,8 @@
 package interfaz;
 import dominio.Funcionario;
 import dominio.Sistema;
-import interfaz.PanelLogin;
+import serialización.Persistencia;
+
 
 /**
  *
@@ -17,12 +18,12 @@ public class PanelRegistro extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistro
      */
-<span class="nc" id="L20">    public PanelRegistro(VentanaRegistroLogin vent,Sistema sistema) {</span>
-<span class="nc" id="L21">        initComponents();</span>
-<span class="nc" id="L22">        this.ventana = vent;</span>
-<span class="nc" id="L23">        this.modelo = sistema;</span>
-<span class="nc" id="L24">        this.ocultarAdvertencias();</span>
-<span class="nc" id="L25">    }</span>
+<span class="nc" id="L21">    public PanelRegistro(VentanaRegistroLogin vent,Sistema sistema) {</span>
+<span class="nc" id="L22">        initComponents();</span>
+<span class="nc" id="L23">        this.ventana = vent;</span>
+<span class="nc" id="L24">        this.modelo = sistema;</span>
+<span class="nc" id="L25">        this.ocultarAdvertencias();</span>
+<span class="nc" id="L26">    }</span>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,115 +34,114 @@ public class PanelRegistro extends javax.swing.JPanel {
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<span class="nc" id="L36">        pnlLogin = new javax.swing.JPanel();</span>
-<span class="nc" id="L37">        lblTitulo = new javax.swing.JLabel();</span>
-<span class="nc" id="L38">        lblUsuario = new javax.swing.JLabel();</span>
-<span class="nc" id="L39">        txUsuario = new javax.swing.JTextField();</span>
-<span class="nc" id="L40">        lblContraseña = new javax.swing.JLabel();</span>
-<span class="nc" id="L41">        fieldContraseña = new javax.swing.JPasswordField();</span>
-<span class="nc" id="L42">        txCorreo = new javax.swing.JTextField();</span>
-<span class="nc" id="L43">        lblCorreo = new javax.swing.JLabel();</span>
-<span class="nc" id="L44">        btnRegistrar = new javax.swing.JButton();</span>
-<span class="nc" id="L45">        btnAtras = new javax.swing.JButton();</span>
-<span class="nc" id="L46">        lblAdvertUsuario = new javax.swing.JLabel();</span>
-<span class="nc" id="L47">        lblAdvertEmail = new javax.swing.JLabel();</span>
-<span class="nc" id="L48">        lblAdvertPassword = new javax.swing.JLabel();</span>
-<span class="nc" id="L49">        btnSalir = new javax.swing.JButton();</span>
+<span class="nc" id="L37">        pnlLogin = new javax.swing.JPanel();</span>
+<span class="nc" id="L38">        lblTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L39">        lblUsuario = new javax.swing.JLabel();</span>
+<span class="nc" id="L40">        txUsuario = new javax.swing.JTextField();</span>
+<span class="nc" id="L41">        lblContraseña = new javax.swing.JLabel();</span>
+<span class="nc" id="L42">        fieldContraseña = new javax.swing.JPasswordField();</span>
+<span class="nc" id="L43">        txCorreo = new javax.swing.JTextField();</span>
+<span class="nc" id="L44">        lblCorreo = new javax.swing.JLabel();</span>
+<span class="nc" id="L45">        btnRegistrar = new javax.swing.JButton();</span>
+<span class="nc" id="L46">        btnAtras = new javax.swing.JButton();</span>
+<span class="nc" id="L47">        lblAdvertUsuario = new javax.swing.JLabel();</span>
+<span class="nc" id="L48">        lblAdvertEmail = new javax.swing.JLabel();</span>
+<span class="nc" id="L49">        lblAdvertPassword = new javax.swing.JLabel();</span>
+<span class="nc" id="L50">        btnSalir = new javax.swing.JButton();</span>
 
-<span class="nc" id="L51">        pnlLogin.setBackground(new java.awt.Color(102, 102, 255));</span>
+<span class="nc" id="L52">        pnlLogin.setBackground(new java.awt.Color(204, 204, 204));</span>
 
-<span class="nc" id="L53">        lblTitulo.setFont(new java.awt.Font(&quot;Dialog&quot;, 1, 18)); // NOI18N</span>
-<span class="nc" id="L54">        lblTitulo.setForeground(new java.awt.Color(0, 0, 0));</span>
-<span class="nc" id="L55">        lblTitulo.setText(&quot;Registro&quot;);</span>
+<span class="nc" id="L54">        lblTitulo.setFont(new java.awt.Font(&quot;Dialog&quot;, 1, 18)); // NOI18N</span>
+<span class="nc" id="L55">        lblTitulo.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="nc" id="L56">        lblTitulo.setText(&quot;Registro&quot;);</span>
 
-<span class="nc" id="L57">        lblUsuario.setForeground(new java.awt.Color(51, 51, 51));</span>
-<span class="nc" id="L58">        lblUsuario.setText(&quot;Nombre De Usuario&quot;);</span>
+<span class="nc" id="L58">        lblUsuario.setForeground(new java.awt.Color(51, 51, 51));</span>
+<span class="nc" id="L59">        lblUsuario.setText(&quot;Nombre De Usuario&quot;);</span>
 
-<span class="nc" id="L60">        txUsuario.setBackground(java.awt.SystemColor.controlLtHighlight);</span>
-<span class="nc" id="L61">        txUsuario.setForeground(new java.awt.Color(0, 0, 0));</span>
-<span class="nc" id="L62">        txUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
-<span class="nc" id="L63">        txUsuario.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L61">        txUsuario.setBackground(java.awt.SystemColor.controlLtHighlight);</span>
+<span class="nc" id="L62">        txUsuario.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="nc" id="L63">        txUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
+<span class="nc" id="L64">        txUsuario.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L65">                txUsuarioActionPerformed(evt);</span>
-<span class="nc" id="L66">            }</span>
+<span class="nc" id="L66">                txUsuarioActionPerformed(evt);</span>
+<span class="nc" id="L67">            }</span>
         });
 
-<span class="nc" id="L69">        lblContraseña.setForeground(new java.awt.Color(51, 51, 51));</span>
-<span class="nc" id="L70">        lblContraseña.setText(&quot;Contraseña&quot;);</span>
+<span class="nc" id="L70">        lblContraseña.setForeground(new java.awt.Color(51, 51, 51));</span>
+<span class="nc" id="L71">        lblContraseña.setText(&quot;Contraseña&quot;);</span>
 
-<span class="nc" id="L72">        fieldContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
-<span class="nc" id="L73">        fieldContraseña.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L73">        fieldContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
+<span class="nc" id="L74">        fieldContraseña.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L75">                fieldContraseñaActionPerformed(evt);</span>
-<span class="nc" id="L76">            }</span>
+<span class="nc" id="L76">                fieldContraseñaActionPerformed(evt);</span>
+<span class="nc" id="L77">            }</span>
         });
 
-<span class="nc" id="L79">        txCorreo.setBackground(java.awt.SystemColor.controlLtHighlight);</span>
-<span class="nc" id="L80">        txCorreo.setForeground(new java.awt.Color(0, 0, 0));</span>
-<span class="nc" id="L81">        txCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
-<span class="nc" id="L82">        txCorreo.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L80">        txCorreo.setBackground(java.awt.SystemColor.controlLtHighlight);</span>
+<span class="nc" id="L81">        txCorreo.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="nc" id="L82">        txCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</span>
+<span class="nc" id="L83">        txCorreo.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L84">                txCorreoActionPerformed(evt);</span>
-<span class="nc" id="L85">            }</span>
+<span class="nc" id="L85">                txCorreoActionPerformed(evt);</span>
+<span class="nc" id="L86">            }</span>
         });
 
-<span class="nc" id="L88">        lblCorreo.setForeground(new java.awt.Color(51, 51, 51));</span>
-<span class="nc" id="L89">        lblCorreo.setText(&quot;Correo electronico&quot;);</span>
+<span class="nc" id="L89">        lblCorreo.setForeground(new java.awt.Color(51, 51, 51));</span>
+<span class="nc" id="L90">        lblCorreo.setText(&quot;Correo electronico&quot;);</span>
 
-<span class="nc" id="L91">        btnRegistrar.setText(&quot;Registrar&quot;);</span>
-<span class="nc" id="L92">        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L92">        btnRegistrar.setText(&quot;Registrar&quot;);</span>
+<span class="nc" id="L93">        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L94">                btnRegistrarActionPerformed(evt);</span>
-<span class="nc" id="L95">            }</span>
+<span class="nc" id="L95">                btnRegistrarActionPerformed(evt);</span>
+<span class="nc" id="L96">            }</span>
         });
 
-<span class="nc" id="L98">        btnAtras.setText(&quot;Atras&quot;);</span>
-<span class="nc" id="L99">        btnAtras.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L99">        btnAtras.setText(&quot;Atras&quot;);</span>
+<span class="nc" id="L100">        btnAtras.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L101">                btnAtrasActionPerformed(evt);</span>
-<span class="nc" id="L102">            }</span>
+<span class="nc" id="L102">                btnAtrasActionPerformed(evt);</span>
+<span class="nc" id="L103">            }</span>
         });
 
-<span class="nc" id="L105">        lblAdvertUsuario.setForeground(new java.awt.Color(255, 0, 0));</span>
-<span class="nc" id="L106">        lblAdvertUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
-<span class="nc" id="L107">        lblAdvertUsuario.setText(&quot;jLabel1&quot;);</span>
+<span class="nc" id="L106">        lblAdvertUsuario.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L107">        lblAdvertUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L108">        lblAdvertUsuario.setText(&quot;jLabel1&quot;);</span>
 
-<span class="nc" id="L109">        lblAdvertEmail.setForeground(new java.awt.Color(255, 0, 0));</span>
-<span class="nc" id="L110">        lblAdvertEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
-<span class="nc" id="L111">        lblAdvertEmail.setText(&quot;jLabel1&quot;);</span>
+<span class="nc" id="L110">        lblAdvertEmail.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L111">        lblAdvertEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L112">        lblAdvertEmail.setText(&quot;jLabel1&quot;);</span>
 
-<span class="nc" id="L113">        lblAdvertPassword.setForeground(new java.awt.Color(255, 0, 0));</span>
-<span class="nc" id="L114">        lblAdvertPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
-<span class="nc" id="L115">        lblAdvertPassword.setText(&quot;jLabel1&quot;);</span>
+<span class="nc" id="L114">        lblAdvertPassword.setForeground(new java.awt.Color(255, 0, 0));</span>
+<span class="nc" id="L115">        lblAdvertPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L116">        lblAdvertPassword.setText(&quot;jLabel1&quot;);</span>
 
-<span class="nc" id="L117">        btnSalir.setText(&quot;Salir&quot;);</span>
-<span class="nc" id="L118">        btnSalir.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L118">        btnSalir.setText(&quot;Salir&quot;);</span>
+<span class="nc" id="L119">        btnSalir.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L120">                btnSalirActionPerformed(evt);</span>
-<span class="nc" id="L121">            }</span>
+<span class="nc" id="L121">                btnSalirActionPerformed(evt);</span>
+<span class="nc" id="L122">            }</span>
         });
 
-<span class="nc" id="L124">        javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);</span>
-<span class="nc" id="L125">        pnlLogin.setLayout(pnlLoginLayout);</span>
-<span class="nc" id="L126">        pnlLoginLayout.setHorizontalGroup(</span>
-<span class="nc" id="L127">            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L128">            .addGroup(pnlLoginLayout.createSequentialGroup()</span>
-<span class="nc" id="L129">                .addContainerGap(367, Short.MAX_VALUE)</span>
-<span class="nc" id="L130">                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L131">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)</span>
-<span class="nc" id="L132">                        .addComponent(lblAdvertUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L133">                        .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L134">                        .addComponent(lblTitulo))</span>
-<span class="nc" id="L135">                    .addComponent(lblUsuario)</span>
-<span class="nc" id="L136">                    .addComponent(lblCorreo)</span>
-<span class="nc" id="L137">                    .addComponent(lblContraseña)</span>
-<span class="nc" id="L138">                    .addComponent(lblAdvertPassword, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L139">                    .addComponent(lblAdvertEmail, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L140">                    .addComponent(txCorreo, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L141">                    .addComponent(fieldContraseña, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L142">                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)</span>
-<span class="nc" id="L143">                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L144">                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L125">        javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);</span>
+<span class="nc" id="L126">        pnlLogin.setLayout(pnlLoginLayout);</span>
+<span class="nc" id="L127">        pnlLoginLayout.setHorizontalGroup(</span>
+<span class="nc" id="L128">            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L129">            .addGroup(pnlLoginLayout.createSequentialGroup()</span>
+<span class="nc" id="L130">                .addContainerGap(367, Short.MAX_VALUE)</span>
+<span class="nc" id="L131">                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L132">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)</span>
+<span class="nc" id="L133">                        .addComponent(lblAdvertUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L134">                        .addComponent(txUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L135">                        .addComponent(lblTitulo))</span>
+<span class="nc" id="L136">                    .addComponent(lblUsuario)</span>
+<span class="nc" id="L137">                    .addComponent(lblCorreo)</span>
+<span class="nc" id="L138">                    .addComponent(lblContraseña)</span>
+<span class="nc" id="L139">                    .addComponent(lblAdvertPassword, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L140">                    .addComponent(lblAdvertEmail, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L141">                    .addComponent(txCorreo, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L142">                    .addComponent(fieldContraseña, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L143">                    .addComponent(btnAtras, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L144">                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
 <span class="nc" id="L145">                    .addComponent(btnRegistrar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
 <span class="nc" id="L146">                .addContainerGap(367, Short.MAX_VALUE))</span>
         );
@@ -201,7 +201,7 @@ public class PanelRegistro extends javax.swing.JPanel {
     
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 <span class="nc bnc" id="L203" title="All 2 branches missed.">        if(this.verificarDatosIngresados()){</span>
-<span class="nc" id="L204">            this.modelo.serializar(this.modelo);</span>
+<span class="nc" id="L204">            new Persistencia().serializar(this.modelo);</span>
 <span class="nc" id="L205">            this.ventana.mostrarPanelLogin();</span>
         }
 <span class="nc" id="L207">    }//GEN-LAST:event_btnRegistrarActionPerformed</span>
@@ -211,7 +211,7 @@ public class PanelRegistro extends javax.swing.JPanel {
 <span class="nc" id="L211">        String password = new String(this.fieldContraseña.getPassword());</span>
 <span class="nc" id="L212">        String email = this.txCorreo.getText();</span>
         Funcionario func;
-<span class="nc bnc" id="L214" title="All 6 branches missed.">        if(PanelLogin.passwordAprobada(password) &amp;&amp; !PanelLogin.usernameVacio(username) &amp;&amp; VentanaPrincipal.isValidEmailAddress(email)){</span>
+<span class="nc bnc" id="L214" title="All 6 branches missed.">        if(this.passwordAprobada(password) &amp;&amp; !PanelLogin.usernameVacio(username) &amp;&amp; VentanaPrincipal.isValidEmailAddress(email)){</span>
 <span class="nc" id="L215">            this.ocultarAdvertencias();</span>
 <span class="nc" id="L216">            func = new Funcionario(username,password,email);</span>
 <span class="nc bnc" id="L217" title="All 2 branches missed.">            if(!this.modelo.existeFuncionario(func)){</span>
@@ -227,68 +227,73 @@ public class PanelRegistro extends javax.swing.JPanel {
 <span class="nc" id="L227">            this.ocultarAdvertencias();</span>
 <span class="nc bnc" id="L228" title="All 2 branches missed.">            if(PanelLogin.usernameVacio(username)){</span>
 <span class="nc" id="L229">                this.mostrarAdvertencia(0,advUsuario);</span>
-<span class="nc bnc" id="L230" title="All 2 branches missed.">            }else if(!PanelLogin.passwordAprobada(password)){</span>
-<span class="nc" id="L231">                this.mostrarAdvertencia(2, advPassword);</span>
-<span class="nc bnc" id="L232" title="All 2 branches missed.">            }else if (!VentanaPrincipal.isValidEmailAddress(email)){</span>
-<span class="nc" id="L233">                this.mostrarAdvertencia(1, advEmail);</span>
+            }
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            else if (!VentanaPrincipal.isValidEmailAddress(email)){</span>
+<span class="nc" id="L232">                this.mostrarAdvertencia(1, advEmail);</span>
+            
+<span class="nc bnc" id="L234" title="All 2 branches missed.">            }else if(!this.passwordAprobada(password)){</span>
+<span class="nc" id="L235">                this.mostrarAdvertencia(2, advPassword);</span>
             }
         }
-<span class="nc" id="L236">        return false;</span>
+<span class="nc" id="L238">        return false;</span>
     }
     public void mostrarAdvertencia(int adv,String texto){
-<span class="nc bnc" id="L239" title="All 4 branches missed.">        switch(adv){</span>
+<span class="nc bnc" id="L241" title="All 4 branches missed.">        switch(adv){</span>
             case 0: 
-<span class="nc" id="L241">                this.lblAdvertUsuario.setText(texto);</span>
-<span class="nc" id="L242">                this.lblAdvertUsuario.setVisible(true);</span>
-<span class="nc" id="L243">            break;</span>
+<span class="nc" id="L243">                this.lblAdvertUsuario.setText(texto);</span>
+<span class="nc" id="L244">                this.lblAdvertUsuario.setVisible(true);</span>
+<span class="nc" id="L245">            break;</span>
             case 1: 
-<span class="nc" id="L245">                this.lblAdvertEmail.setText(texto);</span>
-<span class="nc" id="L246">                this.lblAdvertEmail.setVisible(true);</span>
-<span class="nc" id="L247">            break;</span>
+<span class="nc" id="L247">                this.lblAdvertEmail.setText(texto);</span>
+<span class="nc" id="L248">                this.lblAdvertEmail.setVisible(true);</span>
+<span class="nc" id="L249">            break;</span>
             case 2:
-<span class="nc" id="L249">                this.lblAdvertPassword.setText(texto);</span>
-<span class="nc" id="L250">                this.lblAdvertPassword.setVisible(true);</span>
-<span class="nc" id="L251">            break;</span>
+<span class="nc" id="L251">                this.lblAdvertPassword.setText(texto);</span>
+<span class="nc" id="L252">                this.lblAdvertPassword.setVisible(true);</span>
+<span class="nc" id="L253">            break;</span>
             default:
-<span class="nc" id="L253">                this.lblAdvertUsuario.setVisible(false);</span>
-<span class="nc" id="L254">                this.lblAdvertEmail.setVisible(false);</span>
-<span class="nc" id="L255">                this.lblAdvertPassword.setVisible(false);</span>
+<span class="nc" id="L255">                this.lblAdvertUsuario.setVisible(false);</span>
+<span class="nc" id="L256">                this.lblAdvertEmail.setVisible(false);</span>
+<span class="nc" id="L257">                this.lblAdvertPassword.setVisible(false);</span>
             break;
     }
-<span class="nc" id="L258">}</span>
+<span class="nc" id="L260">}</span>
     public void ocultarAdvertencias(){
-<span class="nc" id="L260">        this.lblAdvertPassword.setVisible(false);</span>
-<span class="nc" id="L261">        this.lblAdvertEmail.setVisible(false);</span>
-<span class="nc" id="L262">        this.lblAdvertUsuario.setVisible(false);</span>
-<span class="nc" id="L263">    }</span>
+<span class="nc" id="L262">        this.lblAdvertPassword.setVisible(false);</span>
+<span class="nc" id="L263">        this.lblAdvertEmail.setVisible(false);</span>
+<span class="nc" id="L264">        this.lblAdvertUsuario.setVisible(false);</span>
+<span class="nc" id="L265">    }</span>
     public void vaciarFields(){
-<span class="nc" id="L265">        this.txCorreo.setText(&quot;&quot;);</span>
-<span class="nc" id="L266">        this.txUsuario.setText(&quot;&quot;);</span>
-<span class="nc" id="L267">        this.fieldContraseña.setText(&quot;&quot;);</span>
+<span class="nc" id="L267">        this.txCorreo.setText(&quot;&quot;);</span>
+<span class="nc" id="L268">        this.txUsuario.setText(&quot;&quot;);</span>
+<span class="nc" id="L269">        this.fieldContraseña.setText(&quot;&quot;);</span>
         
-<span class="nc" id="L269">    }</span>
+<span class="nc" id="L271">    }</span>
+    public static boolean passwordAprobada(String password){
+<span class="nc bnc" id="L273" title="All 2 branches missed.">        return password.length() &gt;= 8;</span>
+    }
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-<span class="nc" id="L272">        this.ocultarAdvertencias();</span>
-<span class="nc" id="L273">        this.vaciarFields();</span>
-<span class="nc" id="L274">        this.ventana.mostrarPanelLogin();</span>
-<span class="nc" id="L275">    }//GEN-LAST:event_btnAtrasActionPerformed</span>
+<span class="nc" id="L277">        this.ocultarAdvertencias();</span>
+<span class="nc" id="L278">        this.vaciarFields();</span>
+<span class="nc" id="L279">        this.ventana.mostrarPanelLogin();</span>
+<span class="nc" id="L280">    }//GEN-LAST:event_btnAtrasActionPerformed</span>
 
     private void txCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txCorreoActionPerformed
         // TODO add your handling code here:
-<span class="nc" id="L279">    }//GEN-LAST:event_txCorreoActionPerformed</span>
+<span class="nc" id="L284">    }//GEN-LAST:event_txCorreoActionPerformed</span>
 
     private void fieldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldContraseñaActionPerformed
         // TODO add your handling code here:
-<span class="nc" id="L283">    }//GEN-LAST:event_fieldContraseñaActionPerformed</span>
+<span class="nc" id="L288">    }//GEN-LAST:event_fieldContraseñaActionPerformed</span>
 
     private void txUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txUsuarioActionPerformed
         // TODO add your handling code here:
-<span class="nc" id="L287">    }//GEN-LAST:event_txUsuarioActionPerformed</span>
+<span class="nc" id="L292">    }//GEN-LAST:event_txUsuarioActionPerformed</span>
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-<span class="nc" id="L290">        System.exit(0);</span>
-<span class="nc" id="L291">    }//GEN-LAST:event_btnSalirActionPerformed</span>
+<span class="nc" id="L295">        System.exit(0);</span>
+<span class="nc" id="L296">    }//GEN-LAST:event_btnSalirActionPerformed</span>
 
     private final VentanaRegistroLogin ventana;
     private final Sistema modelo;

@@ -104,5 +104,10 @@ public class UsuarioTest {
     public void testGetActividadesSinElementos() {
         assertEquals(null, usuario.getActividades().get(0));
     }
+    
+    @Test
+    public void testEqualsOtroObjeto(){
+        assertEquals(false, usuario.equals("Usuario"));
+    }
 
 }

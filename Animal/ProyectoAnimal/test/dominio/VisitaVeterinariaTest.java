@@ -131,12 +131,12 @@ public class VisitaVeterinariaTest {
         visita.setHora(time);
         visita.setFecha(fecha);
         Usuario usuario = visita.getUsuario();
-        Animal perro = visita.getMascota();
+        Animal mascota = visita.getMascota();
         String nombre = visita.getNombre();
         boolean fueRealizado = visita.getFueRealizado();
         Veterinaria veterinaria = visita.getVeterinaria();
         String resToString = visita.toString();
-        assertEquals("VisitaVeterinaria{" + "nombre=" + nombre + ", hora=" + time + ", responsable=" + usuario + ", perro=" + perro + ", fueRealizado=" + fueRealizado + ", fecha=" + fecha + ", veterinaria=" + veterinaria + '}', resToString);
+        assertEquals("VisitaVeterinaria{" + "nombre=" + nombre + ", hora=" + time + ", responsable=" + usuario + ", mascota=" + mascota + ", fueRealizado=" + fueRealizado + ", fecha=" + fecha + ", veterinaria=" + veterinaria + '}', resToString);
     }
 
     @Test

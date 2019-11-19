@@ -53,7 +53,7 @@ public class Veterinaria implements Serializable {
 <span class="fc" id="L53">        this.actividadesAgendadas = actividadesAgendadas;</span>
 <span class="fc" id="L54">    }</span>
 
-    public boolean AgendarActividad(VisitaVeterinaria act) {
+    public boolean agendarActividad(VisitaVeterinaria act) {
 <span class="fc" id="L57">        int hora = act.getHora().getHour();</span>
 <span class="fc bfc" id="L58" title="All 4 branches covered.">        if (hora &gt;= horaInicial &amp;&amp; hora &lt;= horaFinal) {</span>
 <span class="fc" id="L59">            Fecha fecha = act.getFecha();</span>
@@ -73,7 +73,7 @@ public class Veterinaria implements Serializable {
 <span class="fc" id="L73">        return true;</span>
     }
 
-    public void EliminarActividadAgendada(Actividad act) {
+    public void eliminarActividadAgendada(Actividad act) {
 <span class="fc bfc" id="L77" title="All 2 branches covered.">        if (actividadesAgendadas.contains(act)) {</span>
 <span class="fc" id="L78">            actividadesAgendadas.remove(act);</span>
         }
@@ -115,7 +115,7 @@ public class Veterinaria implements Serializable {
 
     @Override
     public String toString() {
-<span class="fc" id="L118">        return &quot;Veterinaria{&quot; + &quot;nombre=&quot; + nombre + &quot;, actividadesAgendadas=&quot; + actividadesAgendadas + &quot;, horaInicial=&quot; + horaInicial + &quot;, horaFinal=&quot; + horaFinal + '}';</span>
+<span class="fc" id="L118">        return this.nombre;</span>
     }
 
 }

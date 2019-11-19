@@ -10,88 +10,121 @@ public class Animal implements Serializable {
     private double peso;
     private String comentarios;
     private ImageIcon foto;
+    private boolean adoptado;
+    private String tipo;
 
-<span class="fc" id="L14">    public Animal(String nombre, double altura, double peso, String comentarios) { //Sin foto</span>
-<span class="fc" id="L15">        setNombre(nombre);</span>
-<span class="fc" id="L16">        setAltura(altura);</span>
-<span class="fc" id="L17">        setPeso(peso);</span>
-<span class="fc" id="L18">        setComentarios(comentarios);</span>
-<span class="fc" id="L19">        this.foto = null;</span>
-<span class="fc" id="L20">    }</span>
-
-<span class="fc" id="L22">    public Animal() { //Sin foto</span>
-<span class="fc" id="L23">        this.nombre = &quot;Sin-Nombre&quot;;</span>
-<span class="fc" id="L24">        this.altura = 0;</span>
-<span class="fc" id="L25">        this.peso = 0;</span>
-<span class="fc" id="L26">        this.comentarios = &quot;Sin-Comentarios&quot;;</span>
-<span class="fc" id="L27">        this.foto = null;</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L16">    public Animal(String nombre, String tipo, double altura, double peso, String comentarios) { //Sin foto</span>
+<span class="fc" id="L17">        setNombre(nombre);</span>
+<span class="fc" id="L18">        setAltura(altura);</span>
+<span class="fc" id="L19">        setPeso(peso);</span>
+<span class="fc" id="L20">        setComentarios(comentarios);</span>
+<span class="fc" id="L21">        this.foto = null;</span>
+<span class="fc" id="L22">        this.adoptado = false;</span>
+<span class="fc" id="L23">        setTipo(tipo);</span>
+<span class="fc" id="L24">    }</span>
+    public String estadoAdopcion(){
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (this.adoptado) return &quot;ANIMAL ADOPTADO&quot;;</span>
+<span class="fc" id="L27">        return &quot;ANIMAL SIN ADOPTAR&quot;;</span>
+        
+    }
+<span class="fc" id="L30">    public Animal() { //Sin foto</span>
+<span class="fc" id="L31">        this.nombre = &quot;Sin-Nombre&quot;;</span>
+<span class="fc" id="L32">        this.altura = 0;</span>
+<span class="fc" id="L33">        this.peso = 0;</span>
+<span class="fc" id="L34">        this.comentarios = &quot;Sin-Comentarios&quot;;</span>
+<span class="fc" id="L35">        this.foto = null;</span>
+<span class="fc" id="L36">        this.tipo = &quot;&quot;;</span>
+<span class="fc" id="L37">    }</span>
 
     public String getNombre() {
-<span class="fc" id="L31">        return nombre;</span>
+<span class="fc" id="L40">        return nombre;</span>
     }
 
     public final void setNombre(String nombre) {
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (nombre.equals(&quot;&quot;)) {</span>
-<span class="fc" id="L36">            this.nombre = &quot;Sin-Nombre&quot;;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (nombre.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L45">            this.nombre = &quot;Sin-Nombre&quot;;</span>
         } else {
-<span class="fc" id="L38">            this.nombre = nombre;</span>
+<span class="fc" id="L47">            this.nombre = nombre;</span>
         }
 
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L50">    }</span>
 
     public double getAltura() {
-<span class="fc" id="L44">        return altura;</span>
+<span class="fc" id="L53">        return altura;</span>
     }
 
     public final void setAltura(double altura) {
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (altura &lt; 0) {</span>
-<span class="fc" id="L49">            this.altura = 0.0;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (altura &lt; 0) {</span>
+<span class="fc" id="L58">            this.altura = 0.0;</span>
         } else {
-<span class="fc" id="L51">            this.altura = altura;</span>
+<span class="fc" id="L60">            this.altura = altura;</span>
         }
 
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L63">    }</span>
 
     public double getPeso() {
-<span class="fc" id="L57">        return peso;</span>
+<span class="fc" id="L66">        return peso;</span>
     }
 
     public final void setPeso(double peso) {
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (peso &lt; 0) {</span>
-<span class="fc" id="L62">            this.peso = 0.0;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (peso &lt; 0) {</span>
+<span class="fc" id="L71">            this.peso = 0.0;</span>
         } else {
-<span class="fc" id="L64">            this.peso = peso;</span>
+<span class="fc" id="L73">            this.peso = peso;</span>
         }
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L75">    }</span>
 
     public String getComentarios() {
-<span class="fc" id="L69">        return comentarios;</span>
+<span class="fc" id="L78">        return comentarios;</span>
     }
 
     public final void setComentarios(String comentarios) {
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (comentarios.equals(&quot;&quot;)) {</span>
-<span class="fc" id="L74">            this.comentarios = &quot;Sin-Comentarios&quot;;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (comentarios.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L83">            this.comentarios = &quot;Sin-Comentarios&quot;;</span>
 
         } else {
-<span class="fc" id="L77">            this.comentarios = comentarios;</span>
+<span class="fc" id="L86">            this.comentarios = comentarios;</span>
         }
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L88">    }</span>
 
     public ImageIcon getFoto() {
-<span class="fc" id="L82">        return foto;</span>
+<span class="fc" id="L91">        return foto;</span>
     }
 
     public void setFoto(ImageIcon imagen) {
-<span class="fc" id="L86">        this.foto = imagen;</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L95">        this.foto = imagen;</span>
+<span class="fc" id="L96">    }</span>
+    
+    public void adoptar(){
+<span class="fc" id="L99">        this.adoptado = true;</span>
+<span class="fc" id="L100">    }</span>
+    
+    public boolean estaAdoptado(){
+<span class="fc" id="L103">        return adoptado;</span>
+    }
+    
+    public void setTipo(String elTipo){
+<span class="fc" id="L107">        tipo = elTipo;</span>
+<span class="fc" id="L108">    }</span>
+    
+    public String getTipo(){
+<span class="fc" id="L111">        return tipo;</span>
+    }
 
     @Override
     public String toString() {
-<span class="fc" id="L91">        return &quot;Perro{&quot; + &quot;nombre=&quot; + nombre + &quot;, altura=&quot; + altura + &quot;, peso=&quot; + peso + &quot;, comentarios=&quot; + comentarios + '}';</span>
+<span class="fc" id="L116">        return this.nombre;</span>
     }
-
-    
+    @Override
+     public boolean equals(Object o){
+<span class="fc" id="L120">         Animal ani = null;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">         if(o instanceof Animal){</span>
+<span class="fc" id="L122">             ani = (Animal)o;</span>
+         }else{
+<span class="fc" id="L124">             return false;</span>
+         }
+<span class="fc" id="L126">         return this.nombre.equals(ani.getNombre());</span>
+     }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

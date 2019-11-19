@@ -33,6 +33,7 @@ public class Animal implements Serializable {
         this.peso = 0;
         this.comentarios = "Sin-Comentarios";
         this.foto = null;
+        this.tipo = "";
     }
 
     public String getNombre() {

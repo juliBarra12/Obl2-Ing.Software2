@@ -31,15 +31,6 @@ public class VentanaFotoRuta extends javax.swing.JFrame {
         }
 <span class="nc" id="L32">    }</span>
 
-    private ImageIcon crearIcono(String ruta, int tamano) {
-<span class="nc" id="L35">        ImageIcon retorno = null;</span>
-        try {
-<span class="nc" id="L37">            retorno = new ImageIcon(ImageIO.read(getClass().getResource(ruta)).getScaledInstance(tamano, -1, Image.SCALE_SMOOTH));</span>
-<span class="nc" id="L38">        } catch (IOException e) {</span>
-<span class="nc" id="L39">            System.out.println(e);</span>
-<span class="nc" id="L40">        }</span>
-<span class="nc" id="L41">        return retorno;</span>
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,58 +41,58 @@ public class VentanaFotoRuta extends javax.swing.JFrame {
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<span class="nc" id="L53">        jPanel1 = new javax.swing.JPanel();</span>
-<span class="nc" id="L54">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="nc" id="L44">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L45">        jLabel1 = new javax.swing.JLabel();</span>
 
-<span class="nc" id="L56">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L57">        setPreferredSize(new java.awt.Dimension(500, 500));</span>
-<span class="nc" id="L58">        addWindowListener(new java.awt.event.WindowAdapter() {</span>
+<span class="nc" id="L47">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L48">        setPreferredSize(new java.awt.Dimension(500, 500));</span>
+<span class="nc" id="L49">        addWindowListener(new java.awt.event.WindowAdapter() {</span>
             public void windowClosing(java.awt.event.WindowEvent evt) {
-<span class="nc" id="L60">                formWindowClosing(evt);</span>
-<span class="nc" id="L61">            }</span>
+<span class="nc" id="L51">                formWindowClosing(evt);</span>
+<span class="nc" id="L52">            }</span>
         });
 
-<span class="nc" id="L64">        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));</span>
+<span class="nc" id="L55">        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));</span>
 
-<span class="nc" id="L66">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
-<span class="nc" id="L67">        jPanel1.setLayout(jPanel1Layout);</span>
-<span class="nc" id="L68">        jPanel1Layout.setHorizontalGroup(</span>
-<span class="nc" id="L69">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L70">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
-<span class="nc" id="L71">                .addContainerGap()</span>
-<span class="nc" id="L72">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L73">                .addContainerGap(27, Short.MAX_VALUE))</span>
+<span class="nc" id="L57">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L58">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L59">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L60">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L61">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L62">                .addContainerGap()</span>
+<span class="nc" id="L63">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L64">                .addContainerGap(27, Short.MAX_VALUE))</span>
         );
-<span class="nc" id="L75">        jPanel1Layout.setVerticalGroup(</span>
-<span class="nc" id="L76">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L77">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
-<span class="nc" id="L78">                .addContainerGap()</span>
-<span class="nc" id="L79">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L80">                .addContainerGap(104, Short.MAX_VALUE))</span>
-        );
-
-<span class="nc" id="L83">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
-<span class="nc" id="L84">        getContentPane().setLayout(layout);</span>
-<span class="nc" id="L85">        layout.setHorizontalGroup(</span>
-<span class="nc" id="L86">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L87">            .addGroup(layout.createSequentialGroup()</span>
-<span class="nc" id="L88">                .addContainerGap()</span>
-<span class="nc" id="L89">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L90">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
-        );
-<span class="nc" id="L92">        layout.setVerticalGroup(</span>
-<span class="nc" id="L93">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L94">            .addGroup(layout.createSequentialGroup()</span>
-<span class="nc" id="L95">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
-<span class="nc" id="L96">                .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L66">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L67">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L68">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L69">                .addContainerGap()</span>
+<span class="nc" id="L70">                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L71">                .addContainerGap(104, Short.MAX_VALUE))</span>
         );
 
-<span class="nc" id="L99">        pack();</span>
-<span class="nc" id="L100">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+<span class="nc" id="L74">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L75">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L76">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L77">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L78">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L79">                .addContainerGap()</span>
+<span class="nc" id="L80">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L81">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L83">        layout.setVerticalGroup(</span>
+<span class="nc" id="L84">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L85">            .addGroup(layout.createSequentialGroup()</span>
+<span class="nc" id="L86">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L87">                .addGap(0, 0, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L90">        pack();</span>
+<span class="nc" id="L91">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
-<span class="nc" id="L104">    }//GEN-LAST:event_formWindowClosing</span>
+<span class="nc" id="L95">    }//GEN-LAST:event_formWindowClosing</span>
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

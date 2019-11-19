@@ -233,6 +233,9 @@ public class Sistema implements Serializable {
         return listaFechas;
     }
 
+    public ArrayList<Funcionario> getListaFuncionarios(){
+        return this.listafuncionarios;
+    }
     
     public Funcionario buscarFuncionario(Funcionario func){
         for(Funcionario f : this.listafuncionarios){
