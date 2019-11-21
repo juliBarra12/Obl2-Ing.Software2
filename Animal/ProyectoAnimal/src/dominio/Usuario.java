@@ -2,6 +2,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Usuario implements Serializable {
 
@@ -38,7 +39,7 @@ public class Usuario implements Serializable {
     }
 
     public String getMail() {
-        return mail;
+        return mail; 
     }
 
     public void setMail(String mail) {
@@ -67,5 +68,12 @@ public class Usuario implements Serializable {
             return false;
         }
         return this.nombre.equals(user.getNombre());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.nombre);
+        return hash;
     }
 }

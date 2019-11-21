@@ -7,6 +7,7 @@ package dominio;
 
 import encriptación.PasswordUtils;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -67,5 +68,13 @@ public class Funcionario implements Serializable {
             return this.username.equals(func.getUsername()) || this.email.equals(func.getEmail());
         } 
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.username);
+        hash = 97 * hash + Objects.hashCode(this.email);
+        return hash;
     }
 }

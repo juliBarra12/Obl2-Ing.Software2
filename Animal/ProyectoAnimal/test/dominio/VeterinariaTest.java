@@ -259,9 +259,6 @@ public class VeterinariaTest {
     @Test
     public void testToString() {
         String nombre = vet.getNombre();
-        ArrayList<Actividad> actividadesAgendadas = vet.getActividadesAgendadas();
-        int horaInicial = vet.getHoraInicial();
-        int horaFinal = vet.getHoraFinal();
         String resToString = vet.toString();
         assertEquals(nombre, resToString);
     }

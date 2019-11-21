@@ -1,10 +1,9 @@
 package dominio;
 
-import java.io.Serializable;
 import java.time.LocalTime;
 import javax.swing.ImageIcon;
 
-public class Paseo extends Actividad implements Serializable {
+public class Paseo extends Actividad {
 
     private Usuario usuario;
     private Animal mascota;

@@ -19,10 +19,10 @@ public class Adopcion implements Serializable{
     private Animal mascota;
     
     public Adopcion (String nombre, String apellido, int telefono, Animal animal){
-        setNombreAdoptante(nombre);
-        setApellidoAdoptante(apellido);
-        setTelefono(telefono);
-        setAnimal(animal);
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.mascota = animal;
         animal.adoptar();
     }
     

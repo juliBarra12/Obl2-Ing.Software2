@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 
 public class Animal implements Serializable {
@@ -115,6 +116,12 @@ public class Animal implements Serializable {
     public String toString() {
         return this.nombre;
     }
+
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
      public boolean equals(Object o){
          Animal ani = null;
@@ -125,5 +132,14 @@ public class Animal implements Serializable {
          }
          return this.nombre.equals(ani.getNombre());
      }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.nombre);
+        return hash;
+    }
+
+    
 
 }

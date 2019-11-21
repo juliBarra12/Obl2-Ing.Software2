@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList; 
+import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +48,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private boolean agregarUsuarioSeleccionado;
     private String rutaImagenAgregar;
     private Fecha fechaSeleccionada;
-    private final int[] arrayDiasEnMes;
     private String rutaImagenRuta;
     private String tipoAnimal;
     
@@ -84,7 +84,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         rutaImagenRuta = "";
         agregarPerroSeleccionado = true;
         agregarUsuarioSeleccionado = true;
-        arrayDiasEnMes = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         calPanRuta.setVisible(false);
         //Agregamos tipos basicos.
         this.sistema.agregarTipo("perro");
@@ -127,7 +126,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setearListaPerros();
         if (animalesCombo.getItemCount() != 0) {
             Animal animal = sistema.buscarPerroPorNombre(animalesCombo.getSelectedItem().toString());
-            animalLblNombre.setText(animal.getNombre().toUpperCase());
+            animalLblNombre.setText(animal.getNombre().toUpperCase(Locale.getDefault()));
             animalLblPeso.setText("Pesa:       " + animal.getPeso());
             animalLblAltura.setText("Mide:       " + animal.getAltura());
             animalLblComentarios.setText("" + animal.getComentarios());
@@ -1952,7 +1951,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ocultarAgregarPerro();
         if (animalesCombo.getItemCount() > 0) {
             Animal animal = sistema.buscarPerroPorNombre(animalesCombo.getSelectedItem().toString());
-            animalLblNombre.setText(animal.getNombre().toUpperCase());
+            animalLblNombre.setText(animal.getNombre().toUpperCase(Locale.getDefault()));
             animalLblPeso.setText("Pesa:       " + animal.getPeso());
             animalLblAltura.setText("Mide:       " + animal.getAltura());
             animalLblComentarios.setText("" + animal.getComentarios());
@@ -2008,7 +2007,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnOtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtroActionPerformed
         String tipo = JOptionPane.showInputDialog(this, "Ingrese un tipo de animal", "Tipo De Animal", JOptionPane.QUESTION_MESSAGE);
         if(tipo != null && !tipo.trim().isEmpty()){
-            this.tipoAnimal = tipo.toLowerCase();
+            this.tipoAnimal = tipo.toLowerCase(Locale.getDefault());
             this.sistema.agregarTipo(tipo);
             this.cbTipoAnimal.setModel(new DefaultComboBoxModel(this.sistema.getListaTipoAnimales().toArray()));
             this.cbTipoAnimal.setSelectedItem(tipo);
@@ -2506,10 +2505,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (calBtnVeterinariaSi.isSelected()) {
                 Veterinaria vet = null;
                 String motivo = (String) calComboMotivo.getSelectedItem();
-                
-                VisitaVeterinaria visita = new VisitaVeterinaria(nombreAct, time, usuario, perro, fueRealizada, fechaSeleccionada, vet, motivo);
-                
+         
                      vet = sistema.buscarVetPorNombre(calComboVeterinaria.getSelectedItem().toString());
+                     VisitaVeterinaria visita = new VisitaVeterinaria(nombreAct, time, usuario, perro, fueRealizada, fechaSeleccionada, vet, motivo);
                      if (vet.agendarActividad(visita)) {
                         sistema.anadirActividad(visita);
                         sistema.getVisitas().add(visita);
@@ -2642,9 +2640,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         + "Hora: " + paseo.getHora().getHour() + ":" + cero + paseo.getHora().getMinute() + "\n"
                         + "Distancia: " + paseo.getDistancia() + "kilómetros");
                 }
-                if (paseo.getRuta() != null) {
-
-                }
+                
             } else {
                 Alimentacion alim = sistema.buscarAlimentacionPorNombre(nombreAct);
                 if (alim != null) {
@@ -2741,7 +2737,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public boolean esNumero(String s){
         try{
-            int i = Integer.parseInt(s);
+            Integer.parseInt(s);
         }
         catch(NumberFormatException | NullPointerException nfe){
             return false;

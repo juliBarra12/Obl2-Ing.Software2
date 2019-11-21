@@ -3,6 +3,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 
@@ -261,8 +262,8 @@ public class Sistema implements Serializable {
         this.animales.add(a);
     }
     public void agregarTipo(String tipo){
-        if(!this.listaTipoAnimales.contains(tipo.toLowerCase())){
-            this.listaTipoAnimales.add(tipo.toLowerCase());
+        if(!this.listaTipoAnimales.contains(tipo.toLowerCase(Locale.getDefault()))){
+            this.listaTipoAnimales.add(tipo.toLowerCase(Locale.getDefault()));
         }
     }
     

@@ -178,6 +178,7 @@ public class PanelLogin extends javax.swing.JPanel {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         new Persistencia().serializar(this.modelo);
         System.exit(0);
+       
     }//GEN-LAST:event_btnSalirActionPerformed
     public boolean verificarDatosIngresados(){
         String username = this.txUsuario.getText();
