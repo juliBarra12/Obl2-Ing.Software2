@@ -2416,9 +2416,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_calTxtTipoAlimentoActionPerformed
 
     private void calComboVeterinariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calComboVeterinariaActionPerformed
+        if(calComboVeterinaria.getSelectedItem() != null){
         Veterinaria vet = sistema.buscarVetPorNombre((String) calComboVeterinaria.getSelectedItem());
         calLblHorarios.setVisible(true);
         calLblHorarios.setText("Horarios: " + vet.getHoraInicial() + " - " + vet.getHoraFinal());
+        }
     }//GEN-LAST:event_calComboVeterinariaActionPerformed
 
     private void calBtnVeterinariaNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calBtnVeterinariaNoActionPerformed
