@@ -1907,7 +1907,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void setearListaPerros() {
-        
+        this.calComboAnimal.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.animalesCombo.setModel(new DefaultComboBoxModel(this.sistema.getAnimales().toArray()));
         this.listaAnimalesQueApadrina.setListData(this.sistema.getAnimales().toArray());
     } 
@@ -2107,6 +2107,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void setearListaAnimalesAApadrinar(){
         
        this.lstAnimalesApadrinar.setListData(this.sistema.getAnimales().toArray());
+      
     }
     
     public void cambiarPanel(JPanel contenedor, JPanel panel){
