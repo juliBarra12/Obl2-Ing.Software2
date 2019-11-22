@@ -2244,6 +2244,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             VisitaVeterinaria visita = new VisitaVeterinaria("Visita a VetCordon", hora, persona, rasta, false, fecha, vet3, "Rasta tiene fiebre");
             sistema.anadirActividad(visita);
             sistema.getVisitas().add(visita);
+            setearListaPerros();
         } catch (IOException ex) {
             System.out.println(ex);
         }
