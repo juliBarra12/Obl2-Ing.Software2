@@ -259,7 +259,9 @@ public class Sistema implements Serializable {
         return this.listaTipoAnimales;
     }
     public void agregarAnimal(Animal a){
-        this.animales.add(a);
+        if(!this.animales.contains(a)){
+            this.animales.add(a);
+        }
     }
     public void agregarTipo(String tipo){
         if(!this.listaTipoAnimales.contains(tipo.toLowerCase(Locale.getDefault()))){
