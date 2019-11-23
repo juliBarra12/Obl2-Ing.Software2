@@ -368,7 +368,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="calLblPerro">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Perro:"/>
+                <Property name="text" type="java.lang.String" value="Animal:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="calLblFecha">

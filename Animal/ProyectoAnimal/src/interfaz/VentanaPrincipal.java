@@ -400,7 +400,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         calLblUsuario.setText("Usuario:");
 
-        calLblPerro.setText("Perro:");
+        calLblPerro.setText("Animal:");
 
         calLblFecha.setText("Fecha:");
 
@@ -1760,7 +1760,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 2678, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 2678, Short.MAX_VALUE)
         );
 
         bindingGroup.bind();
