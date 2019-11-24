@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Funcionario.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProyectoAnimal&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dominio</a> &gt; <span class="el_source">Funcionario.java</span></div><h1>Funcionario.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dominio;
+
+import encriptación.PasswordUtils;
+import java.io.Serializable;
+
+/**
+ *
+ * @author lucascastro
+ */
+public class Funcionario implements Serializable {
+    private String username;
+    private String password;
+    private String email;
+    private String generatedSalt;
+
+    
+<span class="fc" id="L22">    public Funcionario(String user,String pass,String correo){</span>
+<span class="fc" id="L23">        this.username = user;</span>
+<span class="fc" id="L24">        this.generatedSalt = PasswordUtils.getSalt(30);</span>
+<span class="fc" id="L25">        this.password = PasswordUtils.generarPasswordSeguro(pass, this.generatedSalt);</span>
+<span class="fc" id="L26">        this.email = correo;</span>
+<span class="fc" id="L27">    }</span>
+
+    public String getEmail(){
+<span class="fc" id="L30">        return this.email;</span>
+    }
+    
+    public String getUsername() {
+<span class="fc" id="L34">        return username;</span>
+    }
+
+    public String getPassword() {
+<span class="fc" id="L38">        return password;</span>
+    }
+
+    public String getGeneratedSalt() {
+<span class="fc" id="L42">        return generatedSalt;</span>
+    }
+    
+    
+    public void setUsername(String username) {
+<span class="fc" id="L47">        this.username = username;</span>
+<span class="fc" id="L48">    }</span>
+    
+    public void setEmail(String e){
+<span class="fc" id="L51">        this.email = e;</span>
+<span class="fc" id="L52">    }</span>
+
+    public void setPassword(String password) {
+        //Guardamos el salt generado para el usuario, con el fin de poder autenticar el password 
+        //ingresado en el inicio de sesion.
+<span class="fc" id="L57">        this.generatedSalt = PasswordUtils.getSalt(30); </span>
+        // Proteger el password del usuario, creamos la contraseña asegurada.
+<span class="fc" id="L59">        this.password = PasswordUtils.generarPasswordSeguro(password, this.generatedSalt);</span>
+        
+<span class="fc" id="L61">    }</span>
+    
+    @Override
+    public boolean equals(Object o){
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (o instanceof Funcionario) {</span>
+<span class="fc" id="L66">            Funcionario func = (Funcionario) o;</span>
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">            return this.username.equals(func.getUsername()) || this.email.equals(func.getEmail());</span>
+        } 
+<span class="fc" id="L69">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

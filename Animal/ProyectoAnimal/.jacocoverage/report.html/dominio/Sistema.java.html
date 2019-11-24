@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Sistema.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProyectoAnimal&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dominio</a> &gt; <span class="el_source">Sistema.java</span></div><h1>Sistema.java</h1><pre class="source lang-java linenums">package dominio;
+
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+
+
+
+public class Sistema implements Serializable {
+
+    private ArrayList&lt;Usuario&gt; usuarios;
+    private ArrayList&lt;Animal&gt; animales;
+    private final ArrayList&lt;Actividad&gt; listaActividades;
+    private ArrayList&lt;Fecha&gt; listaFechas;
+    private ArrayList&lt;Veterinaria&gt; listaVeterinarias;
+    private ArrayList&lt;ActividadCualquiera&gt; listaActividadesCualquiera;
+    private ArrayList&lt;Paseo&gt; listaPaseos;
+    private ArrayList&lt;Alimentacion&gt; listaAlimentaciones;
+    private ArrayList&lt;VisitaVeterinaria&gt; listaVisitas;
+    //Agregamos la lista de Funcionarios al sistema
+    private ArrayList&lt;Funcionario&gt; listafuncionarios;
+    //Agregamos una lista de tipo de animales al sistema
+    private ArrayList&lt;String&gt; listaTipoAnimales;
+    //Agregamos una lista de padrinos al sistema
+    private ArrayList&lt;Padrino&gt;listaPadrinos;
+    //Agregamos una lista de adopciones al sistema
+    private ArrayList&lt;Adopcion&gt;listaAdopciones;
+
+<span class="fc" id="L30">    public Sistema() {</span>
+<span class="fc" id="L31">        this.usuarios = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L32">        this.animales = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L33">        this.listaActividades = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L34">        this.listaFechas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L35">        this.listaVeterinarias = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">        this.listaPaseos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L37">        this.listaAlimentaciones = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L38">        this.listaVisitas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L39">        this.listaActividadesCualquiera = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L40">        this.listafuncionarios = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L41">        this.listaTipoAnimales = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">        this.listaPadrinos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L43">        this.listaAdopciones = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">    }</span>
+
+    public ArrayList&lt;Actividad&gt; listaActividadesPorFecha(int dia, int mes, int ano) {
+<span class="fc" id="L47">        ArrayList&lt;Actividad&gt; retLista = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L48" title="All 10 branches covered.">        if (dia &gt;= 1 &amp;&amp; dia &lt;= 31 &amp;&amp; mes &gt;= 0 &amp;&amp; mes &lt;= 12 &amp;&amp; ano &gt;= 1) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            for (int i = 0; i &lt; listaActividades.size(); i++) {</span>
+<span class="fc" id="L50">                Actividad act = listaActividades.get(i);</span>
+<span class="fc bfc" id="L51" title="All 6 branches covered.">                if (act.getFecha().getDia() == dia &amp;&amp; act.getFecha().getMes() == mes &amp;&amp; act.getFecha().getAno() == ano) {</span>
+<span class="fc" id="L52">                    retLista.add(act);</span>
+                }
+            }
+        }
+<span class="fc" id="L56">        return retLista;</span>
+    }
+
+    public ArrayList&lt;Veterinaria&gt; getVeterinarias() {
+<span class="fc" id="L60">        return listaVeterinarias;</span>
+    }
+
+    public void setVeterinarias(ArrayList&lt;Veterinaria&gt; veterinarias) {
+<span class="fc" id="L64">        this.listaVeterinarias = veterinarias;</span>
+<span class="fc" id="L65">    }</span>
+
+    public void setUsuarios(ArrayList&lt;Usuario&gt; usuarios) {
+<span class="fc" id="L68">        this.usuarios = usuarios;</span>
+<span class="fc" id="L69">    }</span>
+
+    public ArrayList&lt;Usuario&gt; getUsuarios() {
+<span class="fc" id="L72">        return usuarios;</span>
+    }
+
+    public void setMascotas(ArrayList&lt;Animal&gt; mascotas) {
+<span class="fc" id="L76">        this.animales = mascotas;</span>
+<span class="fc" id="L77">    }</span>
+
+    public ArrayList&lt;Animal&gt; getAnimales() {
+<span class="fc" id="L80">        return this.animales;</span>
+    }
+
+    public ArrayList&lt;Actividad&gt; getActividades() {
+<span class="fc" id="L84">        return listaActividades;</span>
+    }
+
+
+    public void eliminarPerro(Animal perro) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (this.animales.contains(perro)) {</span>
+<span class="fc" id="L90">            this.animales.remove(perro);</span>
+        } else {
+<span class="fc" id="L92">            System.out.println(&quot;No existe tal perro&quot;);</span>
+        }
+<span class="fc" id="L94">    }</span>
+
+    public boolean añadirUsuario(Usuario personaAnadir) {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if(!this.existeUsuario(personaAnadir)){</span>
+<span class="fc" id="L98">            usuarios.add(personaAnadir);</span>
+<span class="fc" id="L99">            return true;</span>
+        }
+<span class="fc" id="L101">        return false;</span>
+    }
+
+    public void eliminarUsuario(Usuario persona) {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (usuarios.contains(persona)) {</span>
+<span class="fc" id="L106">            usuarios.remove(persona);</span>
+        } else {
+<span class="fc" id="L108">            System.out.println(&quot;No existe tal persona&quot;);</span>
+        }
+<span class="fc" id="L110">    }</span>
+
+    public void anadirActividad(Actividad act) {
+<span class="fc" id="L113">        listaActividades.add(act);</span>
+<span class="fc" id="L114">        act.getUsuario().agregarActividad(act);</span>
+<span class="fc" id="L115">    }</span>
+
+    public void eliminarActividad(Actividad act) {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (listaActividades.contains(act)) {</span>
+<span class="fc" id="L119">            listaActividades.remove(act);</span>
+        } else {
+<span class="fc" id="L121">            System.out.println(&quot;No existe tal actividad&quot;);</span>
+        }
+<span class="fc" id="L123">    }</span>
+
+    public void anadirFecha(Fecha fecha) {
+<span class="fc" id="L126">        listaFechas.add(fecha);</span>
+<span class="fc" id="L127">    }</span>
+
+    public void eliminarFecha(Fecha fecha) {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (listaFechas.contains(fecha)) {</span>
+<span class="fc" id="L131">            listaFechas.remove(fecha);</span>
+        } else {
+<span class="fc" id="L133">            System.out.println(&quot;No existe tal fecha&quot;);</span>
+        }
+<span class="fc" id="L135">    }</span>
+
+    public Usuario buscarUsuarioPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        for (int i = 0; i &lt; usuarios.size(); i++) {</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">            if (nombreBuscar.equals(usuarios.get(i).getNombre())) {</span>
+<span class="fc" id="L140">                return usuarios.get(i);</span>
+            }
+        }
+<span class="fc" id="L143">        return null;</span>
+    }
+
+    public Animal buscarPerroPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int i = 0; i &lt; this.animales.size(); i++) {</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            if (nombreBuscar.equals(this.animales.get(i).getNombre())) {</span>
+<span class="fc" id="L149">                return this.animales.get(i);</span>
+            }
+        }
+<span class="fc" id="L152">        return null;</span>
+    }
+
+    public Veterinaria buscarVetPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L156" title="All 2 branches covered.">        for (int i = 0; i &lt; listaVeterinarias.size(); i++) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (nombreBuscar.equals(listaVeterinarias.get(i).getNombre())) {</span>
+<span class="fc" id="L158">                return listaVeterinarias.get(i);</span>
+            }
+        }
+<span class="fc" id="L161">        return null;</span>
+    }
+
+    public Paseo buscarPaseoPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        for (int i = 0; i &lt; listaPaseos.size(); i++) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (nombreBuscar.equals(listaPaseos.get(i).getNombre())) {</span>
+<span class="fc" id="L167">                return listaPaseos.get(i);</span>
+            }
+        }
+<span class="fc" id="L170">        return null;</span>
+    }
+
+    public VisitaVeterinaria buscarVisitaPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        for (int i = 0; i &lt; listaVisitas.size(); i++) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (nombreBuscar.equals(listaVisitas.get(i).getNombre())) {</span>
+<span class="fc" id="L176">                return listaVisitas.get(i);</span>
+            }
+        }
+<span class="fc" id="L179">        return null;</span>
+    }
+
+    public ActividadCualquiera buscarActCualquieraPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        for (int i = 0; i &lt; listaActividadesCualquiera.size(); i++) {</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">            if (nombreBuscar.equals(listaActividadesCualquiera.get(i).getNombre())) {</span>
+<span class="fc" id="L185">                return listaActividadesCualquiera.get(i);</span>
+            }
+        }
+<span class="fc" id="L188">        return null;</span>
+    }
+
+    public Alimentacion buscarAlimentacionPorNombre(String nombreBuscar) {
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        for (int i = 0; i &lt; listaAlimentaciones.size(); i++) {</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">            if (nombreBuscar.equals(listaAlimentaciones.get(i).getNombre())) {</span>
+<span class="fc" id="L194">                return listaAlimentaciones.get(i);</span>
+            }
+        }
+<span class="fc" id="L197">        return null;</span>
+    }
+
+    public ArrayList&lt;ActividadCualquiera&gt; getActsCualquieras() {
+<span class="fc" id="L201">        return listaActividadesCualquiera;</span>
+    }
+
+    public void setActsCualquieras(ArrayList&lt;ActividadCualquiera&gt; actsCualquieras) {
+<span class="fc" id="L205">        this.listaActividadesCualquiera = actsCualquieras;</span>
+<span class="fc" id="L206">    }</span>
+
+    public ArrayList&lt;Paseo&gt; getPaseos() {
+<span class="fc" id="L209">        return listaPaseos;</span>
+    }
+
+    public void setPaseos(ArrayList&lt;Paseo&gt; paseos) {
+<span class="fc" id="L213">        this.listaPaseos = paseos;</span>
+<span class="fc" id="L214">    }</span>
+
+    public ArrayList&lt;Alimentacion&gt; getAlimentaciones() {
+<span class="fc" id="L217">        return listaAlimentaciones;</span>
+    }
+
+    public void setAlimentaciones(ArrayList&lt;Alimentacion&gt; alimentaciones) {
+<span class="fc" id="L221">        this.listaAlimentaciones = alimentaciones;</span>
+<span class="fc" id="L222">    }</span>
+
+    public ArrayList&lt;VisitaVeterinaria&gt; getVisitas() {
+<span class="fc" id="L225">        return listaVisitas;</span>
+    }
+
+    public void setVisitas(ArrayList&lt;VisitaVeterinaria&gt; visitas) {
+<span class="fc" id="L229">        this.listaVisitas = visitas;</span>
+<span class="fc" id="L230">    }</span>
+
+    public ArrayList&lt;Fecha&gt; getFechas() {
+<span class="fc" id="L233">        return listaFechas;</span>
+    }
+
+    public ArrayList&lt;Funcionario&gt; getListaFuncionarios(){
+<span class="fc" id="L237">        return this.listafuncionarios;</span>
+    }
+    
+    public Funcionario buscarFuncionario(Funcionario func){
+<span class="fc bfc" id="L241" title="All 2 branches covered.">        for(Funcionario f : this.listafuncionarios){</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">            if (f.equals(func)) return f;</span>
+<span class="nc" id="L243">        }</span>
+<span class="fc" id="L244">        return null;</span>
+    }
+    public boolean existeFuncionario(Funcionario func){
+<span class="fc" id="L247">        return this.listafuncionarios.contains(func);</span>
+    }
+    public void agregarFuncionario(Funcionario f){
+<span class="fc" id="L250">        this.listafuncionarios.add(f);</span>
+<span class="fc" id="L251">    }</span>
+    
+    public void setFechas(ArrayList&lt;Fecha&gt; fechas) {
+<span class="fc" id="L254">        this.listaFechas = fechas;</span>
+<span class="fc" id="L255">    }</span>
+
+    public ArrayList&lt;String&gt; getListaTipoAnimales(){
+<span class="fc" id="L258">        return this.listaTipoAnimales;</span>
+    }
+    public void agregarAnimal(Animal a){
+<span class="fc" id="L261">        this.animales.add(a);</span>
+<span class="fc" id="L262">    }</span>
+    public void agregarTipo(String tipo){
+<span class="fc bfc" id="L264" title="All 2 branches covered.">        if(!this.listaTipoAnimales.contains(tipo.toLowerCase())){</span>
+<span class="fc" id="L265">            this.listaTipoAnimales.add(tipo.toLowerCase());</span>
+        }
+<span class="fc" id="L267">    }</span>
+    
+    public ArrayList&lt;Padrino&gt; getListaPadrinos(){
+<span class="fc" id="L270">        return this.listaPadrinos;</span>
+    }
+    
+    public void agregarPadrino(Padrino p){
+<span class="fc" id="L274">        this.listaPadrinos.add(p);</span>
+<span class="fc" id="L275">    }</span>
+    
+    public boolean existeAnimal(Animal a){
+<span class="fc" id="L278">        return this.animales.contains(a);</span>
+    }
+    public boolean existeUsuario(Usuario user){
+<span class="fc" id="L281">        return this.usuarios.contains(user);</span>
+    }
+    
+    public void agregarAdopcion(Adopcion a){
+<span class="fc" id="L285">        this.listaAdopciones.add(a);</span>
+<span class="fc" id="L286">    }</span>
+    
+    public ArrayList&lt;Adopcion&gt; getListaAdopciones(){
+<span class="fc" id="L289">        return this.listaAdopciones;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
