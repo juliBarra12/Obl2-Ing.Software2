@@ -7,8 +7,8 @@ package interfaz;
 
 import dominio.Funcionario;
 import dominio.Sistema;
-import encriptación.PasswordUtils;
-import serialización.Persistencia;
+import encriptacion.PasswordUtils;
+import serializacion.Persistencia;
 
 /**
  *

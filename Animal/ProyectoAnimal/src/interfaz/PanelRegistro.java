@@ -6,7 +6,7 @@
 package interfaz;
 import dominio.Funcionario;
 import dominio.Sistema;
-import serialización.Persistencia;
+import serializacion.Persistencia;
 
 
 /**

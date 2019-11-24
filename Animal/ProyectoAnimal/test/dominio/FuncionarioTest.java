@@ -5,7 +5,7 @@
  */
 package dominio;
 
-import encriptación.PasswordUtils;
+import encriptacion.PasswordUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

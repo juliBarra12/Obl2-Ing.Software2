@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
-import serialización.Persistencia;
+import serializacion.Persistencia;
 
 /**
  *

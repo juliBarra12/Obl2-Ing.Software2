@@ -5,7 +5,7 @@
  */
 package dominio;
 
-import encriptación.PasswordUtils;
+import encriptacion.PasswordUtils;
 import java.io.Serializable;
 import java.util.Objects;
 

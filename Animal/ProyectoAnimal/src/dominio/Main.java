@@ -2,7 +2,7 @@ package dominio;
 
 
 
-import serialización.Persistencia;
+import serializacion.Persistencia;
 import interfaz.VentanaRegistroLogin;
 
 public class Main {
